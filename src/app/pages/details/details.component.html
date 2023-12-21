@@ -1,0 +1,230 @@
+<app-navbar></app-navbar>
+
+<div class="section-1">
+
+    <main class="view-1">
+
+        <div class="links" fxLayoutAlign="center center">
+            <ul fxLayout="row" fxLayoutAlign="space-around center">
+                <li class="tes">
+                    <mat-icon style="font-size: 15px; color: green;">send</mat-icon>
+                    Fotos do carro
+                </li>
+                <li>
+                    Interior
+                </li>
+                <li>
+                    Exterior
+                </li>
+                <li>
+                    Opcionais
+                </li>
+                <li>
+                    Detalhes
+                </li>
+            </ul>
+        </div>
+        <div class="img">
+            <div class="bg"></div>
+            <img src="/assets/card-car/car-test.jpeg" alt="">
+        </div>
+        <div class="contact">
+
+            <button class="tel" mat-flat-button color="primary"><mat-icon style="color: #13141A;">
+                    phone</mat-icon>Telefone</button>
+            <button class="email" mat-flat-button color="primary"><mat-icon> email</mat-icon>Email</button>
+            <button class="wpp" mat-flat-button color="primary">
+                <div><img src="/assets/wpp.svg" alt=""><span>Whatsapp</span></div>
+            </button>
+
+        </div>
+        <div class="email" fxLayout="column" fxLayoutAlign="center center">
+            <div class="title" fxLayout="column" fxLayoutAlign="center start">
+                <h3>Para mais informações</h3>
+                <span>falar sobre esse veículo</span>
+            </div>
+            <form action="" fxLayout="column" fxLayoutAlign="space-around center" style="width: 100%; height: 100%;">
+                <mat-form-field style="width: 80%;">
+                    <mat-label>Nome</mat-label>
+                    <input matInput>
+                </mat-form-field>
+                <mat-form-field style="width: 80%;">
+                    <mat-label>Telefone</mat-label>
+                    <input matInput style="width: 80%;">
+                </mat-form-field>
+                <mat-form-field style="width: 80%;">
+                    <mat-label>Email</mat-label>
+                    <input matInput>
+                </mat-form-field>
+                <mat-form-field style="width: 80%;">
+                    <mat-label>Mensagem</mat-label>
+                    <textarea matInput></textarea>
+                </mat-form-field>
+
+                <button mat-flat-button color="primary">Enviar<mat-icon>send</mat-icon></button>
+
+            </form>
+
+        </div>
+        <div class="recomend">
+            <div fxLayoutAlign="flex-start center" style="width: 80%; margin-left: 10px;">
+                <h3>Recomendados</h3>
+            </div>
+
+            <app-card-star></app-card-star>
+            <app-card-star></app-card-star>
+
+        </div>
+        <div class="extra-1"></div>
+        <!-- <div class="extra-2"></div> -->
+
+        <div class="car-details" fxLayout="column" fxLayoutAlign="center center">
+
+            <section fxLayout="column" fxLayoutAlign="flex-start center">
+                <div class="info">
+                    <h3 class="op">Informações</h3>
+                    <ul fxLayout="row" fxLayoutAlign="space-between center">
+
+                        <li>
+
+                            <img src="/assets/card-car/km.svg" alt="">
+                            <div class="text">
+                                <h4>25.000</h4>
+                                <span>Kilometragem</span>
+                            </div>
+
+                        </li>
+
+                        <li>
+                            <img src="/assets/card-car/motor.svg" alt="">
+
+                            <div>
+                                <h4>1.4</h4>
+                                <span>Cilidrada</span>
+                            </div>
+
+                        </li>
+
+                        <li>
+                            <img src="/assets/card-car/comb.svg" alt="">
+
+                            <div>
+                                <h4>Flex</h4>
+                                <span>Combustivel</span>
+                            </div>
+
+                        </li>
+
+                        <li>
+                            <img src="/assets/new.svg" alt="">
+
+                            <div>
+                                <h4>Semi-novo</h4>
+                                <span>Estado</span>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <div class="optionals">
+                    <h3 class="op">Opcionais</h3>
+                    <ul fxLayout="row" fxLayoutAlign="flex-start center">
+                        <li>
+                            <mat-icon>check_circle_outline</mat-icon>
+                            <span>air bag</span>
+                        </li>
+                        <li>
+                            <mat-icon>check_circle_outline</mat-icon>
+                            <span>freio abs</span>
+                        </li>
+                        <li>
+                            <mat-icon>check_circle_outline</mat-icon>
+                            <span>ar condicionado</span>
+                        </li>
+                        <li>
+                            <mat-icon>check_circle_outline</mat-icon>
+                            <span>multimidia</span>
+                        </li>
+                        <li>
+                            <mat-icon>check_circle_outline</mat-icon>
+                            <span>câmera ré</span>
+                        </li>
+                        <li>
+                            <mat-icon>check_circle_outline</mat-icon>
+                            <span>sensor chuva</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="overview">
+                    <h3 class="op">Visão Geral</h3>
+
+                    <ul fxLayout="row" fxLayoutAlign="space-between center">
+                        <li>
+                            <h4>Marca</h4>
+                            <span>Toyota</span>
+                        </li>
+                        <li>
+                            <h4>Modelo</h4>
+                            <span>Sorento</span>
+                        </li>
+                        <li>
+                            <h4>Ano Fabricação</h4>
+                            <span>2017</span>
+                        </li>
+                        <li>
+                            <h4>Ano modelo</h4>
+                            <span>2018</span>
+                        </li>
+                        <li>
+                            <h4>Carroceria</h4>
+                            <span>SUV</span>
+                        </li>
+                        <li>
+                            <h4>Cor</h4>
+                            <span>Branca</span>
+                        </li>
+                        <li>
+                            <h4>Kilometragem</h4>
+                            <span>30.000</span>
+                        </li>
+                        <li>
+                            <h4>Cilindrada</h4>
+                            <span>2.5</span>
+                        </li>
+                        <li>
+                            <h4>Combustivel</h4>
+                            <span>Diesel</span>
+                        </li>
+                        <li>
+                            <h4>Portas</h4>
+                            <span>4</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="description">
+                    <h3 class="op">Descrição</h3>
+                    <pre>
+<strong>Toyota Sorento 2018 - SUV Elegante</strong>
+
+<div style="padding: 20px; border: 1px solid rgba(127, 129, 141, 0.16);">
+Descubra a elegância e conforto do Toyota Sorento 2018, um SUV que 
+eleva sua experiência de condução.
+
+Explore nossas opções de financiamento flexíveis para tornar a 
+aquisição do Toyota Sorento 2018 ainda mais acessível. Nossa 
+equipe está pronta para ajudá-lo a encontrar a melhor solução 
+para suas necessidades. Além disso, oferecemos garantias 
+estendidas e pacotes de serviços para garantir sua 
+tranquilidade após a compra.
+</div>
+                    </pre>
+                </div>
+            </section>
+
+        </div>
+    </main>
+</div>
+<footer style="height: 55vh; width: 100%; background-color: black;">
+
+</footer>

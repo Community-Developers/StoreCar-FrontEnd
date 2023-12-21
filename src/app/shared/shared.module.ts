@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from './navbar.component';
 import { RoutingModule } from '../routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { NavbarComponent } from './navbar/navbar.component';
+import { CardStarComponent } from './card-star/card-star.component';
 
 
 @NgModule({
   declarations: [
-    NavbarComponent
+    NavbarComponent,
+    CardStarComponent
+
   ],
   imports: [
     CommonModule,
@@ -19,7 +22,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatIconModule
   ],
   exports:[
-    NavbarComponent
+    NavbarComponent,
+    CardStarComponent
   ]
 })
 export class SharedModule { }

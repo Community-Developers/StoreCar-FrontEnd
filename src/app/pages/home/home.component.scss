@@ -25,7 +25,7 @@
                 background-position: center;
                 border-radius: 30px;
                 background: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url('https://www.drivco-wp.egenslab.com/wp-content/uploads/2023/10/home5-banner-img-2.jpg'), lightgray 1328.357px 85.991px / 105.964% 100% no-repeat, ;
-
+                
                 position: relative;
 
                 .text {
@@ -136,18 +136,49 @@
 
         .view-2-2 {
             height: 70%;
-            width: 82%;
+            width: 100%;
             background: none;
+            box-sizing: border-box;
 
             .lista-destaque{
+                width: 100%;
+                height: 80%;
+                padding: 10px;
+                list-style-type: none;
 
                 li{
                     margin: 0px 5px;
+                    height: 100%;
+
+                    a{
+                        text-decoration: none;
+                    }
                 }
-                .a{
-                    width: 309px;
-                    height: 416px;
-                    background: blue;
+            }
+
+            .main{
+                height: 100%;
+                width: 100%;
+
+                button {
+                    border-radius: 5px;
+                    background-color: #13141A;
+                    font-family: "Montserrat", 'sans-serif';
+                    font-weight: 600;
+                    font-size: 15px;
+                    color: #fff;
+                    padding: 8px 28px;
+                    line-height: 1;
+                    display: inline-flex;
+                    align-items: center;
+                    white-space: nowrap;
+                    gap: 10px;
+                    transition: 0.5s;
+                    position: relative;
+                    overflow: hidden;
+                    z-index: 1;
+                    border-radius: 5px;
+                    border: 1px solid rgba(29, 29, 29, 0.3);
                 }
             }
         }

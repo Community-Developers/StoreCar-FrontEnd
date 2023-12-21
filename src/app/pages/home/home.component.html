@@ -34,36 +34,38 @@
 </main>
 <main class="view-2" fxLayoutAlign="center center" fxLayout="column">
 
-    <header fxLayoutAlign="start end" fxLayout="row">
+    <header fxLayoutAlign="start center" fxLayout="row">
         <h2>Veículos em Destaque</h2>
     </header>
 
-    <div class="view-2-2" fxLayoutAlign="center center">
+    <div class="view-2-2" fxLayoutAlign="center center" fxLayout="column">
 
-        <section>
-            <ul class="lista-destaque" fxLayout="row" fxLayoutAlign="center center">
+        <div class="main" fxLayoutAlign="space-around center" fxLayout="column">
+            <ul class="lista-destaque" fxLayout="row" fxLayoutAlign="center start">
+
                 <li>
                     <a href="">
-                        <div class="a"></div>
+                        <app-card-star></app-card-star>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <div class="a"></div>
+                        <app-card-star></app-card-star>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <div class="a"></div>
+                        <app-card-star></app-card-star>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <div class="a"></div>
+                        <app-card-star></app-card-star>
                     </a>
                 </li>
             </ul>
-        </section>
+            <button mat-flat-button color="primary">Ver veículos em estoque</button>
+        </div>
     </div>
 
 
