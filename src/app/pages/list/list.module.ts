@@ -1,14 +1,15 @@
+import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home.component';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { ListComponent } from './list.component';
 import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-material.module';
+
 
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    ListComponent
   ],
   imports: [
     CommonModule,
@@ -16,4 +17,4 @@ import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-m
     AngularMaterialModule
   ]
 })
-export class HomeModule { }
+export class ListModule { }

@@ -1,0 +1,94 @@
+:host {
+    display: block;
+    width: 100%;
+    height: calc(auto + 10%);
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 5%;
+
+    .wall {
+        width: 100%;
+        height: 400px;
+        background: url('https://c7auto.com/wp-content/uploads/Otimizacao-de-Orcamento-com-Remarketing-Dinamico-Aumente-Suas-Vendas-na-Concessionaria.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .search {
+        width: 80%;
+        background: #FFF;
+        margin: auto;
+        transform: translateY(-50%);
+        border: 1.5px solid rgba(29, 29, 29, 0.6);
+        border-radius: 10px;
+        background: linear-gradient(4deg, #00000057, #d3caca45);
+        box-shadow: 2px 8px 6px 0px rgb(197 197 197 / 84%);
+
+        mat-form-field{
+            margin: 14px 10px 0px 10px;
+            width: 15%;
+            border-radius: 40px;
+            
+            mat-select{
+                border-radius: 20px;
+            }
+        }
+
+        button {
+            border-radius: 5px;
+            background-color: #13141A;
+            font-family: "Montserrat", 'sans-serif';
+            font-weight: 600;
+            font-size: 15px;
+            color: #fff;
+            padding: 8px 28px;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+            margin: 14px 10px 25px 20px;
+            transition: 0.5s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border-radius: 5px;
+            border: 1px solid rgba(29, 29, 29, 0.3);
+            width: 20%;
+            height: auto;
+            padding: 15px;
+        }
+    }
+
+    .list-items {
+        width: 75%;
+        height: auto;
+        ul{
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content:center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li{
+                width: 30%;
+                margin: 0;
+                padding: 10px;
+                a{
+                    text-decoration: none;
+                    height: 400px;
+                    display: inline-block;
+                    app-card-star{
+                        width: auto;
+                    }
+                }
+            }
+        }
+    }
+}
