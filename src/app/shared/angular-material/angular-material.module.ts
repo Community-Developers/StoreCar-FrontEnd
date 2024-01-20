@@ -7,11 +7,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatTableModule} from '@angular/material/table';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatCardModule} from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatMenuModule } from '@angular/material/menu';
+
+
 
 
 
@@ -37,7 +41,9 @@ import {MatCardModule} from '@angular/material/card';
     MatDialogModule,
     MatCheckboxModule,
     MatDividerModule,
-    MatCardModule
+    MatCardModule,
+    MatSidenavModule,
+    MatMenuModule
   ]
 })
 export class AngularMaterialModule { }

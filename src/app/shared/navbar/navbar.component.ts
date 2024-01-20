@@ -8,6 +8,7 @@ import { DialogLoginComponent } from '../dialog-login/dialog-login.component';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+  showFiller = false;
 
   constructor(public dialog: MatDialog) { }
 

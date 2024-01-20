@@ -1,7 +1,7 @@
 :host {
 
     display: block;
-    width: 55vw;
+    width: 100%;
     height: 75vh;
     background: green;
     box-sizing: border-box;
@@ -101,6 +101,29 @@
 
 ::ng-deep mat-form-field {
     border-radius: 28px;
+}
+
+@media (max-width: 768px) {
+
+    section mat-form-field {
+        width: 85% !important;
+    }
+
+
+    :host {
+        height: 60vh;
+    }
+
+    ::ng-deep #cdk-overlay-0 {
+        max-width: 100% !important;
+        width: 98%;
+    }
+}
+
+@media (max-width: 450px) {
+    .left {
+        display: none;
+    }
 }
 
 :host ::ng-deep .mdc-text-field--outlined {

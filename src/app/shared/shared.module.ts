@@ -11,6 +11,7 @@ import { DialogLoginComponent } from './dialog-login/dialog-login.component';
 
 
 
+
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -18,7 +19,7 @@ import { DialogLoginComponent } from './dialog-login/dialog-login.component';
     FooterComponent,
     DialogAdminComponent,
     DialogLoginComponent,
-  
+
   ],
   imports: [
     CommonModule,
@@ -26,7 +27,7 @@ import { DialogLoginComponent } from './dialog-login/dialog-login.component';
     AngularMaterialModule,
     ReactiveFormsModule
   ],
-  exports:[
+  exports: [
     NavbarComponent,
     CardStarComponent,
     FooterComponent
