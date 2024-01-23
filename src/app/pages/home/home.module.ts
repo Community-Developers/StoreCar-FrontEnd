@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-material.module';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 
 
@@ -13,7 +14,8 @@ import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-m
   imports: [
     CommonModule,
     SharedModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    SlickCarouselModule
   ]
 })
 export class HomeModule { }

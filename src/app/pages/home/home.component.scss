@@ -189,14 +189,56 @@
         }
     }
 
+
+
     .view-3 {
         height: 100vh;
         background-color: red;
     }
 
     .view-4 {
-        height: 100vh;
+        height: auto;
         background-color: green;
+
+    }
+
+    .carouse {
+        box-sizing: border-box;
+        overflow: hidden;
+
+        margin: 140px 0px;
+        height: auto;
+        width: 100%;
+
+        .slide {
+            margin: 0 10px !important;
+        }
+
+        header {
+            height: 10%;
+            width: 82%;
+
+            h2 {
+                color: #13141A;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 40px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 52px;
+
+                margin: 0px;
+            }
+        }
+
+        .slick-wrapper {
+            width: 1000px;
+            margin: 20px auto;
+        }
+
+        .slick-prev:before,
+        .slick-next:before {
+            color: black !important;
+        }
     }
 }
 
@@ -217,7 +259,18 @@
             }
         }
     }
+
+    .carouse {
+        .column-1 {
+            width: 98% !important;
+
+            header {
+                padding: 0 2%;
+            }
+        }
+    }
 }
+
 
 @media (max-width: 500px) {
     main {
@@ -258,4 +311,19 @@
             }
         }
     }
+}
+
+:host ::ng-deep .slick-track {
+    padding: 30px 0px !important;
+}
+
+
+:host ::ng-deep .slick-prev:before,
+.slick-next:before {
+    color: black !important;
+}
+
+:host ::ng-deep .slick-next:before,
+.slick-next:before {
+    color: black !important;
 }
