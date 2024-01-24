@@ -17,7 +17,7 @@
             grid-template-columns: 70% 30%;
             grid-template-rows: 5% 1fr 1fr 1fr 0.5fr 1fr 1fr 1fr;
             height: 90%;
-            width: 70%;
+            width: 82%;
             box-sizing: border-box;
 
             .links {
@@ -217,32 +217,81 @@
 
             .recomend {
                 grid-area: 6/2/10/2;
-                margin: 10px;
                 width: 100%;
-                box-sizing: border-box;
                 display: flex;
                 justify-content: space-around;
                 align-items: center;
                 flex-direction: column;
                 border: 1px solid rgba(127, 129, 141, 0.16);
                 border-radius: 10px;
+                box-sizing: border-box;
+                overflow: hidden;
 
 
-                h3 {
-                    margin: 0;
+                .recomend-slide {
+                    display: none;
 
-                    color: #13141A;
-                    font-family: "Montserrat", sans-serif;
-                    font-size: 20px;
-                    font-style: normal;
-                    font-weight: 600;
-                    line-height: 28px;
-                    /* 140% */
+                    .carouse {
+                        box-sizing: border-box;
+                        overflow: hidden;
+
+                        margin: 50px 0px 30px 0px;
+                        height: auto;
+                        width: 100%;
+
+                        .slide {
+                            margin: 0 10px !important;
+                        }
+
+                        header {
+                            height: 10%;
+                            width: 100%;
+
+                            h2 {
+                                color: #13141A;
+                                font-family: 'Montserrat', sans-serif;
+                                font-size: 40px;
+                                font-style: normal;
+                                font-weight: 700;
+                                line-height: 52px;
+
+                                margin: auto;
+                            }
+                        }
+
+                        .slick-wrapper {
+                            width: 1000px;
+                            margin: 20px auto;
+                        }
+
+                        .slick-prev:before,
+                        .slick-next:before {
+                            color: black !important;
+                        }
+
+                    }
                 }
 
-                app-card-star {
-                    height: 45%;
-                    width: 80%;
+
+                .recomend-in {
+
+                    h3 {
+                        margin: 0;
+
+                        color: #13141A;
+                        font-family: "Montserrat", sans-serif;
+                        font-size: 20px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 28px;
+                        /* 140% */
+                    }
+
+                    app-card-star {
+                        height: 45%;
+                        width: 80%;
+                    }
+
                 }
 
             }
@@ -415,4 +464,220 @@
             }
         }
     }
+}
+
+@media (max-width: 1100px) {
+    .section-1 {
+        .view-1 {
+            width: 98% !important;
+        }
+    }
+}
+
+@media (max-width: 920px) {
+    :host {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .section-1 {
+        width: 82% !important;
+
+        .view-1 {
+            grid-template-columns: 100% !important;
+            grid-template-rows: 2% auto auto 0.5fr 1fr 1fr 1fr 1fr !important;
+
+            .car-details {
+                grid-area: 4/1/10/1 !important;
+
+
+                section {
+                    justify-content: center !important;
+                    gap: 20px !important;
+
+                }
+            }
+
+            .contact {
+                grid-area: 10/1/11/1 !important;
+            }
+
+            .email {
+                grid-area: 11/1/12/1 !important;
+            }
+
+            .recomend {
+                flex-direction: row !important;
+                grid-area: 12/1/13/1 !important;
+
+                .recomend-in {
+                    display: none !important;
+
+                    app-card-star {
+                        max-width: 400px;
+                        height: 400px;
+                    }
+                }
+
+                .recomend-slide {
+                    display: block !important;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 650px) {
+    .section-1 {
+        width: 98% !important;
+
+        .view-1 {
+
+            .links {
+                margin: 0 10px !important;
+
+                ul {
+                    justify-content: space-between !important;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 550px) {
+    .section-1 {
+        .view-1 {
+            .car-details {
+                section {
+                    .info {
+                        ul {
+                            flex-wrap: wrap;
+
+                            li {
+                                width: 49% !important;
+                                justify-content: center !important;
+                                margin: 10px 0px;
+                            }
+                        }
+                    }
+
+                    .optionals {
+                        ul {
+                            flex-wrap: wrap;
+                            justify-content: center !important;
+
+                            li {
+                                width: 49% !important;
+                                margin: 10px 0px;
+                                justify-content: start !important;
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 550px) {
+    .section-1 {
+        .view-1 {
+
+            .links {
+                ul {
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    justify-content: center !important;
+
+                    li {
+                        margin: 0 10px;
+                    }
+                }
+            }
+
+            .car-details {
+                section {
+                    .info {
+                        ul {
+                            flex-wrap: wrap;
+
+                            li {
+                                width: 49% !important;
+                                justify-content: center !important;
+                                margin: 10px 0px;
+                            }
+                        }
+                    }
+
+                    .optionals {
+                        ul {
+                            flex-wrap: wrap;
+                            justify-content: center !important;
+
+                            li {
+                                width: 49% !important;
+                                margin: 10px 0px;
+                                justify-content: start !important;
+
+                            }
+                        }
+                    }
+
+                    .overview {
+
+                        ul {
+                            flex-direction: column !important;
+
+                            li {
+                                width: 85% !important;
+                                justify-content: space-between !important;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 450px) {
+    .view-1 {
+
+        .email {
+            .title {
+                align-items: center !important;
+            }
+        }
+    }
+}
+
+:host ::ng-deep .card-star {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+}
+
+:host ::ng-deep app-card-star {
+    box-sizing: border-box !important;
+}
+
+:host ::ng-deep .slick-track {
+    padding: 30px 0px !important;
+}
+
+
+:host ::ng-deep .slick-prev:before,
+.slick-next:before {
+    color: black !important;
+}
+
+:host ::ng-deep .slick-next:before,
+.slick-next:before {
+    color: black !important;
 }

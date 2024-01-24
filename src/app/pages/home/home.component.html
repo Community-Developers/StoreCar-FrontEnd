@@ -94,6 +94,7 @@
             <h2>Veículos em Destaque</h2>
         </header>
 
+
         <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
             (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
             (beforeChange)="beforeChange($event)">
@@ -102,10 +103,7 @@
                 <app-card-star style="width: 100%;height: 400px; max-width: 420px;"></app-card-star>
             </div>
         </ngx-slick-carousel>
-
     </div>
-
-
 
 </div>
 

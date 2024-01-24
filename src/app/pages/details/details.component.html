@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar style="width: 100%;"></app-navbar>
 
 <div class="section-1">
 
@@ -67,12 +67,36 @@
 
         </div>
         <div class="recomend">
-            <div fxLayoutAlign="flex-start center" style="width: 80%; margin-left: 10px;">
-                <h3>Recomendados</h3>
+
+            <div class="recomend-in" fxLayout="column wrap" fxLayoutAlign="center center">
+                <div fxLayoutAlign="flex-start center" style="width: 80%; margin-left: 10px;">
+                    <h3>Recomendados</h3>
+                </div>
+
+                <app-card-star></app-card-star>
+                <app-card-star></app-card-star>
             </div>
 
-            <app-card-star></app-card-star>
-            <app-card-star></app-card-star>
+
+            <div class="recomend-slide" style="width: 100%;">
+                <div class="carouse" fxLayout="column" fxLayoutAlign="center center">
+
+                    <div class="column-1" style="width: 100%;">
+                        <header fxLayoutAlign="start center" fxLayout="row">
+                            <h2>Veículos em Destaque</h2>
+                        </header>
+                        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+                            (init)="slickInit($event)" (breakpoint)="breakpoint($event)"
+                            (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
+                            <div ngxSlickItem *ngFor="let slide of slides" class="slide"
+                                style="display: flex; justify-content: center;">
+                                <app-card-star style="width: 100%;height: 400px; max-width: 420px;"></app-card-star>
+                            </div>
+                        </ngx-slick-carousel>
+                    </div>
+
+                </div>
+            </div>
 
         </div>
         <div class="extra-1"></div>
@@ -204,21 +228,21 @@
                 </div>
                 <div class="description">
                     <h3 class="op">Descrição</h3>
-                    <pre>
-<strong>Toyota Sorento 2018 - SUV Elegante</strong>
+                    <p>
+                        <strong>Toyota Sorento 2018 - SUV Elegante</strong>
 
-<div style="padding: 20px; border: 1px solid rgba(127, 129, 141, 0.16);">
-Descubra a elegância e conforto do Toyota Sorento 2018, um SUV que 
-eleva sua experiência de condução.
+                    <div style="padding: 20px; text-align: justify; border: 1px solid rgba(127, 129, 141, 0.16);">
+                        Descubra a elegância e conforto do Toyota Sorento 2018, um SUV que
+                        eleva sua experiência de condução.
 
-Explore nossas opções de financiamento flexíveis para tornar a 
-aquisição do Toyota Sorento 2018 ainda mais acessível. Nossa 
-equipe está pronta para ajudá-lo a encontrar a melhor solução 
-para suas necessidades. Além disso, oferecemos garantias 
-estendidas e pacotes de serviços para garantir sua 
-tranquilidade após a compra.
-</div>
-                    </pre>
+                        Explore nossas opções de financiamento flexíveis para tornar a
+                        aquisição do Toyota Sorento 2018 ainda mais acessível. Nossa
+                        equipe está pronta para ajudá-lo a encontrar a melhor solução
+                        para suas necessidades. Além disso, oferecemos garantias
+                        estendidas e pacotes de serviços para garantir sua
+                        tranquilidade após a compra.
+                    </div>
+                    <p>
                 </div>
             </section>
 
