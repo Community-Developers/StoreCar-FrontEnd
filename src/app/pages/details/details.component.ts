@@ -1,13 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+
+
+import {
+  GalleryModule,
+  GalleryItem,
+  ImageItem,
+  ImageSize,
+  ThumbnailsPosition,
+  Gallery,
+} from 'ng-gallery';
+import { LightboxModule, Lightbox } from 'ng-gallery/lightbox';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
-export class DetailsComponent {
-
+export class DetailsComponent implements OnInit {
+  images: GalleryItem[] = [];
   title = 'ng-carousel-demo';
+  value: 'top' | 'left' | 'right' | 'bottom' = 'top';
+
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.atualizarValorComBaseNaLarguraDaTela();
+  }
+
+  private atualizarValorComBaseNaLarguraDaTela(): void {
+    const larguraDaTela = window.innerWidth;
+
+    // Verifique a largura da tela e atribua o valor apropriado à variável
+    this.value = larguraDaTela <= 1024 ? "top" : "left";
+  }
 
   slides = [
     { img: "https://dummyimage.com/350x150/423b42/fff" },
@@ -80,6 +105,17 @@ export class DetailsComponent {
 
   beforeChange(e: any) {
     console.log('beforeChange');
+  }
+
+  ngOnInit() {
+    this.images = [
+      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
+      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
+      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
+      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
+      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
+      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
+    ];
   }
 
 }

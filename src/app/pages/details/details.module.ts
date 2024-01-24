@@ -9,6 +9,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import {
+  GalleryModule,
+  GalleryItem,
+  ImageItem,
+  ImageSize,
+  ThumbnailsPosition,
+  Gallery,
+} from 'ng-gallery';
+import { LightboxModule, Lightbox } from 'ng-gallery/lightbox';
 
 
 @NgModule({
@@ -24,7 +33,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     FlexLayoutModule,
     MatFormFieldModule,
     MatInputModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    GalleryModule,
   ]
 })
 export class DetailsModule { }
