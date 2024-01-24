@@ -41,7 +41,16 @@
                         font-style: normal;
                         font-weight: 600;
                         line-height: 14px;
+                        position: relative;
+                        cursor: pointer;
+
                         /* 100% */
+
+                        &:hover {
+                            mat-icon {
+                                opacity: 1;
+                            }
+                        }
                     }
 
                     .tes {
@@ -51,6 +60,8 @@
 
                         mat-icon {
                             margin-right: 8px;
+                            opacity: 0;
+                            transition: opacity 0.3s ease;
                         }
 
                         mat-icon {
@@ -132,6 +143,7 @@
                     font-weight: 600;
                     line-height: 30px;
                     /* 214.286% */
+
                 }
 
                 .wpp {
@@ -210,6 +222,35 @@
                         border-radius: 5px;
                         background: #00D264;
                         height: 50px;
+
+                        position: relative;
+                        z-index: 1;
+                        overflow: hidden;
+
+                        &::after {
+                            position: absolute;
+                            content: "";
+                            display: block;
+                            left: 8%;
+                            right: -20%;
+                            top: -4%;
+                            height: 150%;
+                            width: 150%;
+                            bottom: 0;
+                            border-radius: 0px 5px 5px 0px;
+                            background-color: red;
+                            transform: skewX(45deg) scale(0, 1);
+                            z-index: -1;
+                            transition: all 0.5s ease-out 0s;
+                        }
+
+                        &:hover {
+                            color: #FFF;
+
+                            &::after {
+                                transform: skewX(45deg) scale(1, 1);
+                            }
+                        }
                     }
                 }
 
@@ -489,7 +530,7 @@
 
         .view-1 {
             grid-template-columns: 100% !important;
-            grid-template-rows: 2% auto auto 0.5fr 1fr 1fr 1fr 1fr !important;
+            grid-template-rows: 3% auto auto 0.5fr 1fr 1fr 1fr 1fr !important;
 
             .car-details {
                 grid-area: 4/1/10/1 !important;

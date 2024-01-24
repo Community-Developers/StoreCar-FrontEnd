@@ -25,6 +25,7 @@
 
                 li {
                     margin: 0 15px;
+                    transition: all 0.5s ease-out 0s;
 
                     a {
                         display: flex;
@@ -40,6 +41,12 @@
                         transition: 0.35s;
 
                         text-decoration: none;
+                    }
+
+                    &:hover {
+                        a {
+                            color: #46D993;
+                        }
                     }
 
                 }
@@ -116,6 +123,12 @@
                     line-height: 30px;
                     /* 230.769% */
                     text-transform: uppercase;
+                    transition: all 0.5s ease-out 0s;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: #46D993;
+                    }
                 }
             }
 
@@ -137,6 +150,34 @@
                 font-weight: 600;
                 line-height: 30px;
                 text-transform: uppercase;
+
+                z-index: 1;
+                overflow: hidden;
+
+                &::after {
+                    position: absolute;
+                    content: "";
+                    display: block;
+                    left: 8%;
+                    right: -20%;
+                    top: -4%;
+                    height: 150%;
+                    width: 150%;
+                    bottom: 0;
+                    border-radius: 0px 5px 5px 0px;
+                    background-color: red;
+                    transform: skewX(45deg) scale(0, 1);
+                    z-index: -1;
+                    transition: all 0.5s ease-out 0s;
+                }
+
+                &:hover {
+                    color: #FFF;
+
+                    &::after {
+                        transform: skewX(45deg) scale(1, 1);
+                    }
+                }
             }
         }
 
@@ -198,7 +239,7 @@
 
         @media (max-width: 768px) {
             .top {
-                margin-bottom: 14px;
+                margin-bottom: 30px;
                 display: flex;
                 justify-content: space-around;
 

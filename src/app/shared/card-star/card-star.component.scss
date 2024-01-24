@@ -134,6 +134,31 @@
                     border-radius: 5px;
                     border: 1px solid rgba(29, 29, 29, 0.3);
                     min-width: 161px;
+
+                    &::after {
+                        position: absolute;
+                        content: "";
+                        display: block;
+                        left: 8%;
+                        right: -20%;
+                        top: -4%;
+                        height: 150%;
+                        width: 150%;
+                        bottom: 0;
+                        border-radius: 0px 5px 5px 0px;
+                        background-color: red;
+                        transform: skewX(45deg) scale(0, 1);
+                        z-index: -1;
+                        transition: all 0.5s ease-out 0s;
+                    }
+
+                    &:hover {
+                        color: #FFF;
+
+                        &::after {
+                            transform: skewX(45deg) scale(1, 1);
+                        }
+                    }
                 }
 
                 .price {
