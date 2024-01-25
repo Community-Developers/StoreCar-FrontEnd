@@ -7,6 +7,7 @@ import { DetailsComponent } from './pages/details/details.component';
 import { ListComponent } from './pages/list/list.component';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { CreatePostComponent } from './pages/admin/create-post/create-post.component';
+import { TableComponent } from './pages/admin/table/table.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,10 @@ const routes: Routes = [
       {
         path: 'post',
         component: CreatePostComponent
+      },
+      {
+        path: 'table',
+        component: TableComponent
       }
     ]
 

@@ -110,37 +110,37 @@ export class DashboardComponent implements OnInit {
 
   sidebarMenu: sidebarMenu[] = [
     {
-      link: "/home",
+      link: "/admin",
       icon: "home",
       menu: "Dashboard",
     },
     {
-      link: "/home",
+      link: "/admin/table",
       icon: "truck",
       menu: "Lista Automóveis",
     },
     {
-      link: "/home",
+      link: "/admin/post",
       icon: "plus",
       menu: "Anúnciar Automóvel",
     },
     {
-      link: "/home",
+      link: "/admin/table",
       icon: "disc",
       menu: "Lista Motocicletas",
     },
     {
-      link: "/home",
+      link: "/admin/create-post",
       icon: "plus",
       menu: "Anúnciar Motocicleta",
     },
     {
-      link: "/home",
+      link: "/",
       icon: "eye",
       menu: "Visão do visitante",
     },
     {
-      link: "/home",
+      link: "/",
       icon: "pie-chart",
       menu: "Análises",
     },

@@ -13,17 +13,21 @@ import {
   Gallery,
 } from 'ng-gallery';
 import { CreatePostComponent } from './create-post/create-post.component';
+import { TableComponent } from './table/table.component';
+import { RoutingModule } from 'src/app/routing.module';
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    TableComponent
   ],
   imports: [
     CommonModule,
     AngularMaterialModule,
     FeatherModule.pick(allIcons),
     GalleryModule,
+    RoutingModule
   ]
 })
 export class AdminModule { }

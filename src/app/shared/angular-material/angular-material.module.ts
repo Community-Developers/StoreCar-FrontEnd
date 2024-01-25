@@ -16,6 +16,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatRippleModule } from '@angular/material/core';
+import { MatRadioModule } from '@angular/material/radio';
+
 
 
 
@@ -47,7 +49,8 @@ import { MatRippleModule } from '@angular/material/core';
     MatSidenavModule,
     MatMenuModule,
     MatToolbarModule,
-    MatRippleModule
+    MatRippleModule,
+    MatRadioModule
   ]
 })
 export class AngularMaterialModule { }
