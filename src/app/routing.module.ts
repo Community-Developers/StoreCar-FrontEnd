@@ -6,6 +6,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { ListComponent } from './pages/list/list.component';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
+import { CreatePostComponent } from './pages/admin/create-post/create-post.component';
 
 
 const routes: Routes = [
@@ -14,16 +15,26 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path:'details',
-    component:DetailsComponent
+    path: 'details',
+    component: DetailsComponent
   },
   {
-    path:'list',
-    component:ListComponent
+    path: 'list',
+    component: ListComponent
   },
   {
-    path:'admin',
-    component:DashboardComponent
+    path: 'admin',
+    children: [
+      {
+        path: '',
+        component: DashboardComponent
+      },
+      {
+        path: 'post',
+        component: CreatePostComponent
+      }
+    ]
+
   }
 ];
 

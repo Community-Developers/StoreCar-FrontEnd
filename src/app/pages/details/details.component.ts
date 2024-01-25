@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 
 import {
@@ -21,17 +21,11 @@ export class DetailsComponent implements OnInit {
   title = 'ng-carousel-demo';
   value: 'top' | 'left' | 'right' | 'bottom' = 'top';
 
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event): void {
-    this.atualizarValorComBaseNaLarguraDaTela();
-  }
-
   private atualizarValorComBaseNaLarguraDaTela(): void {
     const larguraDaTela = window.innerWidth;
 
     // Verifique a largura da tela e atribua o valor apropriado à variável
-    this.value = larguraDaTela <= 1024 ? "top" : "left";
+    this.value = larguraDaTela <= 1024 ? 'top' : 'left';
   }
 
   slides = [
@@ -91,21 +85,6 @@ export class DetailsComponent implements OnInit {
       }
     ]
   };
-  slickInit(e: any) {
-    console.log('slick initialized');
-  }
-
-  breakpoint(e: any) {
-    console.log('breakpoint');
-  }
-
-  afterChange(e: any) {
-    console.log('afterChange');
-  }
-
-  beforeChange(e: any) {
-    console.log('beforeChange');
-  }
 
   ngOnInit() {
     this.images = [
@@ -116,6 +95,8 @@ export class DetailsComponent implements OnInit {
       new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
       new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
     ];
+
+    this.atualizarValorComBaseNaLarguraDaTela();
   }
 
 }

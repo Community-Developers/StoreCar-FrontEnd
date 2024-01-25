@@ -223,7 +223,48 @@
 
     .view-3 {
         height: 100vh;
-        background-color: red;
+        width: 100%;
+
+        section {
+
+            width: 82%;
+            background: #F6F6F6;
+            height: 100%;
+            margin: auto;
+            border-radius: 30px;
+
+            .right .image {
+                position: relative;
+                z-index: 1;
+
+                &::before {
+                    content: '';
+                    height: 87px;
+                    width: 87px;
+                    border-radius: 15px 0 0 0;
+                    background-color: red;
+                    position: absolute;
+                    left: -10px;
+                    top: -10px;
+                    z-index: -1;
+                }
+
+                &::after {
+                    content: '';
+                    height: 87px;
+                    width: 87px;
+                    border-radius: 0 0 15px 0;
+                    background-color: red;
+                    position: absolute;
+                    right: -10px;
+                    bottom: -10px;
+                    z-index: -1;
+                }
+            }
+        }
+
+        margin-bottom: 140px;
+
     }
 
     .view-4 {
@@ -236,7 +277,7 @@
         box-sizing: border-box;
         overflow: hidden;
 
-        margin: 140px 0px;
+        margin: 5% 0px;
         height: auto;
         width: 100%;
 

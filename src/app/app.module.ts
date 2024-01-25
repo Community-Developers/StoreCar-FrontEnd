@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { allIcons } from 'angular-feather/icons';
+import { FeatherModule } from 'angular-feather';
+
 
 
 @NgModule({
@@ -15,7 +18,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    FeatherModule.pick(allIcons)
 
   ],
   providers: [],

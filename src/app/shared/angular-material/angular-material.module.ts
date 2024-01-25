@@ -14,6 +14,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatRippleModule } from '@angular/material/core';
 
 
 
@@ -43,7 +45,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatDividerModule,
     MatCardModule,
     MatSidenavModule,
-    MatMenuModule
+    MatMenuModule,
+    MatToolbarModule,
+    MatRippleModule
   ]
 })
 export class AngularMaterialModule { }

@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CarInfo, DialogAdminComponent } from 'src/app/shared/dialog-admin/dialog-admin.component';
 import { MatDialog } from '@angular/material/dialog';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { GalleryItem, ImageItem } from 'ng-gallery';
 
 
 export interface PeriodicElement {
@@ -9,6 +14,12 @@ export interface PeriodicElement {
   position: number;
   marca: string;
   price: number;
+}
+
+interface sidebarMenu {
+  link: string;
+  icon: string;
+  menu: string;
 }
 
 
@@ -57,26 +68,95 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  routerActive: string = "activelink";
+  images: GalleryItem[] = [];
+
+
+
+  constructor(private breakpointObserver: BreakpointObserver, public dialog: MatDialog, private router: Router) { }
+
+
 
   openDialog(id: number | null, marca: string | null, edit: boolean | null, del: boolean | null): void {
     let dialogRef;
-  
+
     if (id === null && marca === null) {
       dialogRef = this.dialog.open(DialogAdminComponent, {
         data: {}
       });
-      
+
     } else {
       dialogRef = this.dialog.open(DialogAdminComponent, {
-        data: { car:carInfo, edit: edit, del: del },
+        data: { car: carInfo, edit: edit, del: del },
       });
     }
   }
-  
+
 
   displayedColumns: string[] = ['position', 'img', 'title', 'marca', 'price', 'actions'];
   dataSource = ELEMENT_DATA;
+
+
+  search: boolean = false;
+
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
+
+
+  sidebarMenu: sidebarMenu[] = [
+    {
+      link: "/home",
+      icon: "home",
+      menu: "Dashboard",
+    },
+    {
+      link: "/home",
+      icon: "truck",
+      menu: "Lista Automóveis",
+    },
+    {
+      link: "/home",
+      icon: "plus",
+      menu: "Anúnciar Automóvel",
+    },
+    {
+      link: "/home",
+      icon: "disc",
+      menu: "Lista Motocicletas",
+    },
+    {
+      link: "/home",
+      icon: "plus",
+      menu: "Anúnciar Motocicleta",
+    },
+    {
+      link: "/home",
+      icon: "eye",
+      menu: "Visão do visitante",
+    },
+    {
+      link: "/home",
+      icon: "pie-chart",
+      menu: "Análises",
+    },
+  ]
+
+
+  ngOnInit() {
+    this.images = [
+      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
+      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
+      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
+      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
+      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
+      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
+    ];
+  }
+
+
 }
