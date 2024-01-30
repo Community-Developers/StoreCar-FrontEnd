@@ -6,16 +6,19 @@
         box-sizing: border-box;
         z-index: 10;
 
+        border-bottom: 1px solid #F6F6F6;
+
 
         .top {
-            width: 100%;
+            width: 82%;
             box-sizing: border-box;
             height: 78.42px;
-            padding: 0 10%;
             justify-content: center;
             align-items: center;
             flex-shrink: 0;
             border-bottom: 1px solid #EEE;
+            transition: all 1s ease-out 0s;
+
 
             display: grid;
             grid-template-columns: 0fr 1fr 1fr;
@@ -102,9 +105,8 @@
         }
 
         .bottom {
-            width: 100%;
+            width: 82%;
             box-sizing: border-box;
-            padding: 0 10%;
             height: 61px;
             flex-shrink: 0;
             background: #FFF;
@@ -183,11 +185,6 @@
 
         @media (max-width: 1440px) {
 
-            .top,
-            .bottom {
-                width: 100%;
-            }
-
             .top {
                 .list-a ul li {
                     margin-right: 20px !important;
@@ -199,7 +196,7 @@
 
             .top,
             .bottom {
-                padding: 0 2%;
+                width: 98%;
             }
 
             .top {
@@ -486,4 +483,79 @@
     mat-sidenav-content {
         margin-left: 0px !important;
     }
+}
+
+.mode-stick {
+    position: fixed;
+
+    &::ng-deep .bottom {
+        display: none !important;
+        transition: all 1s ease-out 0s;
+    }
+
+    &::ng-deep .top {
+
+        .list-a ul {
+            justify-content: center;
+        }
+
+        .infos {
+            justify-content: flex-end !important;
+
+            .nav-right {
+                display: block !important;
+                transition: all 1s ease 0s;
+
+
+                .sidenav {
+                    width: 100%;
+                    position: fixed;
+                    z-index: 1000;
+                    background: transparent;
+                    //backdrop-filter: blur(10px);
+                    backdrop-filter: blur(0px);
+                    z-index: 100;
+
+                    text-align: end;
+
+                    .nav-right {
+                        width: 20% !important;
+
+                        mat-sidenav-conteiner mat-sidenav-content button mat-icon {
+                            font-size: 40px !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        &::ng-deep .mat-drawer {
+            box-shadow: none !important;
+        }
+
+        &::ng-deep .mat-drawer-inner-container {
+            overflow: hidden;
+        }
+
+        @media (max-width:1550px) {
+            .infos .nav-right .sidenav .nav-right {
+                width: 30% !important
+            }
+        }
+
+
+        @media (max-width:1400px) {
+            .infos .nav-right .sidenav .nav-right {
+                width: 40% !important
+            }
+        }
+
+        @media (max-width:840px) {
+            .infos .nav-right .sidenav .nav-right {
+                width: 50% !important
+            }
+        }
+    }
+
+
 }

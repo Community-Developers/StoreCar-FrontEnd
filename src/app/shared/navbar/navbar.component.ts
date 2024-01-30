@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogLoginComponent } from '../dialog-login/dialog-login.component';
 
@@ -9,8 +9,18 @@ import { DialogLoginComponent } from '../dialog-login/dialog-login.component';
 })
 export class NavbarComponent {
   showFiller = false;
+  headerSticky: boolean = false;
 
   constructor(public dialog: MatDialog) { }
+
+  @HostListener('window:scroll', ['$event']) onscroll() {
+    if (window.scrollY > 80) {
+      this.headerSticky = true
+    }
+    else {
+      this.headerSticky = false
+    }
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogLoginComponent, {
