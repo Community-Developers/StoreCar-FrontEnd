@@ -8,7 +8,7 @@
 
 
         .top {
-            width: 85%;
+            width: 100%;
             box-sizing: border-box;
             height: 78.42px;
             padding: 0 10%;
@@ -102,7 +102,7 @@
         }
 
         .bottom {
-            width: 85%;
+            width: 100%;
             box-sizing: border-box;
             padding: 0 10%;
             height: 61px;
@@ -480,4 +480,10 @@
 
 ::ng-deep .mat-drawer-container {
     z-index: 10 !important;
+}
+
+:host {
+    mat-sidenav-content {
+        margin-left: 0px !important;
+    }
 }

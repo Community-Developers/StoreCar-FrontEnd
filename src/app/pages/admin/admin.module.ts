@@ -16,6 +16,8 @@ import { CreatePostComponent } from './create-post/create-post.component';
 import { TableComponent } from './table/table.component';
 import { RoutingModule } from 'src/app/routing.module';
 
+
+
 @NgModule({
   declarations: [
     DashboardComponent,

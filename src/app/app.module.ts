@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -7,8 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { allIcons } from 'angular-feather/icons';
 import { FeatherModule } from 'angular-feather';
-
-
 
 @NgModule({
   declarations: [
@@ -19,10 +17,11 @@ import { FeatherModule } from 'angular-feather';
     AppRoutingModule,
     BrowserAnimationsModule,
     SlickCarouselModule,
-    FeatherModule.pick(allIcons)
+    FeatherModule.pick(allIcons),
 
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

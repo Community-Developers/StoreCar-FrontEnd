@@ -21,7 +21,7 @@ export class HomeComponent {
     "dots": true,
     "infinite": true,
     autoplay: true,
-    autoplaySpeed: 1000,
+    autoplaySpeed: 1100,
     "responsive": [
       {
         breakpoint: 1440,
