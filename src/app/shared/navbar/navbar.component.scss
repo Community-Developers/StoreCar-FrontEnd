@@ -494,18 +494,25 @@
     }
 
     &::ng-deep .top {
+        a {
+            font-size: 20px !important;
+        }
 
         .list-a ul {
             justify-content: center;
+
+
         }
 
         .infos {
             justify-content: flex-end !important;
+            position: relative;
 
             .nav-right {
                 display: block !important;
                 transition: all 1s ease 0s;
-
+                position: absolute;
+                right: -100px;
 
                 .sidenav {
                     width: 100%;
@@ -521,9 +528,7 @@
                     .nav-right {
                         width: 20% !important;
 
-                        mat-sidenav-conteiner mat-sidenav-content button mat-icon {
-                            font-size: 40px !important;
-                        }
+
                     }
                 }
             }
@@ -537,6 +542,10 @@
             overflow: hidden;
         }
 
+        &::ng-deep mat-sidenav-content button mat-icon {
+            transform: scale(2);
+        }
+
         @media (max-width:1550px) {
             .infos .nav-right .sidenav .nav-right {
                 width: 30% !important
@@ -548,14 +557,32 @@
             .infos .nav-right .sidenav .nav-right {
                 width: 40% !important
             }
+
+            a {
+                font-size: 14px !important;
+            }
+
+        }
+
+        @media (max-width:1100px) {
+            .infos .nav-right {
+                position: relative !important;
+                right: 0;
+
+                &::ng-deep mat-sidenav-content button mat-icon {
+                    transform: scale(1.5);
+                }
+            }
         }
 
         @media (max-width:840px) {
             .infos .nav-right .sidenav .nav-right {
                 width: 50% !important
             }
+
+            div .logo-h img {
+                max-width: 168px !important;
+            }
         }
     }
-
-
 }
