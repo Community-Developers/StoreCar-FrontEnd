@@ -392,6 +392,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         justify-content: center; // Centraliza horizontalmente
         text-align: center;
         margin: 100px 0;
+        overflow: hidden;
 
         .content-wrapper {
             width: 82%;
@@ -425,9 +426,10 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
             .steps {
                 display: flex;
-                justify-content: space-between; // Mudado de space-evenly para space-between
-                margin-bottom: 80px; // Espaço abaixo das etapas
+                margin-bottom: 80px;
+                gap: 20px;
                 position: relative;
+                justify-content: space-around;
 
                 &::after {
                     content: "";
@@ -442,12 +444,13 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
 
                 .step {
-                    width: 22%;
+                    max-width: 300px;
                     background-color: #F6F6F6;
                     box-shadow: $shadow;
                     border-radius: 10px;
                     position: relative;
                     padding-top: 10px;
+                    min-width: 240px;
 
                     &:before {
                         content: attr(data-step);
@@ -578,6 +581,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         background-color: #000; // Tarja preta
         color: #fff;
         padding: 50px 0;
+        overflow: hidden;
 
         .container {
             display: flex;
@@ -728,6 +732,98 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 }
 
+@media (max-width: 1300px) {
+    .view-5 .content-wrapper {
+        padding: 100px 20px !important;
+
+        .steps .step {
+            min-width: unset !important;
+
+            p {
+                min-width: unset !important;
+            }
+
+        }
+    }
+}
+
+@media (max-width: 950px) {
+    .view-5 .content-wrapper {
+        padding: 100px 10px !important;
+
+        .steps {
+            flex-wrap: wrap;
+            justify-content: center !important;
+            row-gap: 60px !important;
+
+            .step {
+                min-width: 250px !important;
+
+                p {
+                    min-width: 240px !important;
+                }
+            }
+
+        }
+    }
+}
+
+
+@media (max-width: 680px) {
+    .view-5 .content-wrapper {
+        padding: 100px 5px !important;
+
+        .steps {
+            .step {
+                max-width: 190px !important;
+
+
+                p {
+                    max-width: 170px !important;
+                }
+            }
+
+        }
+    }
+}
+
+@media (max-width: 550px) {
+    .view-5 .content-wrapper {
+        padding: 100px 5px !important;
+
+        .steps {
+            .step {
+                max-width: 190px !important;
+                min-width: 300px !important;
+
+                p {
+                    max-width: 170px !important;
+                }
+            }
+        }
+
+        .rating {
+            flex-direction: column;
+            row-gap: 30px;
+
+            .rating-block {
+                flex-direction: column;
+                gap: 8px;
+
+                p,
+                span {
+                    margin: 0 !important;
+                    padding: 0;
+                }
+            }
+
+            a {
+                margin: 0 !important;
+            }
+        }
+    }
+}
+
 @media (max-width: 1100px) {
     main {
         .view-1-1 {
@@ -765,6 +861,12 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             header {
                 padding: 0 2%;
             }
+        }
+    }
+
+    .view-5 {
+        .content-wrapper {
+            width: 98% !important;
         }
     }
 }
