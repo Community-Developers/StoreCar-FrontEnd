@@ -1,3 +1,4 @@
+import { AdminService } from './../../services/admin.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -69,15 +70,19 @@ const carInfo: CarInfo = {
   styleUrls: ['./dialog-admin.component.scss']
 })
 export class DialogAdminComponent implements OnInit {
+
   carForm!: FormGroup;
   inputData: any;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ref: MatDialogRef<DialogAdminComponent>, private builder: FormBuilder) {
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ref: MatDialogRef<DialogAdminComponent>, private builder: FormBuilder,
+    private adminService: AdminService) {
     this.inputData = data;
   }
 
   ngOnInit(): void {
     console.log(this.inputData)
+
 
     this.carForm = this.builder.group({
       title: [''],
@@ -114,6 +119,33 @@ export class DialogAdminComponent implements OnInit {
       this.carForm.get('optionalFeatures')?.patchValue(this.inputData.car.options);
     }
   }
+
+  deleteItem() {
+    console.log('entrou no delete dialog');
+    console.log(this.inputData);
+
+    // A verificação específica de tipo não é mais necessária se a lógica é a mesma para ambos os casos.
+    // A condição para verificar se o tipo é 'veiculo' ou 'motocicleta' pode ser removida se a ação subsequente for idêntica.
+    // Se necessário, assegure-se de que `this.inputData.type` sempre terá um valor válido ('veiculo' ou 'motocicleta') antes de chamar este método.
+
+    //this.isLoading = true; // Inicia o indicador de carregamento antes da requisição.
+
+    //this.adminService.deleteItem(this.inputData.id, this.inputData.type).subscribe({
+    //next: (res) => {
+    //console.log(res); // Log da resposta
+    //this.isLoading = false; // Desativa o indicador de carregamento após a conclusão da requisição.
+    //this.ref.close(); // Fecha o diálogo ou componente atual.
+    //},
+    //error: (error) => {
+    //console.error('Erro ao deletar o item:', error);
+    //this.isLoading = false; // Assegura que o indicador de carregamento será desativado mesmo em caso de erro.
+    // Pode adicionar tratamento de erro específico aqui, se necessário.
+    //}
+    //});
+
+    this.ref.close({ delete: true })
+  }
+
 
   saveuser() {
     this.ref.close(this.carForm.value);

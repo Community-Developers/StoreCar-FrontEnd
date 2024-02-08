@@ -26,6 +26,7 @@
     "keycloak-angular": "^14.0.0",
     "keycloak-js": "^21.1.2",
     "ng-gallery": "^11.0.0",
+    "ngx-currency": "^4.0.0",
     "ngx-slick-carousel": "^15.0.0",
     "rxjs": "~7.8.0",
     "slick-carousel": "^1.8.1",

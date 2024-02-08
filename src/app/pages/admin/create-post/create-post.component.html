@@ -39,9 +39,7 @@
                 *ngIf="isHandset$ | async">
                 <i-feather name="menu" class="text-light-muted feather-base mt-n3"></i-feather>
             </button>
-            <!-- <button mat-icon-button class="ms-4 me-4" (click)="search=!search">
-          <i-feather name="search" class="mt-n3 text-light-muted feather-base text-dark"></i-feather>
-        </button>  -->
+
             <div class="ms-auto">
                 <button mat-button class="fs-16 pt-4 pb-4 ps-8 pe-8 text-light-muted d-flex align-items-center"
                     [matMenuTriggerFor]="menu">
@@ -78,77 +76,299 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="mb-32">Form Layout</h4>
-                        <form>
+
+                        <div class="upload-section">
+                            <input type="file" multiple (change)="processFile($event)" #fileInput hidden>
+                            <div class="image-preview" [style.backgroundImage]="'url(' + images[0] + ')'">
+                                <button (click)="fileInput.click()" class="btn-1 upload-btn" mat-flat-button
+                                    color="primary">
+                                    <mat-icon>image</mat-icon><span> Enviar Imagens</span>
+                                </button>
+                            </div>
+                            <div class="thumbnail-container" *ngIf="images.length >= 0">
+                                <ng-container *ngFor="let imgSrc of images; let i = index">
+                                    <div class="thumbnail">
+                                        <img [src]="imgSrc" alt="Image thumbnail">
+                                        <!-- Botão de remoção adicionado aqui -->
+                                        <button *ngIf="i >= 0" class="remove-btn" (click)="removeImage(i)">
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+
+
+                        <form *ngIf="veiculo" fxLayout="row wrap" fxLayoutAlign="space-between center"
+                            [formGroup]="cadastroFormVeiculo" (ngSubmit)="submitForm()">
                             <mat-form-field class="w-100 fs-16" appearance="outline">
-                                <mat-label>Name</mat-label>
-                                <input matInput type="text" value="Nirav Joshi" placeholder="Enter your Name">
+                                <mat-label>Marca</mat-label>
+                                <input matInput type="text" placeholder="Marca do veículo" formControlName="marca">
+                            </mat-form-field>
+
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
+                                <mat-label>Modelo</mat-label>
+                                <input matInput type="text" placeholder="Modelo do veículo" formControlName="modelo">
+                            </mat-form-field>
+
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
+                                <mat-label>Tipo Carroceria</mat-label>
+                                <mat-select formControlName="carroceria">
+                                    <mat-option *ngFor="let option of carrocerias"
+                                        value="{{option}}">{{option}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-30 fs-16" appearance="outline">
+                                <mat-label>Câmbio</mat-label>
+                                <mat-select formControlName="cambio">
+                                    <mat-option value="manual">Manual</mat-option>
+                                    <mat-option value="automatico">Automático</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-30 fs-16" appearance="outline">
+                                <mat-label>Combustivel</mat-label>
+                                <mat-select formControlName="combustivel">
+                                    <mat-option value="gasolina">Gasolina</mat-option>
+                                    <mat-option value="alcool">Álcool</mat-option>
+                                    <mat-option value="diesel">Diesel</mat-option>
+                                    <mat-option value="automatico">Elétrico</mat-option>
+                                    <mat-option value="flex">Flex</mat-option>
+                                    <mat-option value="automatico">Gasolina/Gnv</mat-option>
+                                    <mat-option value="automatico">Tretafull</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-30 fs-16" appearance="outline">
+                                <mat-label>Cor</mat-label>
+                                <mat-select formControlName="cor">
+                                    <mat-option *ngFor="let option of cores" value="{{option}}">{{option}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
+                                <mat-label>Ano Fabricação</mat-label>
+                                <mat-select formControlName="anoFabricacao">
+                                    <mat-option *ngFor="let option of years" value="{{option}}">{{option}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
+                                <mat-label>Ano Modelo</mat-label>
+                                <mat-select formControlName="anoModelo">
+                                    <mat-option *ngFor="let option of years" value="{{option}}">{{option}}</mat-option>
+                                </mat-select>
                             </mat-form-field>
 
                             <mat-form-field class="w-100 fs-16" appearance="outline">
-                                <mat-label>Email</mat-label>
-                                <input matInput type="email" placeholder="Enter your email">
+                                <mat-label>Título</mat-label>
+                                <input matInput type="text" placeholder="Título do anúncio..." formControlName="titulo">
                             </mat-form-field>
 
                             <mat-form-field class="w-100 fs-16" appearance="outline">
-                                <mat-label>Password</mat-label>
-                                <input matInput type="password" placeholder="Enter your password">
+                                <mat-label>Descrição</mat-label>
+                                <textarea matInput rows="8" placeholder="Fale sobre o veículo..."
+                                    formControlName="descricao"></textarea>
                             </mat-form-field>
 
-                            <mat-form-field class="w-100 fs-16" appearance="outline">
-                                <mat-label>Textarea</mat-label>
-                                <textarea matInput rows="6" placeholder="Write your message"
-                                    value="Default Value"></textarea>
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
+                                <mat-label>Renavam</mat-label>
+                                <input matInput type="text" formControlName="renavam">
                             </mat-form-field>
 
-                            <mat-form-field class="w-100 fs-16" appearance="outline">
-                                <mat-label>Error</mat-label>
-                                <input matInput type="text" value="Deep Javiya">
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
+                                <mat-label>Placa</mat-label>
+                                <input matInput type="text" formControlName="placa">
                             </mat-form-field>
 
-                            <section class="fs-16 mb-32">
-                                <mat-checkbox color="primary" [checked]="checked" class="d-block mb-16">Terms &
-                                    Condition</mat-checkbox>
-                                <mat-checkbox class="op-7" [disabled]="true">Disabled</mat-checkbox>
-                            </section>
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
+                                <mat-label>Preço</mat-label>
+                                <input matInput type="text" currencyMask
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left'}"
+                                    formControlName="preco">
+                            </mat-form-field>
 
-                            <mat-radio-group color="primary" class="fs-16" aria-label="Select an option">
-                                <mat-label class="text-secondary">Gender</mat-label>
-                                <mat-radio-button value="1" class="mt-8 mb-16 d-block"
-                                    [checked]="checked">Female</mat-radio-button>
-                                <mat-radio-button value="2" class="d-block mb-16">Male</mat-radio-button>
-                                <mat-radio-button value="3" class="d-block mb-36">Other</mat-radio-button>
+                            <mat-radio-group color="primary" class="fs-16 w-50" aria-label="Select an option"
+                                formControlName="condicao">
+                                <mat-label class="text-secondary">Condição</mat-label>
+                                <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+                                    <mat-radio-button value="zero">Novo</mat-radio-button>
+                                    <mat-radio-button value="semi-novo">Semi-novo</mat-radio-button>
+                                    <mat-radio-button value="bom">Bom</mat-radio-button>
+                                </div>
+
                             </mat-radio-group>
 
-                            <button mat-button class="btn btn-info fw-normal" (click)="onBack()"
-                                type="submit">Submit</button>
+                            <div class=" w-100 fs-16" fxLayout="row wrap" fxLayoutAlign="space-between center"
+                                formGroupName="optionalFeatures" style="margin-bottom: 30px; row-gap: 20px;">
+
+                                <mat-checkbox formControlName="abs" class="d-block mb-16">Freio ABS</mat-checkbox>
+                                <mat-checkbox formControlName="airbags" class="d-block mb-16">Airbags</mat-checkbox>
+                                <mat-checkbox formControlName="stabilityControl" class="d-block mb-16">Controle de
+                                    estabilidade</mat-checkbox>
+                                <mat-checkbox formControlName="tractionControl" class="d-block mb-16">Controle de
+                                    tração</mat-checkbox>
+                                <mat-checkbox formControlName="emergencyBrakeAssist" class="d-block mb-16">Assistente de
+                                    frenagem de emergência</mat-checkbox>
+                                <mat-checkbox formControlName="collisionWarningSystem" class="d-block mb-16">Sistema de
+                                    alerta de colisão frontal</mat-checkbox>
+                                <mat-checkbox formControlName="airConditioning" class="d-block mb-16">Ar
+                                    condicionado</mat-checkbox>
+                                <mat-checkbox formControlName="powerWindows" class="d-block mb-16">Vidros
+                                    elétricos</mat-checkbox>
+                                <mat-checkbox formControlName="electricPowerSteering" class="d-block mb-16">Direção
+                                    elétrica</mat-checkbox>
+                                <mat-checkbox formControlName="leatherSeats" class="d-block mb-16">Bancos de
+                                    couro</mat-checkbox>
+                                <mat-checkbox formControlName="driverSeatHeightAdjustment" class="d-block mb-16">Ajuste
+                                    de altura do banco do motorista</mat-checkbox>
+                                <mat-checkbox formControlName="soundSystem" class="d-block mb-16">Sistema de
+                                    som</mat-checkbox>
+                                <mat-checkbox formControlName="rearViewCamera" class="d-block mb-16">Câmera de
+                                    ré</mat-checkbox>
+                                <mat-checkbox formControlName="navigationSystem" class="d-block mb-16">Sistema de
+                                    navegação</mat-checkbox>
+                                <mat-checkbox formControlName="bluetooth" class="d-block mb-16">Bluetooth</mat-checkbox>
+                                <mat-checkbox formControlName="multifunctionalSteeringWheel"
+                                    class="d-block mb-16">Volante multifuncional</mat-checkbox>
+                            </div>
+
+
+                            <div fxLayout="row wrap" fxLayoutAlign="flex-start center" style="gap: 20px;">
+                                <button type="submit" class="btn-1" mat-flat-button extended color="primary">
+                                    <mat-icon>post_add</mat-icon><span> Publicar Anúncio </span></button>
+
+
+                                <button type="submit" (click)="onBack()" class="btn-1" mat-flat-button extended
+                                    color="accent">
+                                    <mat-icon>date_range </mat-icon><span> Salvar Rascunho </span></button>
+
+
+                                <button type="submit" (click)="onBack()" class="btn-1" mat-flat-button extended
+                                    color="warn">
+                                    <mat-icon>delete</mat-icon><span> Cancelar </span></button>
+
+                            </div>
+
+                        </form>
+
+
+                        <form *ngIf="!veiculo" fxLayout="row wrap" fxLayoutAlign="space-between center"
+                            [formGroup]="cadastroFormMoto" (ngSubmit)="submitForm()">
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
+                                <mat-label>Marca</mat-label>
+                                <input matInput type="text" placeholder="Marca do veículo" formControlName="marca">
+                            </mat-form-field>
+
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
+                                <mat-label>Modelo</mat-label>
+                                <input matInput type="text" placeholder="Modelo do veículo" formControlName="modelo">
+                            </mat-form-field>
+
+                            <mat-form-field class="w-30 fs-16" appearance="outline">
+                                <mat-label>Câmbio</mat-label>
+                                <mat-select formControlName="cambio">
+                                    <mat-option value="manual">Manual</mat-option>
+                                    <mat-option value="automatico">Automático</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-30 fs-16" appearance="outline">
+                                <mat-label>Combustivel</mat-label>
+                                <mat-select formControlName="combustivel">
+                                    <mat-option value="gasolina">Gasolina</mat-option>
+                                    <mat-option value="alcool">Álcool</mat-option>
+                                    <mat-option value="diesel">Diesel</mat-option>
+                                    <mat-option value="automatico">Elétrico</mat-option>
+                                    <mat-option value="flex">Flex</mat-option>
+                                    <mat-option value="automatico">Gasolina/Gnv</mat-option>
+                                    <mat-option value="automatico">Tretafull</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-30 fs-16" appearance="outline">
+                                <mat-label>Cor</mat-label>
+                                <mat-select formControlName="cor">
+                                    <mat-option *ngFor="let option of cores" value="{{option}}">{{option}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
+                                <mat-label>Ano Fabricação</mat-label>
+                                <mat-select formControlName="anoFabricacao">
+                                    <mat-option *ngFor="let option of years" value="{{option}}">{{option}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
+                                <mat-label>Ano Modelo</mat-label>
+                                <mat-select formControlName="anoModelo">
+                                    <mat-option *ngFor="let option of years" value="{{option}}">{{option}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-100 fs-16" appearance="outline">
+                                <mat-label>Título</mat-label>
+                                <input matInput type="text" placeholder="Título do anúncio..." formControlName="titulo">
+                            </mat-form-field>
+
+                            <mat-form-field class="w-100 fs-16" appearance="outline">
+                                <mat-label>Descrição</mat-label>
+                                <textarea matInput rows="8" placeholder="Fale sobre o veículo..."
+                                    formControlName="descricao"></textarea>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
+                                <mat-label>Renavam</mat-label>
+                                <input matInput type="text" formControlName="renavam">
+                            </mat-form-field>
+
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
+                                <mat-label>Placa</mat-label>
+                                <input matInput type="text" formControlName="placa">
+                            </mat-form-field>
+
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
+                                <mat-label>Preço</mat-label>
+                                <input matInput type="text" currencyMask
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left'}"
+                                    formControlName="preco">
+                            </mat-form-field>
+
+                            <mat-radio-group color="primary" class="fs-16 w-50" aria-label="Select an option"
+                                formControlName="condicao">
+                                <mat-label class="text-secondary">Condição</mat-label>
+                                <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+                                    <mat-radio-button value="zero">Novo</mat-radio-button>
+                                    <mat-radio-button value="semi-novo">Semi-novo</mat-radio-button>
+                                    <mat-radio-button value="bom">Bom</mat-radio-button>
+                                </div>
+
+                            </mat-radio-group>
+
+                            <div fxLayout="row wrap" fxLayoutAlign="flex-start center" style="gap: 20px;">
+                                <button type="submit" class="btn-1" mat-flat-button extended color="primary">
+                                    <mat-icon>post_add</mat-icon><span> Publicar Anúncio </span></button>
+
+
+                                <button type="submit" (click)="onBack()" class="btn-1" mat-flat-button extended
+                                    color="accent">
+                                    <mat-icon>date_range </mat-icon><span> Salvar Rascunho </span></button>
+
+
+                                <button type="submit" (click)="onBack()" class="btn-1" mat-flat-button extended
+                                    color="warn">
+                                    <mat-icon>delete</mat-icon><span> Cancelar </span></button>
+
+                            </div>
+
                         </form>
                     </div>
                 </div>
-
-
-
-                <!-- Form Design Type -->
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="mb-32">Form Design Type</h4>
-
-                        <mat-form-field class="me-24 fs-16" appearance="outline">
-                            <mat-label>Outlined</mat-label>
-                            <input matInput>
-                        </mat-form-field>
-
-                        <mat-form-field class="me-24 fs-16" appearance="fill">
-                            <mat-label>Filled</mat-label>
-                            <input matInput>
-                        </mat-form-field>
-
-                        <mat-form-field class="me-24 fs-16">
-                            <mat-label>Standard</mat-label>
-                            <input matInput>
-                        </mat-form-field>
-                    </div>
-                </div>
-
             </div>
         </div>
 

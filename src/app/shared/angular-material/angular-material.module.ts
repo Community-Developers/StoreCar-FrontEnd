@@ -17,6 +17,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatRippleModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -50,7 +51,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatMenuModule,
     MatToolbarModule,
     MatRippleModule,
-    MatRadioModule
+    MatRadioModule,
+    MatProgressSpinnerModule
   ]
 })
 export class AngularMaterialModule { }

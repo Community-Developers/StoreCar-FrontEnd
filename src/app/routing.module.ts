@@ -16,11 +16,11 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'details',
+    path: 'details/:type/:id',
     component: DetailsComponent
   },
   {
-    path: 'list',
+    path: 'list/:type',
     component: ListComponent
   },
   {
@@ -31,11 +31,15 @@ const routes: Routes = [
         component: DashboardComponent
       },
       {
-        path: 'post',
+        path: 'post/:type',
         component: CreatePostComponent
       },
       {
-        path: 'table',
+        path: 'edit/:type/:id',
+        component: CreatePostComponent
+      },
+      {
+        path: 'table/:type',
         component: TableComponent
       }
     ]

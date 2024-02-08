@@ -15,6 +15,8 @@ import {
 import { CreatePostComponent } from './create-post/create-post.component';
 import { TableComponent } from './table/table.component';
 import { RoutingModule } from 'src/app/routing.module';
+import { NgxCurrencyDirective } from 'ngx-currency';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -29,7 +31,10 @@ import { RoutingModule } from 'src/app/routing.module';
     AngularMaterialModule,
     FeatherModule.pick(allIcons),
     GalleryModule,
-    RoutingModule
+    RoutingModule,
+    NgxCurrencyDirective,
+    ReactiveFormsModule
+
   ]
 })
 export class AdminModule { }

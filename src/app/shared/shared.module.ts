@@ -25,7 +25,7 @@ import { DialogLoginComponent } from './dialog-login/dialog-login.component';
     CommonModule,
     RoutingModule,
     AngularMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [
     NavbarComponent,

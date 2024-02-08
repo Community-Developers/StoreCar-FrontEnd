@@ -115,22 +115,22 @@ export class DashboardComponent implements OnInit {
       menu: "Dashboard",
     },
     {
-      link: "/admin/table",
+      link: "/admin/table/automovel",
       icon: "truck",
       menu: "Lista Automóveis",
     },
     {
-      link: "/admin/post",
+      link: "/admin/post/automovel",
       icon: "plus",
       menu: "Anúnciar Automóvel",
     },
     {
-      link: "/admin/table",
+      link: "/admin/table/motocicleta",
       icon: "disc",
       menu: "Lista Motocicletas",
     },
     {
-      link: "/admin/create-post",
+      link: "/admin/post/motocicleta",
       icon: "plus",
       menu: "Anúnciar Motocicleta",
     },

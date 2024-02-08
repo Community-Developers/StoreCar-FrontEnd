@@ -95,9 +95,7 @@
         </header>
 
 
-        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
-            (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
-            (beforeChange)="beforeChange($event)">
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
             <div ngxSlickItem *ngFor="let slide of slides" class="slide"
                 style="display: flex; justify-content: center;">
                 <app-card-star style="width: 100%;height: 400px; max-width: 420px;"></app-card-star>

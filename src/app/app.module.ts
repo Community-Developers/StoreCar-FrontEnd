@@ -7,6 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { allIcons } from 'angular-feather/icons';
 import { FeatherModule } from 'angular-feather';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxCurrencyDirective } from "ngx-currency";
+
+
+
 
 @NgModule({
   declarations: [
@@ -18,7 +23,8 @@ import { FeatherModule } from 'angular-feather';
     BrowserAnimationsModule,
     SlickCarouselModule,
     FeatherModule.pick(allIcons),
-
+    HttpClientModule,
+    NgxCurrencyDirective
   ],
   providers: [
   ],

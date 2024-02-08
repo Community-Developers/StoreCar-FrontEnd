@@ -1,16 +1,17 @@
 <ng-template #delete [ngIf]="inputData.del">
-    <form style="width: 400px; box-sizing: border-box;" [formGroup]="carForm" (ngSubmit)="saveuser()"
-        fxLayout="row wrap" fxLayoutAlign="center center">
+    <!-- <mat-spinner *ngIf="isLoading"></mat-spinner>-->
+
+    <div style="width: 400px; padding: 40px; box-sizing: border-box;" fxLayout="row wrap" fxLayoutAlign="center center">
         <h1 mat-dialog-title>Tem certeza que deseja deletar?</h1>
         <div mat-dialog-content style="text-align: center;">
-            <p>{{inputData.car.model}} {{inputData.car.modelYear}} / {{inputData.car.manufacturingYear}}</p>
+            <p>{{inputData.marca}} {{inputData.modelo}} / </p>
         </div>
         <div mat-dialog-actions>
             <button mat-flat-button color="warn" mat-dialog-close> <mat-icon>close</mat-icon>Cancelar</button>
-            <button type="submit" mat-flat-button mat-dialog-close color="primary"
+            <button (click)="deleteItem()" mat-flat-button color="primary"
                 cdkFocusInitial><mat-icon>check</mat-icon>Confirmar</button>
         </div>
-    </form>
+    </div>
 </ng-template>
 
 <ng-template #new [ngIf]="inputData.title || !inputData.title && !inputData.del">
@@ -54,7 +55,7 @@
             <mat-label>Ano Fabricação</mat-label>
             <mat-select formControlName="manufacturingYear">
                 <mat-option value="2024">2024</mat-option>
-               
+
             </mat-select>
         </mat-form-field>
 
@@ -63,7 +64,7 @@
             <mat-select formControlName="modelYear">
                 <mat-option value="2024">2024</mat-option>
                 <mat-option value="2023">2023</mat-option>
-            
+
             </mat-select>
         </mat-form-field>
 
@@ -92,7 +93,8 @@
             <mat-checkbox formControlName="powerWindows">Vidros elétricos</mat-checkbox>
             <mat-checkbox formControlName="electricPowerSteering">Direção elétrica</mat-checkbox>
             <mat-checkbox formControlName="leatherSeats">Bancos de couro</mat-checkbox>
-            <mat-checkbox formControlName="driverSeatHeightAdjustment">Ajuste de altura do banco do motorista</mat-checkbox>
+            <mat-checkbox formControlName="driverSeatHeightAdjustment">Ajuste de altura do banco do
+                motorista</mat-checkbox>
             <mat-checkbox formControlName="soundSystem">Sistema de som</mat-checkbox>
             <mat-checkbox formControlName="rearViewCamera">Câmera de ré</mat-checkbox>
             <mat-checkbox formControlName="navigationSystem">Sistema de navegação</mat-checkbox>

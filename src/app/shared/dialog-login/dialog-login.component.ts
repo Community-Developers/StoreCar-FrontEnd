@@ -1,4 +1,12 @@
+import { LoginData } from './../login-data.interface';
 import { Component } from '@angular/core';
+import { TokenBearer } from '../token-bearer.interface';
+import { LoginService } from 'src/app/services/login.service';
+import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MatDialogRef } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-dialog-login',
@@ -7,4 +15,40 @@ import { Component } from '@angular/core';
 })
 export class DialogLoginComponent {
 
+  public loginForm: FormGroup = this.formBuilder.group({
+    username: ['', Validators.required],
+    email: ['', Validators.required],
+    password: ['', Validators.required]
+  })
+
+  constructor(private loginService: LoginService, private formBuilder: FormBuilder, private router: Router, private dialogRef: MatDialogRef<DialogLoginComponent>) { }
+
+
+  login() {
+    if (this.loginForm.valid) {
+      const loginData = this.loginForm.value;
+
+      this.loginService.login({ username: loginData.username, password: loginData.password }).subscribe({
+        next: (res) => {
+          // Assumindo que res já é do tipo esperado, caso contrário, faça a validação necessária
+          console.log(res);
+          const tokenData: TokenBearer = {
+            access_token: res.access_token,
+            expires_in: res.expires_in
+          };
+
+          // Armazena o token no localStorage
+          localStorage.setItem('access_token', tokenData.access_token);
+          this.dialogRef.close();
+
+          this.router.navigate(['/admin'])
+
+
+          // Aqui, você pode fazer o que mais precisar com tokenData
+          console.log('Login successful', tokenData);
+        },
+        error: (error) => console.error('Login failed', error)
+      });
+    }
+  }
 }

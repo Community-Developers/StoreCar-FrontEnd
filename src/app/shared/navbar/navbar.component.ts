@@ -23,6 +23,7 @@ export class NavbarComponent {
   }
 
   openDialog() {
+    console.log('O diálogo de login foi aberto');
     const dialogRef = this.dialog.open(DialogLoginComponent, {
       data: {},
     });

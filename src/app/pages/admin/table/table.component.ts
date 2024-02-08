@@ -1,7 +1,13 @@
+import { AdminService } from './../../../services/admin.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map, shareReplay } from 'rxjs';
+import { CarInfo, DialogAdminComponent } from 'src/app/shared/dialog-admin/dialog-admin.component';
+import { Car } from 'src/app/shared/navbar/car.interface';
+import { Moto } from 'src/app/shared/navbar/moto.interface';
 
 interface sidebarMenu {
   link: string;
@@ -9,36 +15,122 @@ interface sidebarMenu {
   menu: string;
 }
 
-export interface PeriodicElement {
+export interface AutoElement {
   id: number;
-  name: string;
-  work: string;
-  project: string;
-  priority: string;
-  badge: string;
-  budget: string;
+  marca: string;
+  type: string;
+  modelo: string;
+  ano: number;
+  status: string;
+  destacado: boolean;
+  valor: number;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { id: 1, name: 'Deep Javiya', work: 'Frontend Devloper', project: 'Flexy Angular', priority: 'Low', badge: 'badge-info', budget: '$3.9k' },
-  { id: 2, name: 'Nirav Joshi', work: 'Project Manager', project: 'Hosting Press HTML', priority: 'Medium', badge: 'badge-primary', budget: '$24.5k' },
-  { id: 3, name: 'Sunil Joshi', work: 'Web Designer', project: 'Elite Admin', priority: 'High', badge: 'badge-danger', budget: '$12.8k' },
-  { id: 4, name: 'Maruti Makwana', work: 'Backend Devloper', project: 'Material Pro', priority: 'Critical', badge: 'badge-success', budget: '$2.4k' },
-];
+const carInfo: CarInfo = {
+  title: "Car Title",
+  price: 20000,
+  brand: "Honda",
+  model: "Civic",
+  mileage: 50000,
+  manufacturingYear: "2024",
+  modelYear: "2024",
+  bodyStyle: "Sedan",
+  description: "This is a great car!",
+  options: {
+    abs: false,
+    airbags: true,
+    stabilityControl: true,
+    tractionControl: false,
+    emergencyBrakeAssist: true,
+    collisionWarningSystem: true,
+    airConditioning: false,
+    powerWindows: false,
+    electricPowerSteering: false,
+    leatherSeats: true,
+    driverSeatHeightAdjustment: true,
+    soundSystem: false,
+    rearViewCamera: true,
+    navigationSystem: false,
+    bluetooth: false,
+    multifunctionalSteeringWheel: true,
+  },
+};
+
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent {
+export class TableComponent implements OnInit {
 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router) { }
+  deleteItem(idItem: number, type: string) {
+    this.adminService.deleteItem(idItem, type).subscribe();
+    this.loadItems();
+  }
 
-  displayedColumns: string[] = ['id', 'assigned', 'name', 'priority', 'budget', 'actions'];
-  dataSource = ELEMENT_DATA;
+  cars: Car[] = [];
+  motos: Moto[] = [];
+  isLoading = false;
+
+
+
+  displayedColumns: string[] = ['id', 'marca', 'modelo', 'ano', 'status', 'valor', 'actions'];
+  dataSource: AutoElement[] = [];
   routerActive: string = "activelink";
 
+  @ViewChild(MatTable) table?: MatTable<any>;
+
+
+
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private adminService: AdminService,
+    private activatedRoute: ActivatedRoute, public dialog: MatDialog) { }
+  ngOnInit(): void {
+    this.loadItems();
+    console.log(this.cars.length);
+  }
+  loadItems() {
+    this.activatedRoute.params.subscribe(params => {
+      this.dataSource = [];
+      const type = params['type'];
+      if (type === 'automovel') {
+        this.loadCars();
+      } else if (type === 'motocicleta') {
+        this.loadMotos();
+      }
+    });
+  }
+
+
+  loadCars() {
+    this.adminService.getAllCars().subscribe(cars => {
+      this.dataSource = cars.map(car => ({
+        id: car.id,
+        marca: car.marca,
+        type: 'veiculo',
+        modelo: car.modelo,
+        ano: car.anoFabricacao,
+        status: car.destaque ? 'Destacado' : 'Destacar', // Exemplo de como manipular o status
+        destacado: car.destaque,
+        valor: car.valor
+      }));
+    });
+  }
+
+  loadMotos() {
+    this.adminService.getAllMobi().subscribe(motos => {
+      this.dataSource = motos.map(moto => ({
+        id: moto.id,
+        marca: moto.marca,
+        type: 'motocicleta',
+        modelo: moto.modelo,
+        ano: moto.anoFabricacao,
+        status: moto.destaque ? 'Destacado' : 'Destacar', // Exemplo de como manipular o status
+        destacado: moto.destaque,
+        valor: moto.valor
+      }));
+    });
+  }
 
 
 
@@ -56,37 +148,73 @@ export class TableComponent {
       menu: "Dashboard",
     },
     {
-      link: "/admin/table",
+      link: "/admin/table/automovel",
       icon: "truck",
       menu: "Lista Automóveis",
     },
     {
-      link: "/admin/post",
+      link: "/admin/post/automovel",
       icon: "plus",
       menu: "Anúnciar Automóvel",
     },
     {
-      link: "/admin/table",
+      link: "/admin/table/motocicleta",
       icon: "disc",
       menu: "Lista Motocicletas",
     },
     {
-      link: "/admin/post",
+      link: "/admin/post/motocicleta",
       icon: "plus",
       menu: "Anúnciar Motocicleta",
     },
     {
-      link: "/home",
+      link: "/",
       icon: "eye",
       menu: "Visão do visitante",
     },
     {
-      link: "/home",
+      link: "/",
       icon: "pie-chart",
       menu: "Análises",
     },
   ]
 
 
+  openDialog(id: number, marca: string, type: string, edit: boolean, del: boolean): void {
+    let dialogRef;
 
+    if (del) {
+      dialogRef = this.dialog.open(DialogAdminComponent, {
+        data: { id: id, marca: marca, type: type, modelo: marca, del: del }
+      });
+
+    } else if (edit) {
+      dialogRef = this.dialog.open(DialogAdminComponent, {
+        data: { car: carInfo, edit: edit, del: del },
+      });
+    }
+
+    dialogRef?.afterClosed().subscribe(result => {
+      if (result) {
+        this.isLoading = true; // Inicia o indicador de carregamento antes da requisição.
+        this.adminService.deleteItem(id, type).subscribe({
+          next: (res) => {
+            console.log(res); // Log da resposta
+            this.dataSource = this.dataSource.filter(item => item.id !== id);
+            this.table?.renderRows();
+
+            this.isLoading = false; // Desativa o indicador de carregamento após a conclusão da requisição.
+          },
+          error: (error) => {
+            console.error('Erro ao deletar o item:', error);
+            this.isLoading = false; // Assegura que o indicador de 
+          }
+        });
+      };
+    })
+  }
+
+  editItem(id: number, type: string) {
+    this.router.navigate([`/admin/edit/${type}/${id}`]);
+  }
 }
