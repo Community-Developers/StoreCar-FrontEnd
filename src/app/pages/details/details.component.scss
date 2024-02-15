@@ -1,3 +1,5 @@
+@import '../../../assets/variablesv2.scss';
+
 :host {
     display: block;
     height: 100vh;
@@ -11,14 +13,16 @@
         width: 100%;
         overflow: hidden;
         margin-bottom: 5%;
+        position: relative;
 
         .view-1 {
             display: grid;
             grid-template-columns: 70% 30%;
-            grid-template-rows: 5% 1fr 1fr 1fr 0.5fr 1fr 1fr 1fr;
+            grid-template-rows: 5% 1fr 1fr 1fr 0.5fr 1fr 1fr 1;
             height: 90%;
             width: 82%;
             box-sizing: border-box;
+            margin-top: 140px;
 
             .links {
                 grid-column: 1/3;
@@ -46,9 +50,15 @@
 
                         /* 100% */
 
+                        mat-icon {
+                            transition: all 0.3s ease;
+                        }
+
                         &:hover {
                             mat-icon {
                                 opacity: 1;
+
+                                transform: translateY(-14px) rotate(30deg) translateX(8px) scale(1.2);
                             }
                         }
                     }
@@ -68,6 +78,10 @@
                             display: flex;
                             align-items: center;
                             justify-content: center;
+                            color: $secundaria !important;
+                            transform: scale(1.1);
+                            transition: all 0.3s ease;
+
                         }
                     }
                 }
@@ -116,10 +130,10 @@
                 .tel {
                     width: 100%;
                     border-radius: 5px;
-                    background: #46D993;
+                    background: $quintenaria;
                     height: 50px;
 
-                    color: #13141A;
+                    color: #FFF;
                     text-align: center;
                     font-family: "Montserrat", sans-serif;
                     font-size: 14px;
@@ -132,7 +146,7 @@
                 .email {
                     width: 100%;
                     border-radius: 5px;
-                    background: #13141A;
+                    background: $quintenaria;
                     height: 50px;
 
                     color: #FFF;
@@ -220,7 +234,7 @@
                     button {
                         width: 80%;
                         border-radius: 5px;
-                        background: #00D264;
+                        background: $quintenaria;
                         height: 50px;
 
                         position: relative;
@@ -238,14 +252,14 @@
                             width: 150%;
                             bottom: 0;
                             border-radius: 0px 5px 5px 0px;
-                            background-color: red;
+                            background-color: $quintenaria;
                             transform: skewX(45deg) scale(0, 1);
                             z-index: -1;
                             transition: all 0.5s ease-out 0s;
                         }
 
                         &:hover {
-                            color: #FFF;
+                            color: $secundaria;
 
                             &::after {
                                 transform: skewX(45deg) scale(1, 1);
@@ -329,7 +343,7 @@
                     }
 
                     app-card-star {
-                        height: 45%;
+                        height: auto;
                         width: 80%;
                     }
 
@@ -346,7 +360,7 @@
                     height: 100%;
                     background: none;
                     padding: 10px 5px 10px 0px;
-                    gap: 5%;
+                    gap: 50px;
 
                     .op {
 
@@ -383,7 +397,7 @@
                             li {
                                 display: flex;
                                 justify-content: flex-start;
-                                align-items: start;
+                                align-items: flex-start;
                                 gap: 10px;
 
                                 img {
@@ -394,7 +408,7 @@
 
                                     display: flex;
                                     flex-direction: column;
-                                    align-items: start;
+                                    align-items: flex-start;
                                     justify-content: flex-start;
 
                                     h4 {
@@ -436,6 +450,7 @@
                                 align-items: flex-start;
                                 justify-content: flex-start;
                                 width: 33.33%;
+                                padding: 0 3px;
 
                                 mat-icon {
                                     font-size: 14px;
@@ -512,6 +527,10 @@
         .view-1 {
             width: 98% !important;
         }
+
+        .map {
+            width: 98% !important;
+        }
     }
 }
 
@@ -567,6 +586,12 @@
                 .recomend-slide {
                     display: block !important;
                 }
+            }
+        }
+
+        .map {
+            iframe {
+                width: 100%;
             }
         }
     }
@@ -721,4 +746,26 @@
 :host ::ng-deep .slick-next:before,
 .slick-next:before {
     color: black !important;
+}
+
+:host ::ng-deep gallery-image img {
+    object-fit: cover !important;
+}
+
+:host ::ng-deep .card-star .content .details ul {
+    flex-direction: column !important;
+    gap: 5px !important;
+    margin-bottom: 5px !important;
+}
+
+@media (max-width:920px) {
+    :host ::ng-deep .card-star .content .details ul {
+        flex-direction: unset !important;
+        gap: unset !important;
+        margin-bottom: unset !important;
+    }
+
+    :host ::ng-deep .card-star {
+        box-shadow: -5px 10px 20px 0px rgba(0, 0, 0, 0.25) !important;
+    }
 }

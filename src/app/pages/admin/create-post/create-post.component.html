@@ -6,9 +6,9 @@
 
         <div class="p-16">
             <div class="mb-16">
-                <a fxLayout="row wrap" style="gap: 20px;" fxLayoutAlign="center center" href="javascript:void(0)"
+                <a fxLayout="row wrap" style="gap: 20px;" fxLayoutAlign="center center" routerLink="/admin"
                     class="d-flex align-items-center">
-                    <img style="max-width: 100%; overflow: hidden;" src="assets/logo.svg" alt=""> <span
+                    <img style="max-width: 100%; overflow: hidden;" src="assets/logomobi.png" alt=""> <span
                         class="ms-16 fw-medium fs-26">Admin</span>
                 </a>
 
@@ -16,7 +16,8 @@
 
             <div class="pt-8">
                 <ul>
-                    <li class="list-group mb-8" *ngFor="let sidenav of sidebarMenu">
+                    <li class="list-group mb-8" *ngFor="let sidenav of sidebarMenu"
+                        [ngClass]="{'disabled-link': sidenav.disabled == true}">
                         <a matRipple [matRippleColor]="'#f7f8f443'" routerLink="{{ sidenav.link }}"
                             class="sidebar-menu fs-16 w-100 d-flex align-items-center" [routerLinkActive]="routerActive"
                             [routerLinkActiveOptions]="{ exact: true }">
@@ -32,6 +33,18 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
+
+        <div style="position: fixed;
+        height:100%; width: -webkit-fill-available; -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(10px);
+         z-index: 4; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 25px;"
+            *ngIf="isLoading">
+
+            <mat-spinner></mat-spinner>
+            <span
+                style="display: block; font-family: Montserrat, sans-serif; font-size: 16px; font-weight: 700;">{{texto}}</span>
+
+
+        </div>
 
         <!-- Header -->
         <mat-toolbar class="header ps-24 pe-24">
@@ -70,27 +83,69 @@
 
         <!-- Content -->
         <div class="body-wrapper">
+
             <div class="page-wrapper">
 
                 <!-- Form Layout -->
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mb-32">Form Layout</h4>
+                        <h4 *ngIf="this.veiculo" class="mb-32">Cadastrar Veículo</h4>
+                        <h4 *ngIf="!this.veiculo" class="mb-32">Cadastrar Motocicleta</h4>
 
-                        <div class="upload-section">
+
+
+                        <!--galeria de imagens - POST -->
+                        <div *ngIf="!isEdit" class="upload-section">
                             <input type="file" multiple (change)="processFile($event)" #fileInput hidden>
-                            <div class="image-preview" [style.backgroundImage]="'url(' + images[0] + ')'">
+                            <div class="image-preview">
+
+                                <img *ngIf="images.length > 0" style="height: 100%; width: 100%; object-fit: cover;"
+                                    [src]="images[0].imageUrl" alt="">
                                 <button (click)="fileInput.click()" class="btn-1 upload-btn" mat-flat-button
                                     color="primary">
                                     <mat-icon>image</mat-icon><span> Enviar Imagens</span>
                                 </button>
                             </div>
                             <div class="thumbnail-container" *ngIf="images.length >= 0">
-                                <ng-container *ngFor="let imgSrc of images; let i = index">
+                                <ng-container *ngFor="let img of images; let i = index">
                                     <div class="thumbnail">
-                                        <img [src]="imgSrc" alt="Image thumbnail">
+                                        <img [src]="img.imageUrl" alt="Image thumbnail">
                                         <!-- Botão de remoção adicionado aqui -->
-                                        <button *ngIf="i >= 0" class="remove-btn" (click)="removeImage(i)">
+                                        <button *ngIf="i >= 0" class="remove-btn"
+                                            (click)="removeImage(i,img.veiculoId,img.nameRef)">
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+
+                        <!--galeria de imagens - PUT -->
+                        <div *ngIf="isEdit" class="upload-section">
+                            <input type="file" multiple (change)="processFile($event)" #fileInput hidden>
+                            <div class="image-preview">
+
+                                <img *ngIf="images.length > 0" style="height: 100%; width: 100%; object-fit: cover;"
+                                    [src]="images[0].imageUrl" alt="">
+                                <button (click)="fileInput.click()" class="btn-1 upload-btn" mat-flat-button
+                                    color="primary">
+                                    <mat-icon>image</mat-icon><span> Enviar Imagens</span>
+                                </button>
+                            </div>
+                            <div class="thumbnail-container" *ngIf="images.length >= 0">
+                                <ng-container *ngFor="let img of images; let i = index">
+                                    <div class="thumbnail">
+                                        <img [src]="img.imageUrl" alt="Image thumbnail">
+                                        <!-- Botão de remoção adicionado aqui -->
+                                        <button *ngIf="i >= 0 && this.veiculo" class="remove-btn"
+                                            (click)="removeImage(i,img.veiculoId,img.nameRef)">
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                        <!-- ================ -->
+
+                                        <button *ngIf="i >= 0 && !this.veiculo" class="remove-btn"
+                                            (click)="removeImage(i,img.motocicletaId,img.nameRef)">
                                             <mat-icon>close</mat-icon>
                                         </button>
                                     </div>
@@ -115,12 +170,12 @@
                             <mat-form-field class="w-50 fs-16" appearance="outline">
                                 <mat-label>Tipo Carroceria</mat-label>
                                 <mat-select formControlName="carroceria">
-                                    <mat-option *ngFor="let option of carrocerias"
-                                        value="{{option}}">{{option}}</mat-option>
+                                    <mat-option *ngFor="let option of carrocerias" value="{{option}}">{{option |
+                                        titlecase}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
 
-                            <mat-form-field class="w-30 fs-16" appearance="outline">
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
                                 <mat-label>Câmbio</mat-label>
                                 <mat-select formControlName="cambio">
                                     <mat-option value="manual">Manual</mat-option>
@@ -128,24 +183,31 @@
                                 </mat-select>
                             </mat-form-field>
 
-                            <mat-form-field class="w-30 fs-16" appearance="outline">
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
                                 <mat-label>Combustivel</mat-label>
                                 <mat-select formControlName="combustivel">
                                     <mat-option value="gasolina">Gasolina</mat-option>
-                                    <mat-option value="alcool">Álcool</mat-option>
+                                    <mat-option value="etanol">Etanol</mat-option>
                                     <mat-option value="diesel">Diesel</mat-option>
-                                    <mat-option value="automatico">Elétrico</mat-option>
                                     <mat-option value="flex">Flex</mat-option>
-                                    <mat-option value="automatico">Gasolina/Gnv</mat-option>
-                                    <mat-option value="automatico">Tretafull</mat-option>
+                                    <mat-option value="eletrico">Elétrico</mat-option>
+                                    <mat-option value="gnv_gasolina">Gnv/Gasolina</mat-option>
+                                    <mat-option value="gnv_flex">Gnv/Flex</mat-option>
                                 </mat-select>
                             </mat-form-field>
 
-                            <mat-form-field class="w-30 fs-16" appearance="outline">
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
                                 <mat-label>Cor</mat-label>
                                 <mat-select formControlName="cor">
-                                    <mat-option *ngFor="let option of cores" value="{{option}}">{{option}}</mat-option>
+                                    <mat-option *ngFor="let option of cores" value="{{option}}">{{option |
+                                        titlecase}}</mat-option>
                                 </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
+                                <mat-label>Kilometragem</mat-label>
+                                <input matInput type="text" formControlName="km" currencyMask
+                                    [options]="{ prefix: '', thousands: '.', precision: 0, align: 'left'}">
                             </mat-form-field>
 
                             <mat-form-field class="w-50 fs-16" appearance="outline">
@@ -183,11 +245,39 @@
                                 <input matInput type="text" formControlName="placa">
                             </mat-form-field>
 
+
+
+
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
+                                <mat-label>Portas</mat-label>
+                                <mat-select formControlName="portas">
+                                    <mat-option value="2">2</mat-option>
+                                    <mat-option value="3">3</mat-option>
+                                    <mat-option value="4">4</mat-option>
+                                    <mat-option value="5">5</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-50 fs-16" appearance="outline">
+                                <mat-label>Potência do Motor</mat-label>
+                                <mat-select formControlName="potenciaMotor">
+                                    <mat-option value="1.0">1.0</mat-option>
+                                    <mat-option value="1.2">1.2</mat-option>
+                                    <mat-option value="1.4">1.4</mat-option>
+                                    <mat-option value="1.6">1.6</mat-option>
+                                    <mat-option value="1.8">1.8</mat-option>
+                                    <mat-option value="2.0">2.0</mat-option>
+                                    <mat-option value="3.0">3.0</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+
+
                             <mat-form-field class="w-50 fs-16" appearance="outline">
                                 <mat-label>Preço</mat-label>
                                 <input matInput type="text" currencyMask
                                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left'}"
-                                    formControlName="preco">
+                                    formControlName="valor">
                             </mat-form-field>
 
                             <mat-radio-group color="primary" class="fs-16 w-50" aria-label="Select an option"
@@ -195,69 +285,81 @@
                                 <mat-label class="text-secondary">Condição</mat-label>
                                 <div fxLayout="row wrap" fxLayoutAlign="space-between center">
 
-                                    <mat-radio-button value="zero">Novo</mat-radio-button>
-                                    <mat-radio-button value="semi-novo">Semi-novo</mat-radio-button>
+
+                                    <mat-radio-button value="zero">Zero KM</mat-radio-button>
+                                    <mat-radio-button value="semi_novo">Semi-novo</mat-radio-button>
+                                    <mat-radio-button value="excelente">Excelente</mat-radio-button>
                                     <mat-radio-button value="bom">Bom</mat-radio-button>
+
                                 </div>
 
                             </mat-radio-group>
 
                             <div class=" w-100 fs-16" fxLayout="row wrap" fxLayoutAlign="space-between center"
-                                formGroupName="optionalFeatures" style="margin-bottom: 30px; row-gap: 20px;">
+                                formGroupName="opcionais" style="margin-bottom: 30px; row-gap: 20px; margin-top: 30px;">
 
                                 <mat-checkbox formControlName="abs" class="d-block mb-16">Freio ABS</mat-checkbox>
                                 <mat-checkbox formControlName="airbags" class="d-block mb-16">Airbags</mat-checkbox>
-                                <mat-checkbox formControlName="stabilityControl" class="d-block mb-16">Controle de
+                                <mat-checkbox formControlName="controleEstabilidade" class="d-block mb-16">Controle de
                                     estabilidade</mat-checkbox>
-                                <mat-checkbox formControlName="tractionControl" class="d-block mb-16">Controle de
+                                <mat-checkbox formControlName="controleTracao" class="d-block mb-16">Controle de
                                     tração</mat-checkbox>
-                                <mat-checkbox formControlName="emergencyBrakeAssist" class="d-block mb-16">Assistente de
+                                <mat-checkbox formControlName="assistenciaFreioEmergencia"
+                                    class="d-block mb-16">Assistente de
                                     frenagem de emergência</mat-checkbox>
-                                <mat-checkbox formControlName="collisionWarningSystem" class="d-block mb-16">Sistema de
+                                <mat-checkbox formControlName="sistemaAvisoColisao" class="d-block mb-16">Sistema de
                                     alerta de colisão frontal</mat-checkbox>
-                                <mat-checkbox formControlName="airConditioning" class="d-block mb-16">Ar
+                                <mat-checkbox formControlName="arCondicionado" class="d-block mb-16">Ar
                                     condicionado</mat-checkbox>
-                                <mat-checkbox formControlName="powerWindows" class="d-block mb-16">Vidros
+                                <mat-checkbox formControlName="vidrosEletricos" class="d-block mb-16">Vidros
                                     elétricos</mat-checkbox>
-                                <mat-checkbox formControlName="electricPowerSteering" class="d-block mb-16">Direção
+                                <mat-checkbox formControlName="direcaoEletrica" class="d-block mb-16">Direção
                                     elétrica</mat-checkbox>
-                                <mat-checkbox formControlName="leatherSeats" class="d-block mb-16">Bancos de
+                                <mat-checkbox formControlName="bancosCouro" class="d-block mb-16">Bancos de
                                     couro</mat-checkbox>
-                                <mat-checkbox formControlName="driverSeatHeightAdjustment" class="d-block mb-16">Ajuste
+                                <mat-checkbox formControlName="ajusteAlturaBancoMotorista" class="d-block mb-16">Ajuste
                                     de altura do banco do motorista</mat-checkbox>
-                                <mat-checkbox formControlName="soundSystem" class="d-block mb-16">Sistema de
+                                <mat-checkbox formControlName="sistemaSom" class="d-block mb-16">Sistema de
                                     som</mat-checkbox>
-                                <mat-checkbox formControlName="rearViewCamera" class="d-block mb-16">Câmera de
+                                <mat-checkbox formControlName="cameraRe" class="d-block mb-16">Câmera de
                                     ré</mat-checkbox>
-                                <mat-checkbox formControlName="navigationSystem" class="d-block mb-16">Sistema de
+                                <mat-checkbox formControlName="sistemaNavegacao" class="d-block mb-16">Sistema de
                                     navegação</mat-checkbox>
                                 <mat-checkbox formControlName="bluetooth" class="d-block mb-16">Bluetooth</mat-checkbox>
-                                <mat-checkbox formControlName="multifunctionalSteeringWheel"
-                                    class="d-block mb-16">Volante multifuncional</mat-checkbox>
+                                <mat-checkbox formControlName="volanteMultifuncional" class="d-block mb-16">Volante
+                                    multifuncional</mat-checkbox>
                             </div>
 
 
                             <div fxLayout="row wrap" fxLayoutAlign="flex-start center" style="gap: 20px;">
-                                <button type="submit" class="btn-1" mat-flat-button extended color="primary">
+
+
+
+                                <button *ngIf="!isEdit" type="submit" class="btn-salvar" mat-flat-button extended
+                                    color="primary">
                                     <mat-icon>post_add</mat-icon><span> Publicar Anúncio </span></button>
 
 
-                                <button type="submit" (click)="onBack()" class="btn-1" mat-flat-button extended
+                                <button *ngIf="isEdit" type="submit" class="btn-salvar" mat-flat-button extended
+                                    color="primary">
+                                    <mat-icon>post_add</mat-icon><span> Salvar Alterações </span></button>
+
+
+                                <!-- <button type="submit" (click)="onBack()" class="btn-1" mat-flat-button extended
                                     color="accent">
-                                    <mat-icon>date_range </mat-icon><span> Salvar Rascunho </span></button>
+                                    <mat-icon>date_range </mat-icon><span> Salvar Rascunho </span></button> -->
 
 
-                                <button type="submit" (click)="onBack()" class="btn-1" mat-flat-button extended
+                                <button type="submit" (click)="onBack()" class="btn-cancelar" mat-flat-button extended
                                     color="warn">
                                     <mat-icon>delete</mat-icon><span> Cancelar </span></button>
 
                             </div>
-
                         </form>
 
 
                         <form *ngIf="!veiculo" fxLayout="row wrap" fxLayoutAlign="space-between center"
-                            [formGroup]="cadastroFormMoto" (ngSubmit)="submitForm()">
+                            [formGroup]="cadastroFormMoto" (ngSubmit)="submitFormMoto()">
                             <mat-form-field class="w-50 fs-16" appearance="outline">
                                 <mat-label>Marca</mat-label>
                                 <input matInput type="text" placeholder="Marca do veículo" formControlName="marca">
@@ -280,19 +382,16 @@
                                 <mat-label>Combustivel</mat-label>
                                 <mat-select formControlName="combustivel">
                                     <mat-option value="gasolina">Gasolina</mat-option>
-                                    <mat-option value="alcool">Álcool</mat-option>
-                                    <mat-option value="diesel">Diesel</mat-option>
-                                    <mat-option value="automatico">Elétrico</mat-option>
                                     <mat-option value="flex">Flex</mat-option>
-                                    <mat-option value="automatico">Gasolina/Gnv</mat-option>
-                                    <mat-option value="automatico">Tretafull</mat-option>
+                                    <mat-option value="eletrico">Elétrico</mat-option>
                                 </mat-select>
                             </mat-form-field>
 
                             <mat-form-field class="w-30 fs-16" appearance="outline">
                                 <mat-label>Cor</mat-label>
                                 <mat-select formControlName="cor">
-                                    <mat-option *ngFor="let option of cores" value="{{option}}">{{option}}</mat-option>
+                                    <mat-option *ngFor="let option of cores" value="{{option}}">{{option |
+                                        titlecase}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
 
@@ -309,6 +408,69 @@
                                     <mat-option *ngFor="let option of years" value="{{option}}">{{option}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
+
+
+                            <mat-form-field class="w-30 fs-16" appearance="outline"
+                                *ngIf="cadastroFormMoto.get('combustivel')?.value == 'eletrico'">
+                                <mat-label>Potência</mat-label>
+                                <mat-select formControlName="potencia">
+
+
+                                    <mat-option value="250">250 W</mat-option>
+                                    <mat-option value="350">350 W</mat-option>
+                                    <mat-option value="1500">1500 W</mat-option>
+                                    <mat-option value="2000">2000 W</mat-option>
+                                    <mat-option value="3000">3000 W</mat-option>
+                                    <mat-option value="4500">4500 W</mat-option>
+
+
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="w-30 fs-16" appearance="outline"
+                                *ngIf="cadastroFormMoto.get('combustivel')?.value != 'eletrico'">
+                                <mat-label>Cilindrada</mat-label>
+                                <mat-select formControlName="cilindrada">
+                                    <mat-option value="125">50 CC</mat-option>
+                                    <mat-option value="125">125 CC</mat-option>
+                                    <mat-option value="150">150 CC</mat-option>
+                                    <mat-option value="200">200 CC</mat-option>
+                                    <mat-option value="250">250 CC</mat-option>
+                                    <mat-option value="300">300 CC</mat-option>
+                                    <mat-option value="350">350 CC</mat-option>
+                                    <mat-option value="350">400 CC</mat-option>
+                                    <mat-option value="350">500 CC</mat-option>
+                                    <mat-option value="350">600 CC</mat-option>
+                                    <mat-option value="700">750 CC</mat-option>
+                                    <mat-option value="1000">1000 CC</mat-option>
+                                    <mat-option value="1000">1100 CC</mat-option>
+                                    <mat-option value="1000">1200 CC</mat-option>
+                                    <mat-option value="1000">1300 CC</mat-option>
+
+                                </mat-select>
+                            </mat-form-field>
+
+
+                            <mat-form-field class="w-30 fs-16" appearance="outline">
+                                <mat-label>Kilometragem</mat-label>
+                                <input matInput type="text" formControlName="km" currencyMask
+                                    [options]="{ prefix: '', thousands: '.',precision: 0, align: 'left'}">
+                            </mat-form-field>
+
+                            <mat-form-field class="w-30 fs-16" appearance="outline">
+                                <mat-label>Categoria</mat-label>
+                                <mat-select formControlName="tipoMoto">
+                                    <mat-option value="street">Street</mat-option>
+                                    <mat-option value="mobilete">Mobilete</mat-option>
+                                    <mat-option value="triciclo">Triciclo</mat-option>
+                                    <mat-option value="scooter">Scooter</mat-option>
+                                    <mat-option value="trail">Trail</mat-option>
+                                    <mat-option value="naked">Naked</mat-option>
+                                    <mat-option value="custom">Custom</mat-option>
+                                    <mat-option value="sport">Sport</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
 
                             <mat-form-field class="w-100 fs-16" appearance="outline">
                                 <mat-label>Título</mat-label>
@@ -335,7 +497,7 @@
                                 <mat-label>Preço</mat-label>
                                 <input matInput type="text" currencyMask
                                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left'}"
-                                    formControlName="preco">
+                                    formControlName="valor">
                             </mat-form-field>
 
                             <mat-radio-group color="primary" class="fs-16 w-50" aria-label="Select an option"
@@ -343,24 +505,33 @@
                                 <mat-label class="text-secondary">Condição</mat-label>
                                 <div fxLayout="row wrap" fxLayoutAlign="space-between center">
 
-                                    <mat-radio-button value="zero">Novo</mat-radio-button>
-                                    <mat-radio-button value="semi-novo">Semi-novo</mat-radio-button>
+                                    <mat-radio-button value="zero">Zero KM</mat-radio-button>
+                                    <mat-radio-button value="semi_novo">Semi-novo</mat-radio-button>
+                                    <mat-radio-button value="excelente">Excelente</mat-radio-button>
                                     <mat-radio-button value="bom">Bom</mat-radio-button>
+
                                 </div>
 
                             </mat-radio-group>
 
                             <div fxLayout="row wrap" fxLayoutAlign="flex-start center" style="gap: 20px;">
-                                <button type="submit" class="btn-1" mat-flat-button extended color="primary">
+
+
+                                <button *ngIf="!isEdit" type="submit" class="btn-salvar" mat-flat-button extended
+                                    color="primary">
                                     <mat-icon>post_add</mat-icon><span> Publicar Anúncio </span></button>
 
+                                <button *ngIf="isEdit" type="submit" class="btn-salvar" mat-flat-button extended
+                                    color="primary">
+                                    <mat-icon>post_add</mat-icon><span> Salvar Alterações </span></button>
 
-                                <button type="submit" (click)="onBack()" class="btn-1" mat-flat-button extended
+
+                                <!-- <button type="submit" (click)="onBack()" class="btn-1" mat-flat-button extended
                                     color="accent">
-                                    <mat-icon>date_range </mat-icon><span> Salvar Rascunho </span></button>
+                                    <mat-icon>date_range </mat-icon><span> Salvar Rascunho </span></button> -->
 
 
-                                <button type="submit" (click)="onBack()" class="btn-1" mat-flat-button extended
+                                <button type="submit" (click)="onBack()" class="btn-cancelar" mat-flat-button extended
                                     color="warn">
                                     <mat-icon>delete</mat-icon><span> Cancelar </span></button>
 

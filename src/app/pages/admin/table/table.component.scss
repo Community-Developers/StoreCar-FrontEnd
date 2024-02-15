@@ -73,3 +73,14 @@
         margin-left: 0 !important;
     }
 }
+
+:host ::ng-deep .mat-drawer-content {
+    overflow: hidden !important;
+    overflow-y: scroll !important;
+}
+
+.disabled-link {
+    color: grey;
+    pointer-events: none;
+    cursor: not-allowed;
+}

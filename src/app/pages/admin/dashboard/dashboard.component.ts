@@ -20,6 +20,7 @@ interface sidebarMenu {
   link: string;
   icon: string;
   menu: string;
+  disabled?: boolean;
 }
 
 
@@ -137,12 +138,14 @@ export class DashboardComponent implements OnInit {
     {
       link: "/",
       icon: "eye",
-      menu: "Visão do visitante",
+      menu: "Visão do visitante (em breve)",
+      disabled: true
     },
     {
       link: "/",
       icon: "pie-chart",
-      menu: "Análises",
+      menu: "Análises (em breve)",
+      disabled: true
     },
   ]
 

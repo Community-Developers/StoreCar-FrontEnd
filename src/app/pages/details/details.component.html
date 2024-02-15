@@ -1,6 +1,17 @@
 <app-navbar style="width: 100%;"></app-navbar>
 
-<div class="section-1">
+<div class="section-1" fxLayout="column">
+    <div style="position: absolute;
+        height:100%; width: 100%; left: 0; bottom: 0; -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(10px);
+         z-index: 10; display: flex; align-items: center center; justify-content: center center; flex-direction: column; gap: 25px;"
+        *ngIf="isLoading">
+
+        <mat-spinner></mat-spinner>
+        <span style="display: block; font-family: Montserrat, sans-serif; font-size: 16px; font-weight: 700;">Obtendo
+            dados...</span>
+
+
+    </div>
 
     <main class="view-1">
 
@@ -29,6 +40,8 @@
                 </li>
             </ul>
         </div>
+
+
         <div class="img">
             <gallery [items]="images" [thumbPosition]="value"></gallery>
         </div>
@@ -36,7 +49,7 @@
 
         <div class="contact">
 
-            <button class="tel" mat-flat-button color="primary"><mat-icon style="color: #13141A;">
+            <button class="tel" mat-flat-button color="primary"><mat-icon style="color: #FFF;">
                     phone</mat-icon>Telefone</button>
             <button class="email" mat-flat-button color="primary"><mat-icon> email</mat-icon>Email</button>
             <button class="wpp" mat-flat-button color="primary">
@@ -45,7 +58,7 @@
 
         </div>
         <div class="email" fxLayout="column" fxLayoutAlign="center center">
-            <div class="title" fxLayout="column" fxLayoutAlign="center start">
+            <div class="title" fxLayout="column" fxLayoutAlign="center flex-start">
                 <h3>Para mais informações</h3>
                 <span>falar sobre esse veículo</span>
             </div>
@@ -75,12 +88,11 @@
         <div class="recomend">
 
             <div class="recomend-in" fxLayout="column wrap" fxLayoutAlign="center center">
-                <div fxLayoutAlign="flex-start center" style="width: 80%; margin-left: 10px;">
-                    <h3>Recomendados</h3>
+                <div fxLayoutAlign="flex-start center" style="width: 90%; margin-left: 10px; margin-top: 10px;">
+                    <h3>Destaques</h3>
                 </div>
-
-                <app-card-star></app-card-star>
-                <app-card-star></app-card-star>
+                <app-card-star style="min-height: 380px;" *ngFor="let item of this.carDestaques"
+                    [item]="item"></app-card-star>
             </div>
 
 
@@ -88,13 +100,14 @@
                 <div class="carouse" fxLayout="column" fxLayoutAlign="center center">
 
                     <div class="column-1" style="width: 100%;">
-                        <header fxLayoutAlign="start center" fxLayout="row">
+                        <header fxLayoutAlign="flex-start center" fxLayout="row">
                             <h2>Veículos em Destaque</h2>
                         </header>
                         <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-                            <div ngxSlickItem *ngFor="let slide of slides" class="slide"
-                                style="display: flex; justify-content: center;">
-                                <app-card-star style="width: 100%;height: 400px; max-width: 420px;"></app-card-star>
+                            <div ngxSlickItem *ngFor="let item  of this.carDestaques" class="slide"
+                                style="display: flex; justify-content: center center;">
+                                <app-card-star style="width: 100%;height: 400px; max-width: 420px;"
+                                    [item]="item"></app-card-star>
                             </div>
                         </ngx-slick-carousel>
                     </div>
@@ -106,7 +119,7 @@
         <div class="extra-1"></div>
         <!-- <div class="extra-2"></div> -->
 
-        <div class="car-details" fxLayout="column" fxLayoutAlign="center center">
+        <div *ngIf="isCar && veiculo" class="car-details" fxLayout="column" fxLayoutAlign="center center">
 
             <section fxLayout="column" fxLayoutAlign="flex-start center">
                 <div class="info">
@@ -117,7 +130,7 @@
 
                             <img src="/assets/card-car/km.svg" alt="">
                             <div class="text">
-                                <h4>25.000</h4>
+                                <h4>{{veiculo.km}}</h4>
                                 <span>Kilometragem</span>
                             </div>
 
@@ -127,8 +140,8 @@
                             <img src="/assets/card-car/motor.svg" alt="">
 
                             <div>
-                                <h4>1.4</h4>
-                                <span>Cilidrada</span>
+                                <h4>{{veiculo.potenciaMotor}}</h4>
+                                <span>Potência do Motor</span>
                             </div>
 
                         </li>
@@ -137,7 +150,7 @@
                             <img src="/assets/card-car/comb.svg" alt="">
 
                             <div>
-                                <h4>Flex</h4>
+                                <h4>{{veiculo.combustivel}}</h4>
                                 <span>Combustivel</span>
                             </div>
 
@@ -147,7 +160,7 @@
                             <img src="/assets/new.svg" alt="">
 
                             <div>
-                                <h4>Semi-novo</h4>
+                                <h4>{{veiculo.condicao}}</h4>
                                 <span>Estado</span>
                             </div>
                         </li>
@@ -157,30 +170,88 @@
                 </div>
                 <div class="optionals">
                     <h3 class="op">Opcionais</h3>
-                    <ul fxLayout="row" fxLayoutAlign="flex-start center">
+                    <ul fxLayout="row" fxLayoutAlign="flex-start center" style="row-gap: 20px;">
                         <li>
-                            <mat-icon>check_circle_outline</mat-icon>
-                            <span>air bag</span>
+                            <mat-icon *ngIf="!veiculo.opcionais.abs">error</mat-icon>
+                            <mat-icon *ngIf="veiculo.opcionais.abs">check_circle_outline</mat-icon>
+                            <span>ABS</span>
                         </li>
                         <li>
-                            <mat-icon>check_circle_outline</mat-icon>
-                            <span>freio abs</span>
+                            <mat-icon *ngIf="!veiculo.opcionais.airbags">error</mat-icon>
+                            <mat-icon *ngIf="veiculo.opcionais.airbags">check_circle_outline</mat-icon>
+                            <span>Airbags</span>
                         </li>
                         <li>
-                            <mat-icon>check_circle_outline</mat-icon>
-                            <span>ar condicionado</span>
+                            <mat-icon *ngIf="!veiculo.opcionais.controleEstabilidade">error</mat-icon>
+                            <mat-icon *ngIf="veiculo.opcionais.controleEstabilidade">check_circle_outline</mat-icon>
+                            <span>Controle de Estabilidade</span>
                         </li>
                         <li>
-                            <mat-icon>check_circle_outline</mat-icon>
-                            <span>multimidia</span>
+                            <mat-icon *ngIf="!veiculo.opcionais.controleTracao">error</mat-icon>
+                            <mat-icon *ngIf="veiculo.opcionais.controleTracao">check_circle_outline</mat-icon>
+                            <span>Controle de Tração</span>
                         </li>
                         <li>
-                            <mat-icon>check_circle_outline</mat-icon>
-                            <span>câmera ré</span>
+                            <mat-icon *ngIf="!veiculo.opcionais.assistenciaFreioEmergencia">error</mat-icon>
+                            <mat-icon
+                                *ngIf="veiculo.opcionais.assistenciaFreioEmergencia">check_circle_outline</mat-icon>
+                            <span>Assistência de Freio de Emergência</span>
                         </li>
                         <li>
-                            <mat-icon>check_circle_outline</mat-icon>
-                            <span>sensor chuva</span>
+                            <mat-icon *ngIf="!veiculo.opcionais.sistemaAvisoColisao">error</mat-icon>
+                            <mat-icon *ngIf="veiculo.opcionais.sistemaAvisoColisao">check_circle_outline</mat-icon>
+                            <span>Sistema de Aviso de Colisão</span>
+                        </li>
+                        <li>
+                            <mat-icon *ngIf="!veiculo.opcionais.arCondicionado">error</mat-icon>
+                            <mat-icon *ngIf="veiculo.opcionais.arCondicionado">check_circle_outline</mat-icon>
+                            <span>Ar Condicionado</span>
+                        </li>
+                        <li>
+                            <mat-icon *ngIf="!veiculo.opcionais.vidrosEletricos">error</mat-icon>
+                            <mat-icon *ngIf="veiculo.opcionais.vidrosEletricos">check_circle_outline</mat-icon>
+                            <span>Vidros Elétricos</span>
+                        </li>
+                        <li>
+                            <mat-icon *ngIf="!veiculo.opcionais.direcaoEletrica">error</mat-icon>
+                            <mat-icon *ngIf="veiculo.opcionais.direcaoEletrica">check_circle_outline</mat-icon>
+                            <span>Direção Elétrica</span>
+                        </li>
+                        <li>
+                            <mat-icon *ngIf="!veiculo.opcionais.bancosCouro">error</mat-icon>
+                            <mat-icon *ngIf="veiculo.opcionais.bancosCouro">check_circle_outline</mat-icon>
+                            <span>Bancos de Couro</span>
+                        </li>
+                        <li>
+                            <mat-icon *ngIf="!veiculo.opcionais.ajusteAlturaBancoMotorista">error</mat-icon>
+                            <mat-icon
+                                *ngIf="veiculo.opcionais.ajusteAlturaBancoMotorista">check_circle_outline</mat-icon>
+                            <span>Ajuste de Altura do Banco do Motorista</span>
+                        </li>
+                        <li>
+                            <mat-icon *ngIf="!veiculo.opcionais.sistemaSom">error</mat-icon>
+                            <mat-icon *ngIf="veiculo.opcionais.sistemaSom">check_circle_outline</mat-icon>
+                            <span>Sistema de Som</span>
+                        </li>
+                        <li>
+                            <mat-icon *ngIf="!veiculo.opcionais.cameraRe">error</mat-icon>
+                            <mat-icon *ngIf="veiculo.opcionais.cameraRe">check_circle_outline</mat-icon>
+                            <span>Câmera de Ré</span>
+                        </li>
+                        <li>
+                            <mat-icon *ngIf="!veiculo.opcionais.sistemaNavegacao">error</mat-icon>
+                            <mat-icon *ngIf="veiculo.opcionais.sistemaNavegacao">check_circle_outline</mat-icon>
+                            <span>Sistema de Navegação</span>
+                        </li>
+                        <li>
+                            <mat-icon *ngIf="!veiculo.opcionais.bluetooth">error</mat-icon>
+                            <mat-icon *ngIf="veiculo.opcionais.bluetooth">check_circle_outline</mat-icon>
+                            <span>Bluetooth</span>
+                        </li>
+                        <li>
+                            <mat-icon *ngIf="!veiculo.opcionais.volanteMultifuncional">error</mat-icon>
+                            <mat-icon *ngIf="veiculo.opcionais.volanteMultifuncional">check_circle_outline</mat-icon>
+                            <span>Volante Multifuncional</span>
                         </li>
                     </ul>
                 </div>
@@ -190,61 +261,166 @@
                     <ul fxLayout="row" fxLayoutAlign="space-between center">
                         <li>
                             <h4>Marca</h4>
-                            <span>Toyota</span>
+                            <span>{{veiculo.marca | titlecase}}</span>
                         </li>
                         <li>
                             <h4>Modelo</h4>
-                            <span>Sorento</span>
+                            <span>{{veiculo.modelo | titlecase}}</span>
                         </li>
                         <li>
                             <h4>Ano Fabricação</h4>
-                            <span>2017</span>
+                            <span>{{veiculo.anoFabricacao}}</span>
                         </li>
                         <li>
                             <h4>Ano modelo</h4>
-                            <span>2018</span>
+                            <span>{{veiculo.anoModelo}}</span>
                         </li>
                         <li>
                             <h4>Carroceria</h4>
-                            <span>SUV</span>
+                            <span>{{veiculo.carroceria | titlecase}}</span>
                         </li>
                         <li>
                             <h4>Cor</h4>
-                            <span>Branca</span>
+                            <span>{{veiculo.cor | titlecase}}</span>
                         </li>
                         <li>
                             <h4>Kilometragem</h4>
-                            <span>30.000</span>
+                            <span>{{veiculo.km}}</span>
                         </li>
                         <li>
-                            <h4>Cilindrada</h4>
-                            <span>2.5</span>
+                            <h4>Câmbio</h4>
+                            <span>{{veiculo.cambio | titlecase}}</span>
                         </li>
                         <li>
                             <h4>Combustivel</h4>
-                            <span>Diesel</span>
+                            <span>{{veiculo.combustivel | titlecase}}</span>
                         </li>
                         <li>
                             <h4>Portas</h4>
-                            <span>4</span>
+                            <span>{{veiculo.portas}}</span>
                         </li>
                     </ul>
                 </div>
                 <div class="description">
                     <h3 class="op">Descrição</h3>
                     <p>
-                        <strong>Toyota Sorento 2018 - SUV Elegante</strong>
+                        <strong>{{veiculo.titulo | titlecase}}</strong>
 
                     <div style="padding: 20px; text-align: justify; border: 1px solid rgba(127, 129, 141, 0.16);">
-                        Descubra a elegância e conforto do Toyota Sorento 2018, um SUV que
-                        eleva sua experiência de condução.
+                        {{veiculo.descricao}}
+                    </div>
+                    <p>
+                </div>
+            </section>
 
-                        Explore nossas opções de financiamento flexíveis para tornar a
-                        aquisição do Toyota Sorento 2018 ainda mais acessível. Nossa
-                        equipe está pronta para ajudá-lo a encontrar a melhor solução
-                        para suas necessidades. Além disso, oferecemos garantias
-                        estendidas e pacotes de serviços para garantir sua
-                        tranquilidade após a compra.
+        </div>
+
+
+        <div *ngIf="!isCar && motocicleta" class="car-details" fxLayout="column" fxLayoutAlign="center center">
+
+            <section fxLayout="column" fxLayoutAlign="flex-start center">
+                <div class="info">
+                    <h3 class="op">Informações</h3>
+                    <ul fxLayout="row" fxLayoutAlign="space-between center">
+
+                        <li>
+
+                            <img src="/assets/card-car/km.svg" alt="">
+                            <div class="text">
+                                <h4>{{motocicleta.km}}</h4>
+                                <span>Kilometragem</span>
+                            </div>
+
+                        </li>
+
+                        <li>
+                            <img src="/assets/card-car/motor.svg" alt="">
+
+                            <div>
+                                <h4>{{motocicleta.cilindrada}}</h4>
+                                <span>Cilidrada</span>
+                            </div>
+
+                        </li>
+
+                        <li>
+                            <img src="/assets/card-car/comb.svg" alt="">
+
+                            <div>
+                                <h4>{{motocicleta.combustivel | titlecase}}</h4>
+                                <span>Combustivel</span>
+                            </div>
+
+                        </li>
+
+                        <li>
+                            <img src="/assets/new.svg" alt="">
+
+                            <div>
+                                <h4>{{motocicleta.condicao | titlecase}}</h4>
+                                <span>Estado</span>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <div class="overview">
+                    <h3 class="op">Visão Geral</h3>
+
+                    <ul fxLayout="row" fxLayoutAlign="space-between center">
+                        <li>
+                            <h4>Marca</h4>
+                            <span>{{motocicleta.marca | titlecase}}</span>
+                        </li>
+                        <li>
+                            <h4>Modelo</h4>
+                            <span>{{motocicleta.modelo | titlecase}}</span>
+                        </li>
+                        <li>
+                            <h4>Ano Fabricação</h4>
+                            <span>{{motocicleta.anoFabricacao}}</span>
+                        </li>
+                        <li>
+                            <h4>Ano modelo</h4>
+                            <span>{{motocicleta.anoModelo}}</span>
+                        </li>
+                        <li>
+                            <h4>Categoria</h4>
+                            <span>{{motocicleta.tipoMoto | titlecase}}</span>
+                        </li>
+                        <li>
+                            <h4>Cor</h4>
+                            <span>{{motocicleta.cor | titlecase}}</span>
+                        </li>
+                        <li>
+                            <h4>Kilometragem</h4>
+                            <span>{{motocicleta.km}}</span>
+                        </li>
+                        <li>
+                            <h4>Cilindrada</h4>
+                            <span>{{motocicleta.cilindrada}}</span>
+                        </li>
+                        <li>
+                            <h4>Combustivel</h4>
+                            <span>{{motocicleta.combustivel | titlecase}}</span>
+                        </li>
+
+                        <li>
+                            <h4>Câmbio</h4>
+                            <span>{{motocicleta.cambio| titlecase}}</span>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <div class="description">
+                    <h3 class="op">Descrição</h3>
+                    <p>
+                        <strong>{{motocicleta.titulo | titlecase}}</strong>
+
+                    <div style="padding: 20px; text-align: justify; border: 1px solid rgba(127, 129, 141, 0.16);">
+                        {{motocicleta.descricao}}
                     </div>
                     <p>
                 </div>
@@ -252,5 +428,11 @@
 
         </div>
     </main>
+    <section class="map" style="width: 82%;">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3461.1749304113073!2d-51.16357062375584!3d-29.83037207503216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x951943d900c5238d%3A0xa3bdf4cc7e94e07!2sBrasil%20Mobis!5e0!3m2!1sen!2sbr!4v1706296704642!5m2!1sen!2sbr"
+            width="70%" height="600" style="border-radius: 10px; border: none;" allowfullscreen=""
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
 </div>
 <app-footer></app-footer>

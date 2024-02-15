@@ -1,14 +1,18 @@
 import { AdminService } from './../../../services/admin.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map, shareReplay } from 'rxjs';
+import { ImagemMotocicleta } from 'src/app/shared/navbar/moto.interface';
+import { Location } from '@angular/common';
+
 
 interface sidebarMenu {
   link: string;
   icon: string;
   menu: string;
+  disabled?: boolean;
 }
 
 
@@ -19,71 +23,194 @@ interface sidebarMenu {
 })
 export class CreatePostComponent implements OnInit {
 
+  isLoading = false;
+  texto: any;
+  isEdit: boolean = false;
+
   public cadastroFormVeiculo: FormGroup = this.fb.group({
-    marca: [''],
-    modelo: [''],
-    carroceria: [''],
-    cambio: [''],
-    combustivel: [''],
-    cor: [''],
-    anoFabricacao: [''],
-    anoModelo: [''],
+    marca: ['', Validators.required],
+    modelo: ['', Validators.required],
+    carroceria: ['', Validators.required],
+    cambio: ['', Validators.required],
+    combustivel: ['', Validators.required],
+    cor: ['', Validators.required],
+    anoFabricacao: ['', Validators.required],
+    anoModelo: ['', Validators.required],
     titulo: [''],
     descricao: [''],
-    renavam: [''],
-    placa: [''],
-    preco: [''],
-    condicao: [''],
-    optionalFeatures: this.fb.group({
+    renavam: [{ value: '', disabled: true }],
+    placa: [{ value: '', disabled: true }],
+    valor: ['', Validators.required],
+    condicao: ['', Validators.required],
+    potenciaMotor: ['', Validators.required],
+    portas: ['', Validators.required],
+    km: [''],
+    opcionais: this.fb.group({
       abs: [false],
       airbags: [false],
-      stabilityControl: [false],
-      tractionControl: [false],
-      emergencyBrakeAssist: [false],
-      collisionWarningSystem: [false],
-      airConditioning: [false],
-      powerWindows: [false],
-      electricPowerSteering: [false],
-      leatherSeats: [false],
-      driverSeatHeightAdjustment: [false],
-      soundSystem: [false],
-      rearViewCamera: [false],
-      navigationSystem: [false],
+      controleEstabilidade: [false],
+      controleTracao: [false],
+      assistenciaFreioEmergencia: [false],
+      sistemaAvisoColisao: [false],
+      arCondicionado: [false],
+      vidrosEletricos: [false],
+      direcaoEletrica: [false],
+      bancosCouro: [false],
+      ajusteAlturaBancoMotorista: [false],
+      sistemaSom: [false],
+      cameraRe: [false],
+      sistemaNavegacao: [false],
       bluetooth: [false],
-      multifunctionalSteeringWheel: [false],
+      volanteMultifuncional: [false],
     })
   });
 
   public cadastroFormMoto: FormGroup = this.fb.group({
-    marca: [''],
-    modelo: [''],
-    cambio: [''],
-    combustivel: [''],
-    cor: [''],
-    anoFabricacao: [''],
-    anoModelo: [''],
+    marca: ['', Validators.required],
+    modelo: ['', Validators.required],
+    cambio: ['', Validators.required],
+    combustivel: ['', Validators.required],
+    cor: ['', Validators.required],
+    anoFabricacao: ['', Validators.required],
+    anoModelo: ['', Validators.required],
     titulo: [''],
     descricao: [''],
-    renavam: [''],
-    placa: [''],
-    preco: [''],
-    condicao: ['']
+    renavam: [{ value: '', disabled: true }],
+    placa: [{ value: '', disabled: true }],
+    valor: ['', Validators.required],
+    condicao: ['', Validators.required],
+    tipoMoto: ['', Validators.required],
+    potencia: [''],
+    cilindrada: [''],
+    km: [''],
   });
+  id: any;
 
-  submitForm() {
-    const veiculoData = JSON.stringify(this.cadastroFormVeiculo.value);
-    console.log(veiculoData)
-    const formData = new FormData();
-    formData.append('veiculoData', veiculoData);
+  sendNewImages(type: string, id: string) {
 
-    this.selectedFiles.forEach((file) => {
-      formData.append('file', file, file.name);
-    });
+    if (this.selectedFiles.length > 0) {
+      const formData = new FormData();
 
-    this.adminService.post(formData).subscribe((res) => {
-      console.log(res)
-    })
+      this.selectedFiles.forEach((file) => {
+        formData.append('files', file, file.name);
+      });
+
+      this.adminService.saveNewImages(formData, type, id).subscribe(res => {
+        console.log(res)
+      });
+    }
+
   }
+  submitForm() {
+
+    if (this.isEdit && this.cadastroFormVeiculo.valid) {
+      const value = this.formatarFormPostCarro();
+      this.isLoading = true;
+      this.adminService.updateCarro(this.id, value).subscribe({
+        next: (res) => {
+          console.log(res)
+          this.isLoading = false; // Desativa o indicador de carregamento após a conclusão da requisição.
+          this.location.back();
+        },
+        error: (error) => {
+          console.log(error)
+          this.isLoading = false;
+        }
+      })
+
+      this.sendNewImages('veiculo', this.id);
+
+    } else if (!this.isEdit && this.cadastroFormVeiculo.valid) {
+
+      const value = this.formatarFormPostCarro();
+      const formData = new FormData();
+      const valueFormated = JSON.stringify(value);
+
+
+      formData.append('veiculoData', valueFormated);
+
+
+      this.selectedFiles.forEach((file) => {
+        formData.append('file', file, file.name);
+      });
+
+
+      this.texto = "Publicando...";
+      this.isLoading = true;
+      this.adminService.post(formData).subscribe({
+        next: (res) => {
+          console.log(res)
+          this.isLoading = false; // Desativa o indicador de carregamento após a conclusão da requisição.
+          this.cadastroFormVeiculo.reset();
+          this.images = [];
+          this.selectedFiles = [];
+          this.location.back();
+
+        },
+        error: (error) => {
+          console.log(error)
+          this.isLoading = false;
+        }
+      })
+    }
+  }
+
+  submitFormMoto() {
+
+    if (this.isEdit && this.cadastroFormMoto.valid) {
+      const value = this.formatarFormPostMoto();
+      console.log(value)
+      this.isLoading = true;
+      this.adminService.updateMobi(this.id, value).subscribe({
+        next: (res) => {
+          console.log(res)
+          this.isLoading = false; // Desativa o indicador de carregamento após a conclusão da requisição.
+          this.location.back();
+
+        },
+        error: (error) => {
+          console.log(error)
+          this.isLoading = false;
+        }
+      })
+
+      this.sendNewImages('motocicleta', this.id);
+
+    } else {
+
+      const value = this.formatarFormPostMoto();
+      const formData = new FormData();
+      const valueFormated = JSON.stringify(value);
+
+      formData.append('motocicletaData', valueFormated);
+
+      this.selectedFiles.forEach((file) => {
+        formData.append('file', file, file.name);
+      });
+
+      this.texto = "Publicando...";
+      this.isLoading = true;
+
+      this.adminService.postMoto(formData).subscribe({
+        next: (res) => {
+          console.log(res)
+          this.isLoading = false; // Desativa o indicador de carregamento após a conclusão da requisição.
+          this.cadastroFormMoto.reset();
+          this.images = [];
+          this.selectedFiles = [];
+          this.location.back();
+        },
+        error: (error) => {
+          console.log(error)
+          this.isLoading = false;
+        }
+      })
+
+    }
+
+  }
+
+
   routerActive: string = "activelink";
   checked = true;
 
@@ -110,20 +237,16 @@ export class CreatePostComponent implements OnInit {
     "hatch",
     "sedan",
     "suv",
-    "cupê",
-    "conversível",
-    "perua",
-    "minivan",
-    "picape",
-    "van",
-    "crossover",
-    "esportivo"
+    "wagon",
+    "utilitario"
   ];
 
   carForm!: FormGroup;
   veiculo: boolean = false;
 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private adminService: AdminService) { }
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router,
+    private activatedRoute: ActivatedRoute, private fb: FormBuilder, private adminService: AdminService,
+    private location: Location) { }
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.veiculo = false;
@@ -150,8 +273,34 @@ export class CreatePostComponent implements OnInit {
   editarItem(type: string, id: number) {
     this.adminService.getItem(type, id).subscribe(item => {
       console.log(item)
+      this.id = id;
+      this.isEdit = true;
       this.preencherFormularioComDados(type, item);
+      this.location.back();
     })
+
+    console.log(this.selectedFiles);
+  }
+
+  formatarFormPostCarro() {
+    const valueOf = this.cadastroFormVeiculo.getRawValue();
+
+    valueOf.carroceria = valueOf.carroceria.toUpperCase();
+    valueOf.combustivel = valueOf.combustivel.toUpperCase();
+    valueOf.condicao = valueOf.condicao.toUpperCase();
+
+    // return JSON.stringify(valueOf);
+    return valueOf;
+  }
+  formatarFormPostMoto() {
+    const valueOf = this.cadastroFormMoto.getRawValue();
+
+    valueOf.tipoMoto = valueOf.tipoMoto.toUpperCase();
+    valueOf.combustivel = valueOf.combustivel.toUpperCase();
+    valueOf.condicao = valueOf.condicao.toUpperCase();
+
+    // return JSON.stringify(valueOf);
+    return valueOf;
   }
 
   preencherFormularioComDados(type: string, dados: any): void {
@@ -170,35 +319,40 @@ export class CreatePostComponent implements OnInit {
         anoModelo: dados.anoModelo.toString(),
         titulo: dados.titulo,
         descricao: dados.descricao,
-        renavam: dados.renavam,
-        placa: dados.placa,
-        preco: dados.valor, // Note a mudança de 'valor' para 'preco'
+        potenciaMotor: dados.potenciaMotor,
+        portas: dados.portas.toString(),
+        //renavam: dados.renavam,
+        //placa: dados.placa,
+        valor: dados.valor, // Note a mudança de 'valor' para 'preco'
         condicao: dados.condicao.toLowerCase(),
+        km: dados.km.toString(),
       });
 
       // Preenchendo os recursos opcionais
-      this.cadastroFormVeiculo.get('optionalFeatures')?.patchValue({
+      this.cadastroFormVeiculo.get('opcionais')?.patchValue({
         abs: dados.opcionais.abs,
         airbags: dados.opcionais.airbags,
-        stabilityControl: dados.opcionais.controleEstabilidade,
-        tractionControl: dados.opcionais.controleTracao,
-        emergencyBrakeAssist: dados.opcionais.assistenciaFreioEmergencia,
-        collisionWarningSystem: dados.opcionais.sistemaAvisoColisao,
-        airConditioning: dados.opcionais.arCondicionado,
-        powerWindows: dados.opcionais.vidrosEletricos,
-        electricPowerSteering: dados.opcionais.direcaoEletrica,
-        leatherSeats: dados.opcionais.bancosCouro,
-        driverSeatHeightAdjustment: dados.opcionais.ajusteAlturaBancoMotorista,
-        soundSystem: dados.opcionais.sistemaSom,
-        rearViewCamera: dados.opcionais.cameraRe,
-        navigationSystem: dados.opcionais.sistemaNavegacao,
+        controleEstabilidade: dados.opcionais.controleEstabilidade,
+        controleTracao: dados.opcionais.controleTracao,
+        assistenciaFreioEmergencia: dados.opcionais.assistenciaFreioEmergencia,
+        sistemaAvisoColisao: dados.opcionais.sistemaAvisoColisao,
+        arCondicionado: dados.opcionais.arCondicionado,
+        vidrosEletricos: dados.opcionais.vidrosEletricos,
+        direcaoEletrica: dados.opcionais.direcaoEletrica,
+        bancosCouro: dados.opcionais.bancosCouro,
+        ajusteAlturaBancoMotorista: dados.opcionais.ajusteAlturaBancoMotorista,
+        sistemaSom: dados.opcionais.sistemaSom,
+        cameraRe: dados.opcionais.cameraRe,
+        sistemaNavegacao: dados.opcionais.sistemaNavegacao,
         bluetooth: dados.opcionais.bluetooth,
-        multifunctionalSteeringWheel: dados.opcionais.volanteMultifuncional,
+        volanteMultifuncional: dados.opcionais.volanteMultifuncional,
       });
 
       for (let img of dados.imagensVeiculos) {
-        this.images.push(img.imageUrl);
+        this.images.push(img);
       }
+      console.log(this.images[0]);
+
     }
     if (type === 'motocicleta' && dados) {
       this.cadastroFormMoto.patchValue({
@@ -209,16 +363,20 @@ export class CreatePostComponent implements OnInit {
         anoModelo: dados.anoModelo.toString(),
         titulo: dados.titulo,
         descricao: dados.descricao,
-        renavam: dados.renavam,
-        placa: dados.placa,
-        preco: dados.valor, // Note a mudança de 'valor' para 'preco'
+        //renavam: dados.renavam,
+        //placa: dados.placa,
+        valor: dados.valor, // Note a mudança de 'valor' para 'preco'
         condicao: dados.condicao.toLowerCase(),
         combustivel: dados.combustivel.toLowerCase(),
-
+        tipoMoto: dados.tipoMoto.toLowerCase(),
+        cambio: dados.cambio,
+        km: dados.km,
+        potencia: dados.potencia?.toString(),
+        cilindrada: dados.cilindrada?.toString(),
       });
 
       for (let img of dados.imagensMotocicleta) {
-        this.images.push(img.imageUrl);
+        this.images.push(img);
       }
     }
 
@@ -228,7 +386,7 @@ export class CreatePostComponent implements OnInit {
 
 
   selectedFiles: File[] = []; // Armazenar os arquivos selecionados
-  images: string[] = []; // Armazenar as URLs de dados para visualização
+  images: any[] = []; // Armazenar as URLs de dados para visualização
 
   processFile(event: any): void {
     this.selectedFiles = Array.from(event.target.files);
@@ -238,7 +396,16 @@ export class CreatePostComponent implements OnInit {
       if (file.type.startsWith('image/')) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          this.images.push(e.target.result); // Adicionar a URL de dados da imagem ao array para visualização
+
+
+          const imagemMotocicleta: ImagemMotocicleta = {
+            id: undefined,
+            imageUrl: e.target.result, // URL da imagem codificada em base64
+            marcaRef: undefined,
+            nameRef: undefined,
+          };
+
+          this.images.push(imagemMotocicleta); // Adicionar a URL de dados da imagem ao array para visualização
         };
         reader.readAsDataURL(file);
       }
@@ -285,16 +452,18 @@ export class CreatePostComponent implements OnInit {
     {
       link: "/",
       icon: "eye",
-      menu: "Visão do visitante",
+      menu: "Visão do visitante (em breve)",
+      disabled: true
     },
     {
       link: "/",
       icon: "pie-chart",
-      menu: "Análises",
+      menu: "Análises (em breve)",
+      disabled: true
     },
   ]
   onBack(): void {
-    this.router.navigate(['/flexy/home']);
+    this.location.back();
   }
 
   formattedValue = '';
@@ -309,12 +478,32 @@ export class CreatePostComponent implements OnInit {
     }
   }
 
-  removeImage(index: number): void {
-    this.images.splice(index, 1); // Remove a imagem da visualização
-    this.selectedFiles.splice(index, 1); // Remove o arquivo da lista a ser enviada
+  removeImage(index: number, id: string, object: string): void {
+    this.images.splice(index, 1);
+    if (this.isEdit && this.veiculo && id) {
+      console.log(id + "=================" + object + "REMOVE IMAGE =================")
+      this.adminService.deleteImageCarro(id, object).subscribe({
+        next: (res) => {
+          console.log(res);
+        }
+      });
+
+    } else if (this.isEdit && !this.veiculo && id) {
+      console.log(id + "=================" + object + "REMOVE IMAGE =================")
+      this.adminService.deleteImageMoto(id, object).subscribe({
+        next: (res) => {
+          //this.images.splice(index, 1);
+          console.log(res);
+        }
+      });
+
+    } else if (this.isEdit && !id) {
+      console.log("É PARA SER ID UNDEFINED")
+      //this.images.splice(index, 1); // Remove a imagem da visualização
+      this.selectedFiles.splice(index, 1); // Remove o arquivo da lista a ser enviada
+    } else {
+      //this.images.splice(index, 1); // Remove a imagem da visualização
+      this.selectedFiles.splice(index, 1); // Remove o arquivo da lista a ser enviada
+    }
   }
-
-
-
-
 }

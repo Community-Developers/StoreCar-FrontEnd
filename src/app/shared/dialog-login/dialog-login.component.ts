@@ -1,8 +1,6 @@
-import { LoginData } from './../login-data.interface';
+import { LoginService } from './../../services/login.service';
 import { Component } from '@angular/core';
 import { TokenBearer } from '../token-bearer.interface';
-import { LoginService } from 'src/app/services/login.service';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -17,7 +15,6 @@ export class DialogLoginComponent {
 
   public loginForm: FormGroup = this.formBuilder.group({
     username: ['', Validators.required],
-    email: ['', Validators.required],
     password: ['', Validators.required]
   })
 

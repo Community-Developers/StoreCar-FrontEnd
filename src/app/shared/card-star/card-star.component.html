@@ -1,32 +1,40 @@
 <div class="card-star" fxLayout="column" fxLayoutAlign="space-between center">
 
-    <div class="img"><img src="/assets/card-car/car-test.jpeg" alt="">
-        <div class="bg"></div>
+    <div class="img" *ngIf="item?.imagem; else noImage">
+        <img [src]="item?.imagem" alt="{{item?.titulo}}">
     </div>
+    <ng-template #noImage>
+        <div class="img">
+            <img src="/assets/logo-mobi.png" style="width: 100%;" alt="Imagem padrão">
+        </div>
+    </ng-template>
+
 
     <div class="content" fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="">
         <div class="title">
             <h3>
-                Peugeot 307 2011
+                {{item?.titulo}}
             </h3>
         </div>
         <div class="details">
             <ul>
                 <li>
-                    <img src="/assets/card-car/km.svg" alt=""> <span>100.000</span>
+                    <img src="/assets/card-car/km.svg" alt=""> <span>{{item?.km | number:'1.0-0':'pt-BR'}}</span>
                 </li>
 
                 <li>
-                    <img src="/assets/card-car/comb.svg" alt=""> <span>Flex</span>
+                    <img src="/assets/card-car/comb.svg" alt=""> <span>{{item?.combustivel}}</span>
                 </li>
                 <li>
-                    <img src="/assets/card-car/motor.svg" alt=""><span>1.0</span>
+                    <img src="/assets/card-car/motor.svg" alt=""><span>{{item?.potenciaMotor}}</span>
                 </li>
 
             </ul>
         </div>
         <div class="more" fxLayoutAlign="space-between center">
-            <button mat-flat-button color="primary">Ver detalhes</button> <span class="price">R$20.990</span>
+            <button (click)="verDetalhes(item.type, item.id)" mat-flat-button color="primary">Ver detalhes</button>
+            <span class="price">R$ {{item?.valor |
+                number:'1.0-2':'pt-BR'}}</span>
         </div>
     </div>
 </div>

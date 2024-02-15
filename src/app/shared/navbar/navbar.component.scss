@@ -1,3 +1,5 @@
+@import '../../../assets/variablesv2.scss';
+
 :host {
     main {
         width: 100%;
@@ -5,6 +7,10 @@
         overflow: hidden;
         box-sizing: border-box;
         z-index: 10;
+
+        position: absolute;
+        left: 0;
+        top: 0;
 
         border-bottom: 1px solid #F6F6F6;
 
@@ -36,9 +42,9 @@
                         justify-content: center;
                         gap: 5px;
 
-                        color: #5E5E5E;
+                        color: $terciaria;
                         font-family: "Open Sans", sans-serif;
-                        ;
+
                         font-size: 13px;
                         font-weight: 600;
                         transition: 0.35s;
@@ -48,7 +54,7 @@
 
                     &:hover {
                         a {
-                            color: #46D993;
+                            color: $secundaria;
                         }
                     }
 
@@ -129,7 +135,7 @@
                     cursor: pointer;
 
                     &:hover {
-                        color: #46D993;
+                        color: $secundaria;
                     }
                 }
             }
@@ -143,7 +149,7 @@
                 width: 100%;
                 height: 40px;
                 border-radius: 5px;
-                background: #46D993;
+                background: $quintenaria;
 
                 color: #13141A;
                 font-family: Montserrat;
@@ -167,7 +173,7 @@
                     width: 150%;
                     bottom: 0;
                     border-radius: 0px 5px 5px 0px;
-                    background-color: red;
+                    background-color: $secundaria;
                     transform: skewX(45deg) scale(0, 1);
                     z-index: -1;
                     transition: all 0.5s ease-out 0s;
@@ -236,7 +242,6 @@
 
         @media (max-width: 768px) {
             .top {
-                margin-bottom: 30px;
                 display: flex;
                 justify-content: space-around;
 
@@ -263,7 +268,7 @@
                                 padding: 15px;
 
                                 button {
-                                    color: #13141A;
+                                    color: $quintenaria;
                                     font-family: Montserrat;
                                     font-size: 16px;
                                     font-style: normal;
@@ -275,7 +280,7 @@
                                 }
 
                                 a {
-                                    color: #13141A;
+                                    color: $quintenaria;
                                     font-family: Montserrat;
                                     font-size: 16px;
                                     font-style: normal;
@@ -432,7 +437,7 @@
         width: 100%;
         height: 40px;
         border-radius: 5px;
-        background: #46D993;
+        background: $quintenaria;
 
         color: #13141A;
         font-family: Montserrat;
@@ -441,33 +446,74 @@
         font-weight: 600;
         line-height: 30px;
         text-transform: uppercase;
+
+        z-index: 1;
+        overflow: hidden;
+
+        &::after {
+            position: absolute;
+            content: "";
+            display: block;
+            left: 8%;
+            right: -20%;
+            top: -4%;
+            height: 150%;
+            width: 150%;
+            bottom: 0;
+            border-radius: 0px 5px 5px 0px;
+            background-color: $secundaria;
+            transform: skewX(45deg) scale(0, 1);
+            z-index: -1;
+            transition: all 0.5s ease-out 0s;
+        }
+
+        &:hover {
+            color: #FFF;
+
+            &::after {
+                transform: skewX(45deg) scale(1, 1);
+            }
+        }
     }
 
 }
 
 ::ng-deep .mat-mdc-menu-item-text {
-    color: #13141A;
-    font-family: Montserrat !important;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
+    color: $terciaria !important;
+    font-family: $family-open-sans !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
     line-height: 30px;
     /* 230.769% */
-    text-transform: uppercase;
-    display: flex;
     align-items: center;
     justify-content: flex-start;
     padding: 15px;
+    transition: 0.35s;
+    text-transform: capitalize !important;
+    gap: 5px !important;
+
+
 
     &::before {
         content: "";
         position: absolute;
         width: 5px;
         height: 5px;
-        background-color: black;
+        background-color: $quintenaria;
         border-radius: 50%;
         left: 20px;
     }
+}
+
+::ng-deep .bnt-mobile-list {
+    color: $terciaria !important;
+    font-family: $family-open-sans !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    font-style: normal !important;
+    /* 230.769% */
+    transition: 0.35s;
+    text-transform: capitalize !important;
 }
 
 ::ng-deep .mat-elevation-z8,
@@ -486,7 +532,11 @@
 }
 
 .mode-stick {
-    position: fixed;
+
+    position: fixed !important;
+    transition: all ease 2s;
+    -webkit-animation: 300ms ease-in-out 0s;
+
 
     &::ng-deep .bottom {
         display: none !important;
@@ -586,4 +636,12 @@
             }
         }
     }
+}
+
+#menu-mobile {
+
+    li {
+        text-align: center;
+    }
+
 }

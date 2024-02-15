@@ -13,6 +13,7 @@ interface sidebarMenu {
   link: string;
   icon: string;
   menu: string;
+  disabled?: boolean;
 }
 
 export interface AutoElement {
@@ -94,6 +95,7 @@ export class TableComponent implements OnInit {
       this.dataSource = [];
       const type = params['type'];
       if (type === 'automovel') {
+        console.log("ENTROU NO CARRO")
         this.loadCars();
       } else if (type === 'motocicleta') {
         this.loadMotos();
@@ -170,12 +172,14 @@ export class TableComponent implements OnInit {
     {
       link: "/",
       icon: "eye",
-      menu: "Visão do visitante",
+      menu: "Visão do visitante (em breve)",
+      disabled: true
     },
     {
       link: "/",
       icon: "pie-chart",
-      menu: "Análises",
+      menu: "Análises (em breve)",
+      disabled: true
     },
   ]
 
@@ -216,5 +220,9 @@ export class TableComponent implements OnInit {
 
   editItem(id: number, type: string) {
     this.router.navigate([`/admin/edit/${type}/${id}`]);
+  }
+
+  detalhar(type: string, id: any) {
+    this.router.navigate([`/details/${type}/${id}`]);
   }
 }

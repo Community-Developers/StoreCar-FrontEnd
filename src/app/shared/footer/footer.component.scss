@@ -1,7 +1,10 @@
+@import '../../../assets/variablesv2.scss';
+
+
 :host {
     display: block;
-    height: 50vh;
-    background: #13141A;
+    height: 36vh;
+    background: $quintenaria;
     width: 100%;
     overflow: hidden;
 
@@ -27,8 +30,8 @@
                     list-style: none;
 
                     h3 {
-                        color: #FFF;
-                        font-family: Montserrat;
+                        color: $sextenaria;
+                        font-family: $family-montserrat;
                         font-size: 20px;
                         font-style: normal;
                         font-weight: 600;
@@ -39,14 +42,22 @@
                     li {
 
                         a {
-                            color: #B3B3B3;
-                            font-family: Open Sans;
+                            color: $primaria;
+                            font-family: $family-open-sans;
                             font-size: 15px;
                             font-style: normal;
                             font-weight: 600;
                             line-height: 30px;
                             /* 200% */
                             text-decoration: none;
+                            transition: all 0.5s ease-out 0s;
+
+                        }
+
+                        &:hover {
+                            a {
+                                color: $secundaria;
+                            }
                         }
                     }
                 }
@@ -65,11 +76,11 @@
                     }
 
                     .right .span1 {
-                        font-family: "Open Sans", sans-serif;
+                        font-family: $family-open-sans;
                         font-weight: 600;
                         font-size: 14px;
                         line-height: 1;
-                        color: #B3B3B3;
+                        color: $sextenaria;
                         margin-bottom: 5px;
                         display: inline-block;
                     }
@@ -79,8 +90,8 @@
                         padding-left: 20px;
 
                         .span2 {
-                            color: #FFF;
-                            font-family: Montserrat;
+                            color: $secundaria;
+                            font-family: $family-montserrat;
                             font-size: 16px;
                             font-style: normal;
                             font-weight: 600;
@@ -96,14 +107,14 @@
 
         footer {
             width: 100%;
-            background: #13141A;
+            background: $quintenaria;
             height: 19%;
             padding: 0 10%;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
 
             .copy span {
-                color: #FFF;
-                font-family: Open Sans;
+                color: $sextenaria;
+                font-family: $family-open-sans;
                 font-size: 14px;
                 font-style: normal;
                 font-weight: 400;
@@ -114,8 +125,8 @@
 
             .follow {
                 h5 {
-                    color: #FFF;
-                    font-family: Open Sans;
+                    color: $sextenaria;
+                    font-family: $family-open-sans;
                     font-size: 16px;
                     font-style: normal;
                     font-weight: 400;
@@ -136,15 +147,30 @@
                         align-items: center;
                         justify-content: center;
 
+                        &:hover {
+                            a {
+                                border-radius: 50%;
+                                background-color: $primaria;
+
+                                img {
+                                    filter: invert(100%);
+                                }
+                            }
+                        }
+
                         a {
                             display: flex;
                             align-items: center;
                             justify-content: center;
+                            transition: all 0.5s ease-out 0s;
+
 
                             img {
                                 width: 28px;
                                 height: 28px;
                                 align-items: center;
+                                transition: all 0.5s ease-out 0s;
+
                             }
                         }
                     }

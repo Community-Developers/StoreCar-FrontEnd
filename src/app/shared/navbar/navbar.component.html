@@ -1,7 +1,7 @@
 <main fxLayout="column" fxLayoutAlign="center center" [ngClass]="headerSticky ? 'mode-stick' : ''">
     <div class="top">
         <div>
-            <a class="logo-h" [routerLink]="['/']"><img src="/assets/logo.svg" alt=""></a>
+            <a class="logo-h" [routerLink]="['/']"><img style="max-width: 240px;" src="/assets/logomobi.png" alt=""></a>
         </div>
         <div class="list-a">
             <ul fxLayout="row" fxLayoutGap="35px">
@@ -47,7 +47,7 @@
                                                 <mat-icon>close</mat-icon>
                                             </button>
                                         </div>
-                                        <ul class="list-mobile"
+                                        <ul fxLayout="column" fxLayoutGap="25px" class="list-mobile" id="menu-mobile"
                                             style="width: 100%; margin: auto; padding: 0; text-align: start; padding: 10px 50px;">
                                             <li><a href="">Sobre nós</a></li>
                                             <li><a href="">Localização</a></li>
@@ -85,8 +85,8 @@
 
 
 
-                                                <button (click)="showFiller =!showFiller" mat-button
-                                                    [matMenuTriggerFor]="belowMenu">Categorias
+                                                <button class="bnt-mobile-list" (click)="showFiller =!showFiller"
+                                                    mat-button [matMenuTriggerFor]="belowMenu">Categorias
                                                     <mat-icon [class.rotate-icon]="showFiller"
                                                         style="transition: all 0.4s;">arrow_forward_ios</mat-icon>
                                                 </button>
@@ -132,7 +132,8 @@
 
 
                                     <div style="margin: 50px 0px">
-                                        <a [routerLink]="['/']"><img src="/assets/logo.svg" alt=""></a>
+                                        <a [routerLink]="['/']"><img src="/assets/logomobi.png" style="width: 250px"
+                                                alt=""></a>
                                     </div>
 
                                     <button style="width: 70%;" (click)="openDialog()" class="login" mat-flat-button
@@ -165,12 +166,12 @@
     <div class="bottom" fxLayout="row" fxLayoutAlign="space-between center">
         <div class="categorias">
             <ul fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="start center">
-                <li>Home</li>
-                <li>Automóveis</li>
-                <li>Motocicletas</li>
-                <li>Acessórios</li>
+                <li><a routerLink="/">Home</a></li>
+                <li><a routerLink="/list/veiculo">Automóveis</a></li>
+                <li><a routerLink="/list/motocicleta">Motocicletas</a></li>
+                <!-- <li>Acessórios</li>
                 <li>Peças</li>
-                <li>Ferramentas</li>
+                <li>Ferramentas</li> -->
             </ul>
         </div>
 

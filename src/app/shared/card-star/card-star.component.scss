@@ -1,3 +1,5 @@
+@import '../../../assets/variablesv2.scss';
+
 :host {
     display: block;
     height: 100%;
@@ -6,7 +8,7 @@
     .card-star {
         border-radius: 10px;
         border: 1px solid rgba(238, 238, 238, 0.93);
-        background: #FFF;
+        background: $sextenaria;
         padding: 10px;
         transition: .45s ease;
         height: 100%;
@@ -65,8 +67,8 @@
                 width: 100%;
 
                 h3 {
-                    color: #13141A;
-                    font-family: "Montserrat", sans-serif;
+                    color: $quintenaria;
+                    font-family: $family-montserrat;
                     font-size: 18px;
                     font-weight: 600;
                     transition: 0.35s;
@@ -94,8 +96,8 @@
                         }
 
                         span {
-                            color: #5E5E5E;
-                            font-family: Open Sans;
+                            color: $quaternaria;
+                            font-family: $family-open-sans;
                             font-size: 13px;
                             font-style: normal;
                             font-weight: 600;
@@ -116,11 +118,11 @@
 
                 button {
                     border-radius: 5px;
-                    background-color: #13141A;
-                    font-family: "Montserrat", 'sans-serif';
+                    background-color: $quintenaria;
+                    font-family: $family-montserrat;
                     font-weight: 600;
                     font-size: 15px;
-                    color: #fff;
+                    color: $sextenaria;
                     padding: 8px 28px;
                     line-height: 1;
                     display: inline-flex;
@@ -146,14 +148,14 @@
                         width: 150%;
                         bottom: 0;
                         border-radius: 0px 5px 5px 0px;
-                        background-color: red;
+                        background-color: $secundaria;
                         transform: skewX(45deg) scale(0, 1);
                         z-index: -1;
                         transition: all 0.5s ease-out 0s;
                     }
 
                     &:hover {
-                        color: #FFF;
+                        color: $sextenaria;
 
                         &::after {
                             transform: skewX(45deg) scale(1, 1);
@@ -162,7 +164,7 @@
                 }
 
                 .price {
-                    color: #13141A;
+                    color: $quintenaria;
                     font-family: "Montserrat", 'sans-serif';
                     font-size: 18px;
                     font-weight: 700;

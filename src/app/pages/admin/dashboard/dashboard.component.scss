@@ -68,3 +68,9 @@ gallery-core {
 gallery-core[thumbPosition=bottom] gallery-thumbs .g-slider-content {
     background: black;
 }
+
+.disabled-link {
+    color: grey;
+    pointer-events: none;
+    cursor: not-allowed;
+}

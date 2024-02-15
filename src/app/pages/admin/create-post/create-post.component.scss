@@ -1,3 +1,5 @@
+@import '../../../../assets/variablesv2.scss';
+
 :host {
     display: flex;
     width: 100%;
@@ -53,7 +55,7 @@
 
 
 .upload-section {
-    border: 1px solid #9b9b9b;
+    border: 1px solid $terciaria;
     padding: 10px;
     position: relative; // Isso é necessário para posicionar absolutamente o botão de upload em relação a esta seção
     height: auto;
@@ -63,7 +65,7 @@
 }
 
 .upload-btn {
-    position: absolute;
+    position: absolute !important;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -78,7 +80,6 @@
     position: relative;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-
 
 }
 
@@ -96,12 +97,13 @@
     height: 200px;
     margin-right: 5px;
     overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
     .remove-btn {
         position: absolute;
         top: 5px;
         right: 5px;
-        background: #fff;
+        background: $sextenaria;
         border: none;
         border-radius: 50%;
         cursor: pointer;
@@ -126,6 +128,129 @@
     z-index: 1;
     overflow: hidden;
     border-radius: 5px;
+    background-color: $quintenaria !important;
+
+    &::after {
+        position: absolute;
+        content: "";
+        display: block;
+        left: 8%;
+        right: -20%;
+        top: -4%;
+        height: 150%;
+        width: 150%;
+        bottom: 0;
+        border-radius: 0px 5px 5px 0px;
+        background-color: $secundaria;
+        transform: skewX(45deg) scale(0, 1);
+        z-index: -1;
+        transition: all 0.5s ease-out 0s;
+    }
+
+    &:hover {
+
+        span {
+            transition: all 0.5s ease-out 0s;
+            font-size: 16px;
+
+        }
+
+        &::after {
+            transform: skewX(45deg) scale(1, 1);
+        }
+
+        mat-icon {
+            transform: scale(1.2);
+            transition: all 0.7s ease-out 0s;
+            transform: rotate(-20deg);
+
+        }
+    }
+
+    span {
+        color: $sextenaria;
+        text-align: center;
+        font-family: Open Sans;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 30px;
+        /* 200% */
+    }
+}
+
+.btn-salvar {
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 245px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: $quintenaria !important;
+
+    &::after {
+        position: absolute;
+        content: "";
+        display: block;
+        left: 8%;
+        right: -20%;
+        top: -4%;
+        height: 150%;
+        width: 150%;
+        bottom: 0;
+        border-radius: 0px 5px 5px 0px;
+        background-color: green;
+        transform: skewX(45deg) scale(0, 1);
+        z-index: -1;
+        transition: all 0.5s ease-out 0s;
+    }
+
+    &:hover {
+
+        span {
+            transition: all 0.5s ease-out 0s;
+            font-size: 16px;
+
+        }
+
+        &::after {
+            transform: skewX(45deg) scale(1, 1);
+        }
+
+        mat-icon {
+            transform: scale(1.2);
+            transition: all 0.7s ease-out 0s;
+            transform: rotate(-20deg);
+
+        }
+    }
+
+    span {
+        color: $sextenaria;
+        text-align: center;
+        font-family: Open Sans;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 30px;
+        /* 200% */
+    }
+}
+
+.btn-cancelar {
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 245px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: $quintenaria !important;
 
     &::after {
         position: absolute;
@@ -165,7 +290,7 @@
     }
 
     span {
-        color: #FFF;
+        color: $sextenaria;
         text-align: center;
         font-family: Open Sans;
         font-size: 15px;
@@ -184,4 +309,10 @@ mat-checkbox {
     border-radius: 10px;
     min-width: 150px;
     padding: 5px;
+}
+
+.disabled-link {
+    color: $quaternaria;
+    pointer-events: none;
+    cursor: not-allowed;
 }

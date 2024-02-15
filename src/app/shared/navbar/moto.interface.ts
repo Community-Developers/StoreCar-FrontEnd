@@ -16,12 +16,14 @@ export interface Moto {
     anoModelo: number;
     titulo: string;
     descricao: string;
+    cilindrada: number;
+    potencia: number;
     imagensMotocicleta: ImagemMotocicleta[];
 }
 
 export interface ImagemMotocicleta {
-    id: number;
+    id: number | undefined;
     imageUrl: string;
-    marcaRef: string;
-    nameRef: string;
+    marcaRef: string | undefined;
+    nameRef: string | undefined;
 }

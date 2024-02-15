@@ -18,6 +18,7 @@ import {
   Gallery,
 } from 'ng-gallery';
 import { LightboxModule, Lightbox } from 'ng-gallery/lightbox';
+import { AngularMaterialModule } from 'src/app/shared/angular-material/angular-material.module';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { LightboxModule, Lightbox } from 'ng-gallery/lightbox';
     MatInputModule,
     SlickCarouselModule,
     GalleryModule,
+    AngularMaterialModule
   ]
 })
 export class DetailsModule { }

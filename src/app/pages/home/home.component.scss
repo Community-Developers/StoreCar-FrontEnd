@@ -1,4 +1,5 @@
 @import '../../../assets/animate-slide.scss';
+@import '../../../assets/variablesv2.scss';
 
 
 $background-color: #FFFFFF;
@@ -22,16 +23,12 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: center;
             align-items: center;
-
+            margin-top: 140px;
 
             .banner {
                 width: 100%;
-                height: 633px;
+                height: 700px;
                 border-radius: 30px;
-                background: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url('https://www.drivco-wp.egenslab.com/wp-content/uploads/2023/10/home5-banner-img-2.jpg'), lightgray 1328.357px 85.991px / 105.964% 100% no-repeat, ;
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-position: center;
                 position: relative;
 
                 .text {
@@ -41,9 +38,9 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                     transform: translate(-50%, -50%);
 
                     h1 {
-                        color: #FFF;
+                        color: $sextenaria;
                         text-align: center;
-                        font-family: Montserrat;
+                        font-family: $family-montserrat;
                         font-size: 75px;
                         font-style: normal;
                         font-weight: 700;
@@ -51,7 +48,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                     }
 
                     span {
-                        color: #FFF;
+                        color: $sextenaria;
                         text-align: center;
                         font-family: Open Sans;
                         font-size: 20px;
@@ -71,9 +68,9 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                         }
 
                         span {
-                            color: #FFF;
+                            color: $sextenaria;
                             text-align: center;
-                            font-family: 'Open Sans', sans-serif;
+                            font-family: $family-open-sans;
                             font-size: 14px;
                             font-style: normal;
                             font-weight: 400;
@@ -92,6 +89,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                         position: relative;
                         z-index: 1;
                         overflow: hidden;
+                        background-color: $quintenaria;
 
                         &::after {
                             position: absolute;
@@ -104,7 +102,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                             width: 150%;
                             bottom: 0;
                             border-radius: 0px 5px 5px 0px;
-                            background-color: red;
+                            background-color: $secundaria;
                             transform: skewX(45deg) scale(0, 1);
                             z-index: -1;
                             transition: all 0.5s ease-out 0s;
@@ -113,7 +111,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                         &:hover {
 
                             span {
-                                color: black;
+                                color: $primaria ;
                                 transition: all 0.5s ease-out 0s;
 
                             }
@@ -128,9 +126,9 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                         }
 
                         span {
-                            color: #FFF;
+                            color: $sextenaria;
                             text-align: center;
-                            font-family: Open Sans;
+                            font-family: $family-open-sans;
                             font-size: 15px;
                             font-style: normal;
                             font-weight: 600;
@@ -143,7 +141,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
 
                     .span1 {
-                        border-right: solid 1px white;
+                        border-right: solid 1px $sextenaria;
                         margin-right: 10px;
                     }
                 }
@@ -154,7 +152,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
     .view-2 {
         height: auto;
-        background-color: #FAF8FB;
+        background-color: $primaria;
         width: 100%;
         box-sizing: border-box;
         overflow: hidden;
@@ -165,8 +163,8 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 82%;
 
             h2 {
-                color: #13141A;
-                font-family: 'Montserrat', sans-serif;
+                color: $quintenaria;
+                font-family: $family-montserrat;
                 font-size: 40px;
                 font-style: normal;
                 font-weight: 700;
@@ -207,11 +205,11 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
                 button {
                     border-radius: 5px;
-                    background-color: #13141A;
-                    font-family: "Montserrat", 'sans-serif';
+                    background-color: $quintenaria;
+                    font-family: $family-montserrat;
                     font-weight: 600;
                     font-size: 15px;
-                    color: #fff;
+                    color: $sextenaria;
                     padding: 8px 28px;
                     line-height: 1;
                     display: inline-flex;
@@ -234,13 +232,13 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     .view-3 {
         height: auto;
         width: 100%;
-        margin-bottom: 100px;
+        margin: 100px 0;
         overflow: hidden;
 
         section {
 
             width: 82%;
-            background: #F6F6F6;
+            background: $primaria;
             margin: auto;
             border-radius: 30px;
 
@@ -266,7 +264,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                         height: 87px;
                         width: 87px;
                         border-radius: 15px 0 0 0;
-                        background-color: red;
+                        background-color: $secundaria;
                         position: absolute;
                         left: -10px;
                         top: -10px;
@@ -278,7 +276,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                         height: 87px;
                         width: 87px;
                         border-radius: 0 0 15px 0;
-                        background-color: red;
+                        background-color: $secundaria;
                         position: absolute;
                         right: -10px;
                         bottom: -10px;
@@ -292,12 +290,12 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 margin-right: 20px;
 
                 .top {
-                    margin-bottom: 60px;
+                    margin-bottom: 40px;
 
                     h3 {
 
-                        color: #13141A;
-                        font-family: Montserrat;
+                        color: $quintenaria;
+                        font-family: $family-montserrat;
                         font-size: 38px;
                         font-style: normal;
                         font-weight: 700;
@@ -308,7 +306,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                     span {
 
                         color: #5E5E5E;
-                        font-family: "Open Sans";
+                        font-family: $family-open-sans;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
@@ -347,8 +345,8 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
 
                             h5 {
-                                color: #000;
-                                font-family: Montserrat;
+                                color: $quintenaria;
+                                font-family: $family-montserrat;
                                 font-size: 20px;
                                 font-style: normal;
                                 font-weight: 500;
@@ -357,8 +355,8 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                             }
 
                             p {
-                                color: #5E5E5E;
-                                font-family: "Open Sans";
+                                color: $quaternaria;
+                                font-family: $family-open-sans;
                                 font-size: 15px;
                                 font-style: normal;
                                 font-weight: 400;
@@ -396,15 +394,15 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
         .content-wrapper {
             width: 82%;
-            background: #F6F6F6;
+            background: $primaria;
             border-radius: 30px;
             height: auto;
             padding: 100px 150px;
 
             h1 {
                 margin-bottom: 10px;
-                color: #13141A;
-                font-family: Montserrat;
+                color: $quintenaria;
+                font-family: $family-montserrat;
                 font-size: 38px;
                 font-style: normal;
                 font-weight: 700;
@@ -414,8 +412,8 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
             p {
                 margin-bottom: 70px;
-                color: #5E5E5E;
-                font-family: "Open Sans";
+                color: $quaternaria;
+                font-family: $family-open-sans;
                 font-size: 16px;
                 font-style: normal;
                 font-weight: 400;
@@ -435,7 +433,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                     content: "";
                     height: 1px;
                     width: 100%;
-                    background-color: #eee;
+                    background-color: $primaria;
                     position: absolute;
                     top: -27px;
                     left: 0;
@@ -445,12 +443,19 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
                 .step {
                     max-width: 300px;
-                    background-color: #F6F6F6;
+                    background-color: $primaria;
                     box-shadow: $shadow;
                     border-radius: 10px;
                     position: relative;
                     padding-top: 10px;
                     min-width: 240px;
+                    transition: all 0.5s ease-out 0s;
+
+
+                    &:hover {
+                        transform: translateY(-10px);
+                        z-index: 10;
+                    }
 
                     &:before {
                         content: attr(data-step);
@@ -458,7 +463,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                         top: -40px;
                         left: 50%;
                         transform: translateX(-50%);
-                        color: $background-color;
+                        color: black;
                         width: 30px;
                         height: 30px;
                         border-radius: 50%;
@@ -467,9 +472,9 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                         align-items: center;
                         z-index: 3;
                         border: 1.5px solid rgba(19, 20, 26, 0.50);
-                        // background-image: radial-gradient(circle, $primary-color, $primary-color 60%, transparent 0%);
-                        //background-image: radial-gradient(circle at center, $primary-color %, rgba(255, 255, 255, 0) 31%);
-                        background-image: radial-gradient(circle at center, $primary-color 50%, rgba(255, 255, 255, 0) 65%);
+                        // background-image: radial-gradient(circle, $secundaria, $secundaria 60%, transparent 0%);
+                        //background-image: radial-gradient(circle at center, $secundaria %, rgba(255, 255, 255, 0) 31%);
+                        background-image: radial-gradient(circle at center, $secundaria 50%, rgba(255, 255, 255, 0) 65%);
 
                     }
 
@@ -485,13 +490,14 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                             content: "";
                             height: 55px;
                             width: 60px;
-                            background-color: #FFF;
+                            background-color: $sextenaria;
                             position: absolute;
                             border-radius: 100%;
                             z-index: -1;
                             top: 50%;
                             left: 50%;
                             transform: translate(-50%, -50%);
+
                         }
 
 
@@ -507,9 +513,9 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
                     h3 {
                         margin-top: 30px;
-                        color: #13141A;
+                        color: $quintenaria;
                         text-align: center;
-                        font-family: Montserrat;
+                        font-family: $family-montserrat;
                         font-size: 18px;
                         font-style: normal;
                         font-weight: 700;
@@ -518,14 +524,14 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                     }
 
                     p {
-                        color: #5E5E5E;
-                        text-align: center;
-                        font-family: "Open Sans";
+                        color: $quaternaria;
+                        text-align: left;
+                        font-family: $family-open-sans;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
                         line-height: 26px;
-                        min-width: 250px;
+                        // min-width: 250px;
                         /* 162.5% */
                     }
                 }
@@ -541,13 +547,13 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                     align-items: center;
 
                     .stars {
-                        color: $primary-color;
+                        color: $secundaria;
                         margin-right: 10px;
                     }
 
                     p:first-child {
                         color: #000;
-                        font-family: Montserrat;
+                        font-family: $family-montserrat;
                         font-size: 18px;
                         font-style: normal;
                         font-weight: 600;
@@ -556,9 +562,9 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
                     p {
                         margin: 0 10px 0 0;
-                        color: #5E5E5E;
+                        color: $quaternaria;
                         text-align: center;
-                        font-family: "Open Sans";
+                        font-family: $family-open-sans;
                         font-size: 15px;
                         font-style: normal;
                         font-weight: 400;
@@ -595,7 +601,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 height: 100%;
                 display: flex;
                 flex-direction: row;
-                align-items: end;
+                align-items: flex-end;
                 width: 70%;
                 justify-content: space-around;
 
@@ -604,19 +610,19 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                     h2 {
 
                         margin-bottom: 0;
-                        font-family: Montserrat;
+                        font-family: $family-montserrat;
                         font-weight: 700;
                         font-size: 40px;
                         line-height: 1.3;
-                        color: #FFF
+                        color: $sextenaria;
                     }
 
                     p {
-                        font-family: Montserrat;
+                        font-family: $family-montserrat;
                         font-weight: 500;
                         font-size: 18px;
                         letter-spacing: 0.2em;
-                        color: #46d993;
+                        color: $secundaria;
                         display: inline-block;
                         margin-bottom: 5px;
                     }
@@ -628,7 +634,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 .image-wrapper {
                     height: 100%;
                     display: flex;
-                    align-items: end;
+                    align-items: flex-end;
 
                     img {
                         max-width: 300px;
@@ -640,12 +646,12 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             .content-right {
                 height: 100%;
                 display: flex;
-                justify-content: end;
+                justify-content: flex-end;
                 flex-direction: column;
                 width: 23%;
 
                 p {
-                    color: #FFF;
+                    color: $sextenaria;
                     margin-bottom: 25px;
                 }
             }
@@ -659,12 +665,12 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 position: relative;
                 z-index: 1;
                 overflow: hidden;
-                background-color: $primary-color;
+                background-color: $secundaria;
                 transition: all 0.5s ease-out 0s;
-
+                color: $quintenaria;
                 margin-bottom: 90px;
                 width: 200px;
-
+                border-radius: 5px;
 
                 &::after {
                     position: absolute;
@@ -677,7 +683,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                     width: 150%;
                     bottom: 0;
                     border-radius: 0px 5px 5px 0px;
-                    background-color: red;
+                    background-color: $quintenaria;
                     transform: skewX(45deg) scale(0, 1);
                     z-index: -1;
                     transition: all 0.5s ease-out 0s;
@@ -686,7 +692,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 &:hover {
 
 
-                    color: black;
+                    color: $sextenaria;
 
 
                     &::after {
@@ -721,6 +727,9 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     overflow: hidden;
 
+    margin-top: 140px;
+
+
     margin: 5% 0px;
     height: auto;
     width: 100%;
@@ -734,8 +743,8 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         width: 82%;
 
         h2 {
-            color: #13141A;
-            font-family: 'Montserrat', sans-serif;
+            color: $quintenaria;
+            font-family: $family-montserrat;
             font-size: 40px;
             font-style: normal;
             font-weight: 700;
@@ -752,7 +761,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
     .slick-prev:before,
     .slick-next:before {
-        color: black !important;
+        color: $quintenaria !important;
     }
 }
 
@@ -760,6 +769,14 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 @media (max-width: 1500px) {
     .view-3 section .p-150 {
         padding: 100px !important;
+    }
+
+    main .banner {
+        background-position: center center !important;
+    }
+
+    main .banner {
+        background-position: center center !important;
     }
 }
 
@@ -828,9 +845,9 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             .step {
                 min-width: 250px !important;
 
-                p {
-                    min-width: 240px !important;
-                }
+                // p {
+                //     min-width: 240px !important;
+                // }
             }
 
         }
@@ -847,9 +864,9 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 max-width: 190px !important;
 
 
-                p {
-                    max-width: 170px !important;
-                }
+                // p {
+                //     max-width: 170px !important;
+                // }
             }
 
         }
@@ -865,9 +882,9 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 max-width: 190px !important;
                 min-width: 300px !important;
 
-                p {
-                    max-width: 170px !important;
-                }
+                // p {
+                //     max-width: 170px !important;
+                // }
             }
         }
 
@@ -1144,10 +1161,69 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
 :host ::ng-deep .slick-prev:before,
 .slick-next:before {
-    color: black !important;
+    color: $quintenaria !important;
 }
 
 :host ::ng-deep .slick-next:before,
 .slick-next:before {
-    color: black !important;
+    color: $quintenaria !important;
+}
+
+.bg-custom {
+    // background-position: center -70px !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center -70px !important;
+}
+
+.bg-custom-2 {
+    background-position: center top !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+
+:host ::ng-deep .slick-dots {
+    bottom: 70px;
+
+    li button {
+        // background-image: radial-gradient(circle at center, #FFE227 50%, rgba(255, 255, 255, 0) 65%);
+        border: 1.2px solid rgba(255, 255, 255, .5);
+        border-radius: 10px;
+        height: 16px;
+        width: 16px;
+
+        position: relative;
+        opacity: 1;
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        background-color: transparent;
+        border: 1px solid rgba(255, 255, 255, .5)
+    }
+}
+
+:host ::ng-deep .slick-dots li.slick-active button:before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $secundaria;
+    opacity: 1;
+}
+
+
+:host ::ng-deep .slick-dots li button:before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, .5)
 }
