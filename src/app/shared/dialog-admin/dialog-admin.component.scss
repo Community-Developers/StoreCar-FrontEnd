@@ -1,0 +1,34 @@
+:host {
+    display: block;
+    overflow-y: scroll;
+
+    form {
+        padding: 5%;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    mat-form-field {
+        margin: 2% 0;
+    }
+
+    .mt-100 {
+        width: 99%;
+    }
+
+    .mt-50 {
+        width: 48%;
+    }
+
+    .mt-30 {
+        width: 29.5%;
+    }
+
+    .desc {
+        height: 200px;
+    }
+
+    mat-checkbox {
+        width: 30%;
+    }
+}

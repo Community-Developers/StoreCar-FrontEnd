@@ -1,76 +1,337 @@
 <app-navbar></app-navbar>
 <main class="view-1" fxLayout="row" fxLayoutAlign="center start">
 
-    <div class="view-1-1">
-        <section class="banner">
-            <div class="text">
-                <h1>Premier Auto Sales</h1>
-                <span>Car dealerships may sell new cars from one or several manufacturers</span>
-                <div fxLayout="row" fxLayoutAlign="center " style="margin-top: 30px;" fxLayoutGap="8%">
 
-                    <button class="btn-1" mat-flat-button extended color="primary">
-                        <div fxLayout="row" fxLayoutGap="8px">
-                            <img src="/assets/car.svg" alt="">
-                            <span> Encontre seu veículo</span>
-                        </div>
 
-                    </button>
 
-                    <div class="rating">
 
-                        <img src="/assets/google.svg" alt="">
-                        <span class="span1">Rating 4.7</span>
-                        <span>Baseado em 17 Avalições
-                        </span>
+    <div fxLayout="column" fxLayoutAlign="center center" class=" carouse" style="margin: 0;">
 
+        <div class="column-1" style="width: 100%;">
+
+            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig2">
+                <div ngxSlickItem *ngFor="let slide of slides2" class="slide"
+                    style="display: flex; justify-content: center;">
+
+                    <div class="view-1-1">
+                        <section class="banner" [ngClass]="slide?.one ? 'bg-custom' : 'bg-custom-2' "
+                            [style.background]="
+                        'linear-gradient(0deg, rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.30)), url(' + slide.img + ')'">
+                            <div class="text">
+                                <h1>{{slide.text}}</h1>
+                                <span>{{slide.descricao}}</span>
+                                <div class="w-820" fxLayout="row" fxLayoutAlign="center " style="margin-top: 30px;"
+                                    fxLayoutGap="8%">
+
+                                    <button (click)="onClick()" class="btn-1" mat-flat-button extended color="primary">
+                                        <div fxLayout="row" fxLayoutGap="8px">
+                                            <img src="/assets/car.svg" alt="">
+                                            <span>{{slide.btnText}}</span>
+                                        </div>
+
+                                    </button>
+
+                                    <div class="rating">
+
+                                        <img src="/assets/google.svg" alt="">
+                                        <span class="span1">Rating 4.7</span>
+                                        <span>Baseado em 17 Avalições
+                                        </span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
-            </div>
-        </section>
+            </ngx-slick-carousel>
+        </div>
 
     </div>
 
 
+
+
 </main>
+
+
+
+
+<!-- 
 <main class="view-2" fxLayoutAlign="center center" fxLayout="column">
 
-    <header fxLayoutAlign="start end" fxLayout="row">
+    <header fxLayoutAlign="start center" fxLayout="row">
         <h2>Veículos em Destaque</h2>
     </header>
 
-    <div class="view-2-2" fxLayoutAlign="center center">
+    <div class="view-2-2" fxLayoutAlign="center center" fxLayout="column">
 
-        <section>
-            <ul class="lista-destaque" fxLayout="row" fxLayoutAlign="center center">
+        <div class="main" fxLayoutAlign="space-around center" fxLayout="column">
+            <ul class="lista-destaque" fxLayout="row" fxLayoutAlign="center flex-start" fx>
+
                 <li>
                     <a href="">
-                        <div class="a"></div>
+                        <app-card-star></app-card-star>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <div class="a"></div>
+                        <app-card-star></app-card-star>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <div class="a"></div>
+                        <app-card-star></app-card-star>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <div class="a"></div>
+                        <app-card-star></app-card-star>
                     </a>
                 </li>
             </ul>
-        </section>
+
+            <ngx-slick-carousel class="carousel" [config]="slickCarouselConfig">
+                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
+                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
+                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
+                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
+                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
+                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
+            </ngx-slick-carousel> 
+            
+            <button mat-flat-button color="primary">Ver veículos em estoque</button>
+        </div>
+    </div>
+</main>
+
+-->
+
+<div fxLayout="column" fxLayoutAlign="center center" class=" carouse" *ngIf="this.carDestaques.length > 0">
+
+    <div class="column-1" style="width: 82%;">
+
+        <header fxLayoutAlign="start center" fxLayout="row">
+            <h2>Veículos em Destaque</h2>
+        </header>
+
+
+        <ngx-slick-carousel *ngIf="this.carDestaques.length > 0" class="carousel" #slickModal="slick-carousel"
+            [config]="slideConfig">
+            <div ngxSlickItem *ngFor="let item of this.carDestaques" class="slide"
+                style="display: flex; justify-content: center;">
+                <app-card-star style="width: 100%;height: 400px; max-width: 420px;" [item]="item"></app-card-star>
+            </div>
+        </ngx-slick-carousel>
     </div>
 
+</div>
+
+
+<main class="view-3" fxLayoutAlign="center center">
+
+    <section>
+
+        <div class="p-150" fxLayout="row-reverse" fxLayoutAlign="space-between center"
+            style="width: 100%; height: 100%; box-sizing: border-box; padding: 100px 150px">
+            <div class="right" fxLayoutAlign="end center">
+                <div class="image">
+
+
+                    <img src="https://www.drivco-wp.egenslab.com/wp-content/uploads/2023/10/why-drivco.png" alt="">
+
+                </div>
+            </div>
+            <div class="left">
+                <div class="top">
+                    <h3>Porque a Brasil Mobis?</h3>
+                    <span>Somos representantes da Amazon Motors em Porto Alegre e Região</span>
+                </div>
+                <ul fxLayout="column" style="gap: 15px;">
+                    <li>
+                        <div class="image-icon">
+                            <img src="/assets/selo.svg" alt="">
+                        </div>
+                        <div>
+                            <h5>Compra Segura</h5>
+                            <p>Adquira seu veículo com a Brasil Mobis e desfrute da serenidade de uma compra protegida.
+                                Comprometemo-nos com a integridade em cada transação.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="image-icon">
+                            <img src="/assets/selo.svg" alt="">
+                        </div>
+                        <div>
+                            <h5>Garantia de Fabrica</h5>
+                            <p>Todas as nossas motocicleta 0KM possuem garantia de fábrica, assegurando sua
+                                tranquilidade e suporte contínuo após a compra.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="image-icon">
+                            <img src="/assets/selo.svg" alt="">
+                        </div>
+                        <div>
+                            <h5>Suporte Premium</h5>
+                            <p>Assistência Total Pós-Venda: Nosso compromisso com a satisfação vai além da venda.
+                                Oferecemos serviços de manutenção, peças e assistência técnica especializada.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</main>
+<main class="view-4">
+
+    <div class="scroll imgBox" style="--time:60s; width: 82%; margin: auto;">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" alt="">
+            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" alt="">
+            <img src="https://seeklogo.com/images/O/ole-consignado-logo-C4846B9715-seeklogo.com.png"
+                style="max-height: 80px;" alt="">
+            <img src="https://seeklogo.com/images/B/banco-pan-logo-1D441A0860-seeklogo.com.png"
+                style="max-height: 70px;" alt="">
+            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" alt="">
+            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" alt="">
+            <img src="https://seeklogo.com/images/O/ole-consignado-logo-C4846B9715-seeklogo.com.png"
+                style="max-height: 80px;" alt="">
+            <img src="https://seeklogo.com/images/B/banco-pan-logo-1D441A0860-seeklogo.com.png"
+                style="max-height: 70px;" alt="">
+            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" alt="">
+            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" alt="">
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" alt="">
+            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" alt="">
+            <img src="https://seeklogo.com/images/O/ole-consignado-logo-C4846B9715-seeklogo.com.png"
+                style="max-height: 80px;" alt="">
+            <img src="https://seeklogo.com/images/B/banco-pan-logo-1D441A0860-seeklogo.com.png"
+                style="max-height: 70px;" alt="">
+            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" alt="">
+            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" alt="">
+            <img src="https://seeklogo.com/images/O/ole-consignado-logo-C4846B9715-seeklogo.com.png"
+                style="max-height: 80px;" alt="">
+            <img src="https://seeklogo.com/images/B/banco-pan-logo-1D441A0860-seeklogo.com.png"
+                style="max-height: 70px;" alt="">
+            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" alt="">
+            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" alt="">
+        </div>
+    </div>
 
 </main>
-<main class="view-3"></main>
-<main class="view-4"></main>
 
-<footer style="height: 55vh; width: 100%; background-color: black;">
 
-</footer>
+<main class="view-5">
+    <div class="content-wrapper">
+        <h1>Como nós Trabalhamos?</h1>
+        <p>Here are some of the featured cars in different categories</p>
+
+        <div class="steps">
+            <!-- Step 1 -->
+            <div class="step" data-step="01">
+                <div>
+                    <img src="assets/maps.svg" alt="Choose Anywhere Icon" />
+                </div>
+
+                <h3>Escolha Fácil</h3>
+                <p>Oferecemos um catálogo online completo para que você possa escolher sua motocicleta ou veículo do
+                    conforto de sua casa. Use nosso tour virtual para ver cada detalhe ou agende uma visita presencial
+                    para um test drive.</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step" data-step="02">
+                <div>
+                    <img src="assets/contact.svg" alt="Contact With Us Icon" />
+
+                </div>
+                <h3>Fale Conosco</h3>
+                <p>Nossa equipe de especialistas está pronta para atendê-lo por diversos canais. Entre em contato
+                    conosco por telefone, e-mail, ou visite nossa loja para um atendimento personalizado. Estamos
+                    disponíveis para ajudar na escolha do veículo ideal, discussão de opções de financiamento e
+                    esclarecimento de quaisquer dúvidas.</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step" data-step="03">
+                <div>
+                    <img src="/assets/pay.svg" alt="Pay For The Car Icon" />
+                </div>
+                <h3>Opções de Pagamento</h3>
+                <p>Facilitamos seu processo de compra com várias opções de pagamento. Aceitamos cartões de crédito,
+                    transferências bancárias, e financiamento próprio com taxas competitivas. Nossa equipe financeira
+                    está à disposição para encontrar a melhor solução de pagamento para você.</p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step" data-step="04">
+                <div>
+                    <img src="/assets/motocicle.svg" alt="Receive The Car Icon" />
+                </div>
+                <h3>Receba Seu Veículo</h3>
+                <p>Após a conclusão da compra, prepare-se para receber sua nova motocicleta ou veículo. Oferecemos
+                    entrega diretamente em sua localização escolhida ou a possibilidade de retirada em nossa loja, com
+                    uma demonstração completa das funcionalidades do veículo e todos os documentos necessários.</p>
+            </div>
+        </div>
+
+        <div class="rating">
+            <div class="rating-block">
+                <p>Excelente!</p>
+                <span class="stars">★★★★★</span>
+
+                <p>4.7 Avaliação de 5.0 Basedo Em 17 Reviews</p>
+            </div>
+            <a href="https://www.trustpilot.com" class="trustpilot">
+                <img src="/assets/google.svg" alt="Google" />
+            </a>
+        </div>
+    </div>
+</main>
+
+
+
+<section class="view-5-5">
+    <div class="bg" style="position: absolute; background-color: black; 
+    width: 100%; height: 300px; left: 0; bottom: 0;"></div>
+    <div class="container">
+
+        <div class="content-left">
+
+
+            <div class="text" style="margin-bottom: 90px;">
+                <p class="subtitle">Recomendação de Veículo</p>
+                <h2>Procurando o Veículo Ideal?</h2>
+            </div>
+
+            <div class="image-wrapper">
+                <!-- Substitua 'path-to-your-image.jpg' pelo caminho correto para a sua imagem -->
+                <img src="https://www.drivco-wp.egenslab.com/wp-content/uploads/2023/09/recommended-img.png"
+                    alt="Man thinking">
+            </div>
+
+
+        </div>
+        <div class="content-right">
+            <p>Escolher o veículo certo é essencial. Nós ajudamos você a encontrar um que seja perfeito para você.</p>
+            <a href="#show-cars" class="cta-button">Falar Agora</a>
+        </div>
+
+    </div>
+</section>
+
+<main class="view-6">
+
+    <section>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3461.1749304113073!2d-51.16357062375584!3d-29.83037207503216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x951943d900c5238d%3A0xa3bdf4cc7e94e07!2sBrasil%20Mobis!5e0!3m2!1sen!2sbr!4v1706296704642!5m2!1sen!2sbr"
+            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+</main>
+
+
+
+<app-footer></app-footer>

@@ -1,0 +1,86 @@
+:host {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    td.mat-cell {
+        padding: 16px;
+    }
+
+    th.mat-header-cell:first-of-type,
+    td.mat-cell:first-of-type,
+    td.mat-footer-cell:first-of-type {
+        padding: 16px;
+    }
+
+    th.mat-header-cell {
+        padding: 16px;
+    }
+
+    .mat-header-cell {
+        font-size: 14px;
+    }
+
+
+    .sidenav-container {
+        height: 100%;
+        width: 100%;
+    }
+
+    .sidenav {
+        width: 200px;
+    }
+
+    .sidenav .mat-toolbar {
+        background: inherit;
+    }
+
+    .mat-toolbar.mat-primary {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    i-feather {
+        margin-right: 16px;
+    }
+
+    .tag-gallery {
+        color: #13141A;
+        font-family: Montserrat;
+        font-size: 34px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 49.4px;
+        text-align: center;
+        margin-bottom: -50px;
+    }
+
+
+}
+
+:host ::ng-deep .mat-sidenav-content {
+    margin-left: 265px !important;
+}
+
+@media (max-width: 601px) {
+    :host ::ng-deep .mat-sidenav-content {
+        margin-left: 0 !important;
+    }
+}
+
+:host ::ng-deep .mat-drawer-content {
+    overflow: hidden !important;
+    overflow-y: scroll !important;
+}
+
+.disabled-link {
+    color: grey;
+    pointer-events: none;
+    cursor: not-allowed;
+}

@@ -1,0 +1,196 @@
+<mat-sidenav-container class="sidenav-container">
+
+    <!-- Sidebar -->
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+
+        <div class="p-16">
+            <div class="mb-16">
+                <a fxLayout="row wrap" style="gap: 20px;" fxLayoutAlign="center center" routerLink="/admin"
+                    class="d-flex align-items-center">
+                    <img style="max-width: 100%; overflow: hidden;" src="assets/logomobi.png" alt=""> <span
+                        class="ms-16 fw-medium fs-26">Admin</span>
+                </a>
+
+            </div>
+
+            <div class="pt-8">
+                <ul>
+                    <li class="list-group mb-8" *ngFor="let sidenav of sidebarMenu"
+                        [ngClass]="{'disabled-link': sidenav.disabled == true}">
+                        <a matRipple [matRippleColor]="'#f7f8f443'" routerLink="{{ sidenav.link }}"
+                            class="sidebar-menu fs-16 w-100 d-flex align-items-center" [routerLinkActive]="routerActive"
+                            [routerLinkActiveOptions]="{ exact: true }">
+                            <i-feather name="{{ sidenav.icon }}" class="feather-base me-16"></i-feather> <span
+                                class="ps-4">{{
+                                sidenav.menu }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+
+
+        <div style="position: fixed;
+        height:100%; width: -webkit-fill-available; -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(10px);
+         z-index: 4; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 25px;"
+            *ngIf="isLoading">
+
+            <mat-spinner></mat-spinner>
+            <span
+                style="display: block; font-family: Montserrat, sans-serif; font-size: 16px; font-weight: 700;">Excluindo...</span>
+
+
+        </div>
+
+
+        <!-- Header -->
+        <mat-toolbar class="header ps-24 pe-24">
+            <button type="button" class="ms-4" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+                *ngIf="isHandset$ | async">
+                <i-feather name="menu" class="text-light-muted feather-base mt-n3"></i-feather>
+            </button>
+            <!-- <button mat-icon-button class="ms-4 me-4" (click)="search=!search">
+          <i-feather name="search" class="mt-n3 text-light-muted feather-base text-dark"></i-feather>
+        </button>  -->
+            <div class="ms-auto">
+                <button mat-button class="fs-16 pt-4 pb-4 ps-8 pe-8 text-light-muted d-flex align-items-center"
+                    [matMenuTriggerFor]="menu">
+                    <div class="d-flex align-items-center">
+                        <img src="assets/images/user2.webp" class="rounded-circle" alt="">
+                        <span class="fw-light ms-8 text-secondary">Olá,</span>
+                        <span class="fw-bold ms-8"> Vera</span>
+                        <i-feather name="chevron-down" class="feather-base"></i-feather>
+                    </div>
+                </button>
+                <mat-menu #menu="matMenu" class="profile-dropdown">
+                    <!-- <div class="p-16 mb-4">
+              <button mat-menu-item class="fs-16">Edit Profile</button>
+              <button mat-menu-item class="fs-16">Account</button>
+              <button mat-menu-item class="fs-16">Change Password</button>
+              <button mat-menu-item class="fs-16">My Settings</button>
+            </div> -->
+
+                    <hr>
+
+                    <div class="p-16">
+                        <button mat-flat-button color="primary" class="w-100 text-white">Deslogar</button>
+                    </div>
+
+                </mat-menu>
+            </div>
+        </mat-toolbar>
+
+        <!-- Content -->
+        <div class="body-wrapper">
+            <div class="page-wrapper">
+
+
+                <!-- Daily Activity -->
+                <mat-card class="w-100">
+                    <mat-card-content>
+                        <h4 class="mb-56">Product Perfomance</h4>
+
+                        <div class="table-responsive">
+                            <table mat-table [dataSource]="dataSource" class="text-nowrap w-100">
+
+                                <!-- Id Column -->
+                                <ng-container matColumnDef="id">
+                                    <th mat-header-cell *matHeaderCellDef> Id </th>
+                                    <td mat-cell class="fw-medium" *matCellDef="let element">
+                                        {{dataSource.indexOf(element)+1 }}
+                                    </td>
+                                </ng-container>
+
+                                <!-- Assigned Column -->
+                                <ng-container matColumnDef="marca">
+                                    <th mat-header-cell *matHeaderCellDef> Marca </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <p class="mb-0 fw-medium">{{ element.marca }}</p>
+                                        <p class="mb-0 fw-normal op-5">{{ element.marca }}</p>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Project Column -->
+                                <ng-container matColumnDef="modelo">
+                                    <th mat-header-cell *matHeaderCellDef> Modelo </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <p class="mb-0 fw-medium op-5">{{element.modelo}}</p>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Priority Column -->
+                                <ng-container matColumnDef="ano">
+                                    <th mat-header-cell *matHeaderCellDef> Ano </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <span class="badge {{element.ano}} rounded-pill">{{element.ano}}</span>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Budget Column -->
+                                <ng-container matColumnDef="status">
+                                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <mat-checkbox checked="{{element.destacado}}"
+                                            class="example-margin">{{element.status}}</mat-checkbox>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Budget Column -->
+                                <ng-container matColumnDef="valor">
+                                    <th mat-header-cell *matHeaderCellDef> Valor </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <p class="mb-0 fw-medium">{{element.valor | currency : 'BRL'}}</p>
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="actions">
+                                    <th mat-header-cell *matHeaderCellDef> Ações </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+
+                                            <!--<button
+                                                (click)="openDialog(element.id, element.marca,element.type,true, false)"
+                                                mat-flat-button color="primary"
+                                                style="min-width: 125px;"><mat-icon>edit</mat-icon>
+                                                Editar</button>-->
+
+                                            <button (click)="editItem(element.id,element.type)" mat-flat-button
+                                                color="primary" style="min-width: 125px;"><mat-icon>edit</mat-icon>
+                                                Editar</button>
+
+                                            <button
+                                                (click)="openDialog(element.id, element.marca, element.type,false, true)"
+                                                mat-flat-button color="warn"
+                                                style=" min-width: 125px;"><mat-icon>delete</mat-icon>
+                                                Deletar</button>
+
+                                            <button (click)="detalhar(element.type,element.id)" mat-flat-button
+                                                color="accent" style=" min-width: 125px;"><mat-icon>read_more</mat-icon>
+                                                Detalhes</button>
+                                        </div>
+
+
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+            </div>
+        </div>
+
+        <p class="text-center pb-24 fs-16">© 2024 Todos os direitos reservados por <a href="brasilmobis.com.br"
+                target="_blank" class="text-indigo">Brasil Mobis</a></p>
+
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

@@ -1,0 +1,121 @@
+<ng-template #delete [ngIf]="inputData.del">
+    <!-- <mat-spinner *ngIf="isLoading"></mat-spinner>-->
+
+    <div style="width: 400px; padding: 40px; box-sizing: border-box;" fxLayout="row wrap" fxLayoutAlign="center center">
+        <h1 mat-dialog-title>Tem certeza que deseja deletar?</h1>
+        <div mat-dialog-content style="text-align: center;">
+            <p>{{inputData.marca}} {{inputData.modelo}} / </p>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-flat-button color="warn" mat-dialog-close> <mat-icon>close</mat-icon>Cancelar</button>
+            <button (click)="deleteItem()" mat-flat-button color="primary"
+                cdkFocusInitial><mat-icon>check</mat-icon>Confirmar</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #new [ngIf]="inputData.title || !inputData.title && !inputData.del">
+    <form style="width: 700px; height: 80vh;" [formGroup]="carForm" (ngSubmit)="saveuser()" fxLayout="row wrap">
+
+        <h3 *ngIf="inputData.edit">Editar Anúncio</h3>
+        <h3 *ngIf="!inputData.edit">Criar novo anúncio</h3>
+
+        <mat-form-field class="mt-100">
+            <mat-label>Título</mat-label>
+            <input matInput formControlName="title">
+        </mat-form-field>
+
+        <mat-form-field floatLabel="always" class="mt-50">
+            <mat-label>Preço</mat-label>
+            <input matInput type="number" placeholder="0" formControlName="price">
+            <span matPrefix>R$&nbsp;</span>
+            <span matSuffix>,00</span>
+        </mat-form-field>
+
+        <mat-form-field class="mt-50">
+            <mat-label>Marca</mat-label>
+            <mat-select formControlName="brand">
+                <mat-option value="Honda">Honda</mat-option>
+                <mat-option value="two">Fiat</mat-option>
+                <mat-option value="two">Chevrolet</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="mt-50">
+            <mat-label>Modelo</mat-label>
+            <input matInput formControlName="model">
+        </mat-form-field>
+
+        <mat-form-field class="mt-50">
+            <mat-label>Kilometragem</mat-label>
+            <input matInput formControlName="mileage">
+        </mat-form-field>
+
+        <mat-form-field class="mt-30">
+            <mat-label>Ano Fabricação</mat-label>
+            <mat-select formControlName="manufacturingYear">
+                <mat-option value="2024">2024</mat-option>
+
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="mt-30">
+            <mat-label>Ano Modelo</mat-label>
+            <mat-select formControlName="modelYear">
+                <mat-option value="2024">2024</mat-option>
+                <mat-option value="2023">2023</mat-option>
+
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="mt-30">
+            <mat-label>Carroceria</mat-label>
+            <mat-select formControlName="bodyStyle">
+                <mat-option value="Hatch">Hatch</mat-option>
+                <mat-option value="Sedan">Sedan</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="mt-100">
+            <mat-label>Descrição</mat-label>
+            <textarea matInput class="desc" formControlName="description"></textarea>
+        </mat-form-field>
+
+        <div class="op" formGroupName="optionalFeatures" style="margin-bottom: 30px;">
+            <!-- Campos opcionais -->
+            <mat-checkbox formControlName="abs">Freio ABS</mat-checkbox>
+            <mat-checkbox formControlName="airbags">Airbags</mat-checkbox>
+            <mat-checkbox formControlName="stabilityControl">Controle de estabilidade</mat-checkbox>
+            <mat-checkbox formControlName="tractionControl">Controle de tração</mat-checkbox>
+            <mat-checkbox formControlName="emergencyBrakeAssist">Assistente de frenagem de emergência</mat-checkbox>
+            <mat-checkbox formControlName="collisionWarningSystem">Sistema de alerta de colisão frontal</mat-checkbox>
+            <mat-checkbox formControlName="airConditioning">Ar condicionado</mat-checkbox>
+            <mat-checkbox formControlName="powerWindows">Vidros elétricos</mat-checkbox>
+            <mat-checkbox formControlName="electricPowerSteering">Direção elétrica</mat-checkbox>
+            <mat-checkbox formControlName="leatherSeats">Bancos de couro</mat-checkbox>
+            <mat-checkbox formControlName="driverSeatHeightAdjustment">Ajuste de altura do banco do
+                motorista</mat-checkbox>
+            <mat-checkbox formControlName="soundSystem">Sistema de som</mat-checkbox>
+            <mat-checkbox formControlName="rearViewCamera">Câmera de ré</mat-checkbox>
+            <mat-checkbox formControlName="navigationSystem">Sistema de navegação</mat-checkbox>
+            <mat-checkbox formControlName="bluetooth">Bluetooth</mat-checkbox>
+            <mat-checkbox formControlName="multifunctionalSteeringWheel">Volante multifuncional</mat-checkbox>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div fxLayout="row wrap" fxLayoutAlign="flex-start center" style="width: 100%; padding: 0 0 5% 0">
+            <button style="margin-right: 15px;" mat-flat-button mat-dialog-close color="warn">
+                <mat-icon>close</mat-icon>Cancelar
+            </button>
+            <button *ngIf="!inputData.edit" type="submit" mat-flat-button mat-dialog-close color="primary">
+                <mat-icon>check</mat-icon> Publicar
+            </button>
+
+            <button *ngIf="inputData.edit" type="submit" mat-flat-button mat-dialog-close color="primary">
+                <mat-icon>check</mat-icon> Salvar alteração
+            </button>
+        </div>
+
+    </form>
+</ng-template>

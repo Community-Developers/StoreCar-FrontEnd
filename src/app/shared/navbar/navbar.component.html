@@ -1,0 +1,185 @@
+<main fxLayout="column" fxLayoutAlign="center center" [ngClass]="headerSticky ? 'mode-stick' : ''">
+    <div class="top">
+        <div>
+            <a class="logo-h" [routerLink]="['/']"><img style="max-width: 240px;" src="/assets/logomobi.png" alt=""></a>
+        </div>
+        <div class="list-a">
+            <ul fxLayout="row" fxLayoutGap="35px">
+                <li><a href="">Sobre nós</a></li>
+                <li><a href="">Localização</a></li>
+                <li><a href="">Fale conosco</a></li>
+            </ul>
+        </div>
+        <div class="infos" fxLayout="row" fxLayoutAlign="end center">
+            <div class="left">
+
+                <ul fxLayout="row" fxLayoutAlign="space-around center">
+                    <li>
+                        <a href=""> <mat-icon> local_offer</mat-icon><span>venda conosco</span></a>
+                    </li>
+                    <li style="margin-right: 5px;">
+                        <a href=""> <img src="/assets/call.svg" alt=""></a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="right" fxLayout="column" fxLayoutAlign="center start">
+                <span class="span1">Para mais informações</span>
+                <span class="span2">(51) 98105-7222</span>
+            </div>
+
+            <div class="nav-right" style="display: none;">
+                <mat-sidenav-container class="sidenav-container">
+                    <mat-sidenav position="end" #sidenav mode="over" class="sidenav">
+
+                        <div style="width: 100%; height: 100%;" fxLayoutAlign="end center">
+
+                            <div class="nav-right"
+                                style="width: 50%; height: 100%; background: #fff; box-shadow: 0 2px 15px rgb(185 172 172 / 80%);">
+
+                                <div style="height: 50%;">
+                                    <div fxLayout="column" fxLayoutAlign="center center"
+                                        style="width: 100%; margin: auto; text-align: center; margin-top: 40px;">
+                                        <div
+                                            style="width: 100%; text-align: end; padding: 0 30px; box-sizing: border-box;">
+                                            <button mat-mini-fab (click)="sidenav.toggle()"
+                                                style="background: transparent !important; color: black;">
+                                                <mat-icon>close</mat-icon>
+                                            </button>
+                                        </div>
+                                        <ul fxLayout="column" fxLayoutGap="25px" class="list-mobile" id="menu-mobile"
+                                            style="width: 100%; margin: auto; padding: 0; text-align: start; padding: 10px 50px;">
+                                            <li><a href="">Sobre nós</a></li>
+                                            <li><a href="">Localização</a></li>
+                                            <li><a href="">Fale conosco</a></li>
+
+                                            <li>
+                                                <!-- <button
+                                                style="background: none; border: none; display: flex; justify-content: center; align-items: center;"
+                                                (click)="showFiller = !showFiller">
+                                                Categorias <mat-icon *ngIf="showFiller">
+                                                    arrow_drop_down
+                                                </mat-icon>
+                                                <mat-icon *ngIf="!showFiller">arrow_right</mat-icon>
+                                            </button>
+
+                                            <div *ngIf="showFiller" style="text-align: start;">
+
+
+                                                <ul class="list-mobile">
+                                                    <li>
+                                                        <a href="">Automóveis</a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="">Motocicletas</a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="">Acessórios</a>
+                                                    </li>
+                                                </ul>
+
+
+                                            </div> -->
+
+
+
+                                                <button class="bnt-mobile-list" (click)="showFiller =!showFiller"
+                                                    mat-button [matMenuTriggerFor]="belowMenu">Categorias
+                                                    <mat-icon [class.rotate-icon]="showFiller"
+                                                        style="transition: all 0.4s;">arrow_forward_ios</mat-icon>
+                                                </button>
+                                                <mat-menu (close)="showFiller = false" #belowMenu="matMenu"
+                                                    yPosition="below">
+                                                    <button mat-menu-item>Automoveis</button>
+                                                    <button mat-menu-item>Motocicletas</button>
+                                                </mat-menu>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                                <div style="text-align: center;">
+                                    <!-- <button style="width: 70%;" (click)="openDialog()" class="login" mat-flat-button
+                                        extended color="#6f7487">
+                                        <mat-icon>account_circle</mat-icon>
+                                        Login Admin
+                                    </button> -->
+
+                                    <div class="w-520" style="padding: 0 0 20px 0">
+
+                                        <div class="left">
+
+                                            <ul fxLayout="column" fxLayoutAlign=" space-around center">
+                                                <li>
+                                                    <a href=""> <mat-icon> local_offer</mat-icon><span>venda
+                                                            conosco</span></a>
+                                                </li>
+                                                <li style="margin-right: 5px;">
+                                                    <a href=""> <img width="20px" src="/assets/call.svg" alt=""></a>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                        <div class="right" style="margin: auto; width: 70%;">
+                                            <span class="span1" style="display: block;">Para mais informações</span>
+                                            <span class="span2">(51) 98105-7222</span>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div style="margin: 50px 0px">
+                                        <a [routerLink]="['/']"><img src="/assets/logomobi.png" style="width: 250px"
+                                                alt=""></a>
+                                    </div>
+
+                                    <button style="width: 70%;" (click)="openDialog()" class="login" mat-flat-button
+                                        extended color="#6f7487">
+                                        <mat-icon>account_circle</mat-icon>
+                                        Login Admin
+                                    </button>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                    </mat-sidenav>
+
+                    <mat-sidenav-content>
+                        <button mat-icon-button (click)="sidenav.toggle()">
+                            <mat-icon>menu</mat-icon>
+                        </button>
+                    </mat-sidenav-content>
+
+
+                </mat-sidenav-container>
+            </div>
+
+        </div>
+    </div>
+    <div class="bottom" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="categorias">
+            <ul fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="start center">
+                <li><a routerLink="/">Home</a></li>
+                <li><a routerLink="/list/veiculo">Automóveis</a></li>
+                <li><a routerLink="/list/motocicleta">Motocicletas</a></li>
+                <!-- <li>Acessórios</li>
+                <li>Peças</li>
+                <li>Ferramentas</li> -->
+            </ul>
+        </div>
+
+        <div class="logi">
+            <button (click)="openDialog()" class="login" mat-flat-button extended color="#6f7487">
+                <mat-icon>account_circle</mat-icon>
+                Login
+            </button>
+        </div>
+    </div>
+</main>
