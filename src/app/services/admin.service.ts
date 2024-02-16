@@ -34,12 +34,12 @@ export class AdminService {
   public getAllCars(): Observable<Car[]> {
 
     //const headers: HttpHeaders = this.fetchData();
-    return this.http.get<{ content: Car[] }>('https://18.220.168.177:80/veiculo').pipe(
+    return this.http.get<{ content: Car[] }>('https://18.220.168.177/veiculo').pipe(
       map(res => res.content)
     );
   }
   public getAllMobi(): Observable<Moto[]> {
-    return this.http.get<{ content: Moto[] }>('https://18.220.168.177:80/motocicleta').pipe(
+    return this.http.get<{ content: Moto[] }>('https://18.220.168.177/motocicleta').pipe(
       map(res => res.content)
     );
   }
@@ -72,7 +72,7 @@ export class AdminService {
   // }
 
   public getDestaquesCarros() {
-    return this.http.get<{ content: Car[] }>('https://18.220.168.177:80/veiculo').pipe(
+    return this.http.get<{ content: Car[] }>('https://18.220.168.177/veiculo').pipe(
       map(res => res.content)
     );
   }
@@ -83,7 +83,7 @@ export class AdminService {
   }
 
   public getDestaquesMobi(): Observable<Moto[]> {
-    return this.http.get<{ content: Moto[] }>('https://18.220.168.177:80/motocicleta/destaques').pipe(
+    return this.http.get<{ content: Moto[] }>('https://18.220.168.177/motocicleta/destaques').pipe(
       map(res => res.content)
     );
   }
@@ -96,12 +96,12 @@ export class AdminService {
   //===========POST SERVER ================
   post(formData: FormData) {
     const headers = this.fetchData();
-    return this.http.post('https://18.220.168.177:80/veiculo', formData, { headers })
+    return this.http.post('https://18.220.168.177/veiculo', formData, { headers })
   }
 
   postMoto(formData: FormData) {
     const headers = this.fetchData();
-    return this.http.post('https://18.220.168.177:80/motocicleta', formData, { headers })
+    return this.http.post('https://18.220.168.177/motocicleta', formData, { headers })
   }
   //===========POST SERVER ================
 
@@ -111,7 +111,7 @@ export class AdminService {
 
   //=========== GET ITEM SERVER ================
   getItem(type: string, id: any): Observable<any> {
-    return this.http.get(`https://18.220.168.177:80/${type}/${id}`);
+    return this.http.get(`https://18.220.168.177/${type}/${id}`);
   }
   //=========== GET ITEM SERVER ================
 
@@ -121,12 +121,12 @@ export class AdminService {
   //=========== DELETE IMAGE SERVER ================
   public deleteImageCarro(id: string, nameObject: string): Observable<any> {
     const headers = this.fetchData();
-    return this.http.delete(`https://18.220.168.177:80/veiculo/delete-images/${id}/${nameObject}`, { headers });
+    return this.http.delete(`https://18.220.168.177/veiculo/delete-images/${id}/${nameObject}`, { headers });
   }
 
   public deleteImageMoto(id: string, nameObject: string): Observable<any> {
     const headers = this.fetchData();
-    return this.http.delete(`https://18.220.168.177:80/motocicleta/delete-images/${id}/${nameObject}`, { headers });
+    return this.http.delete(`https://18.220.168.177/motocicleta/delete-images/${id}/${nameObject}`, { headers });
   }
   //=========== DELETE IMAGE SERVER ================
 
@@ -134,11 +134,11 @@ export class AdminService {
 
   //================= UPDATE SERVER ============================
   public updateMobi(id: any, value: any): Observable<any> {
-    return this.http.put(`https://18.220.168.177:80/motocicleta/${id}`, value, { headers: this.fetchData() });
+    return this.http.put(`https://18.220.168.177/motocicleta/${id}`, value, { headers: this.fetchData() });
   }
 
   public updateCarro(id: number, value: any): Observable<any> {
-    return this.http.put(`https://18.220.168.177:80/veiculo/${id}`, value, { headers: this.fetchData() });
+    return this.http.put(`https://18.220.168.177/veiculo/${id}`, value, { headers: this.fetchData() });
   }
   //================= UPDATE SERVER ============================
 
@@ -148,7 +148,7 @@ export class AdminService {
 
   public deleteItem(idItem: number, type: string): Observable<any> {
     const headers = this.fetchData();
-    return this.http.delete(`https://18.220.168.177:80/${type}/${idItem}`, { headers });
+    return this.http.delete(`https://18.220.168.177/${type}/${idItem}`, { headers });
   }
   //================= DELETE ITEM SERVER ============================
 
@@ -157,7 +157,7 @@ export class AdminService {
 
   //================= SAVE NEW IMAGES ============================
   saveNewImages(formData: FormData, type: string, id: string,): Observable<any> {
-    return this.http.post(`https://18.220.168.177:80/${type}/save-images/${id}`, formData, { headers: this.fetchData() });
+    return this.http.post(`https://18.220.168.177/${type}/save-images/${id}`, formData, { headers: this.fetchData() });
   }
   //================= SAVE NEW IMAGES ============================
 
