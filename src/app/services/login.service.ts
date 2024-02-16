@@ -12,7 +12,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  private url: string = 'https://18.220.168.177:80/login';
+  private url: string = 'https://18.220.168.177/login';
 
   public login(loginData: LoginData): Observable<TokenBearer> {
     return this.http.post<TokenBearer>(this.url, loginData);
