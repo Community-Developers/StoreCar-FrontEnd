@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from '../../services/admin.service';
 
@@ -11,6 +11,8 @@ import { AdminService } from '../../services/admin.service';
 export class HomeComponent implements OnInit {
 
   title = 'ng-carousel-demo';
+  isScreenSmall: boolean = false;
+
 
   slides = [
     { img: "https://dummyimage.com/350x150/423b42/fff" },
@@ -25,19 +27,30 @@ export class HomeComponent implements OnInit {
   slides2 = [
     {
       img: "/assets/bmw.jpg",
+      smallImgPath: "/assets/one-650.jpg",
       one: true,
       btnText: 'Ver Motocicletas',
-      text: 'Motocicletas & Ciclomotores',
-      descricao: 'Experimente a liberdade sobre rodas com nossas motocicletas, triciclos, e ciclomotores - escolha entre modelos elétricos para uma viagem sustentável'
+      text: 'Motocicletas',
+      descricao: 'Motocicletas, Ciclomotores e Triciclos'
     },
-    { img: "assets/mer.jpg", one: false, btnText: 'Ver Veículos', text: 'Carros' }
+    {
+      img: "assets/mer.jpg",
+      smallImgPath: "assets/one-650.jpg",
+      one: false,
+      btnText: 'Ver Veículos',
+      text: 'Carros'
+    }
   ];
+
+
+
+
   slideConfig = {
     "slidesToShow": 4,
     "slidesToScroll": 1,
     "dots": true,
     "infinite": true,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 1400,
     "responsive": [
       {
@@ -97,7 +110,7 @@ export class HomeComponent implements OnInit {
     "slidesToScroll": 1,
     "dots": true,
     "infinite": true,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 1550
     // "responsive": [
     //   {
@@ -155,10 +168,12 @@ export class HomeComponent implements OnInit {
 
 
   constructor(
-    private router: Router, private adminService: AdminService
-  ) { }
+    private router: Router, private adminService: AdminService) {
+    this.isScreenSmall = window.innerWidth < 650
+  }
   ngOnInit(): void {
-    this.loadMotos();
+    // this.loadMotos();
+    this.loadCarros();
   }
 
   onClick() {
@@ -169,6 +184,9 @@ export class HomeComponent implements OnInit {
   duplicar() {
     const aux: any[] = [];
     for (let item of this.carDestaques) {
+      aux.push(item);
+      aux.push(item);
+      aux.push(item);
       aux.push(item);
       aux.push(item);
     }
@@ -190,5 +208,27 @@ export class HomeComponent implements OnInit {
       }))
       this.duplicar();
     })
+  }
+
+  loadCarros() {
+    this.adminService.getDestaquesCarros().subscribe(carros => {
+      this.carDestaques = carros.map(carro => ({
+        id: carro.id,
+        type: 'veiculo',
+        km: carro.km,
+        titulo: carro.titulo,
+        combustivel: carro.combustivel,
+        potenciaMotor: carro.potenciaMotor,
+        valor: carro.valor,
+        imagem: carro.imagensVeiculos[0].imageUrl
+      }))
+      this.duplicar();
+    })
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    // Atualiza isScreenSmall com base na largura da tela atual
+    this.isScreenSmall = window.innerWidth < 650;
   }
 }

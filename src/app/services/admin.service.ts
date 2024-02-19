@@ -34,12 +34,12 @@ export class AdminService {
   public getAllCars(): Observable<Car[]> {
 
     //const headers: HttpHeaders = this.fetchData();
-    return this.http.get<{ content: Car[] }>('https://load10-1661520641.us-east-2.elb.amazonaws.com/veiculo').pipe(
+    return this.http.get<{ content: Car[] }>('https://server.brasilmobis.com/veiculo').pipe(
       map(res => res.content)
     );
   }
   public getAllMobi(): Observable<Moto[]> {
-    return this.http.get<{ content: Moto[] }>('https://load10-1661520641.us-east-2.elb.amazonaws.com/motocicleta').pipe(
+    return this.http.get<{ content: Moto[] }>('https://server.brasilmobis.com/motocicleta').pipe(
       map(res => res.content)
     );
   }
@@ -72,7 +72,7 @@ export class AdminService {
   // }
 
   public getDestaquesCarros() {
-    return this.http.get<{ content: Car[] }>('https://load10-1661520641.us-east-2.elb.amazonaws.com/veiculo').pipe(
+    return this.http.get<{ content: Car[] }>('https://server.brasilmobis.com/veiculo').pipe(
       map(res => res.content)
     );
   }
@@ -83,7 +83,7 @@ export class AdminService {
   }
 
   public getDestaquesMobi(): Observable<Moto[]> {
-    return this.http.get<{ content: Moto[] }>('https://load10-1661520641.us-east-2.elb.amazonaws.com/destaques').pipe(
+    return this.http.get<{ content: Moto[] }>('https://server.brasilmobis.com/destaques').pipe(
       map(res => res.content)
     );
   }
@@ -96,12 +96,12 @@ export class AdminService {
   //===========POST SERVER ================
   post(formData: FormData) {
     const headers = this.fetchData();
-    return this.http.post('https://load10-1661520641.us-east-2.elb.amazonaws.com/veiculo', formData, { headers })
+    return this.http.post('https://server.brasilmobis.com/veiculo', formData, { headers })
   }
 
   postMoto(formData: FormData) {
     const headers = this.fetchData();
-    return this.http.post('https://load10-1661520641.us-east-2.elb.amazonaws.com/motocicleta', formData, { headers })
+    return this.http.post('https://server.brasilmobis.com/motocicleta', formData, { headers })
   }
   //===========POST SERVER ================
 
@@ -111,7 +111,7 @@ export class AdminService {
 
   //=========== GET ITEM SERVER ================
   getItem(type: string, id: any): Observable<any> {
-    return this.http.get(`https://load10-1661520641.us-east-2.elb.amazonaws.com/${type}/${id}`);
+    return this.http.get(`https://server.brasilmobis.com/${type}/${id}`);
   }
   //=========== GET ITEM SERVER ================
 
@@ -121,12 +121,12 @@ export class AdminService {
   //=========== DELETE IMAGE SERVER ================
   public deleteImageCarro(id: string, nameObject: string): Observable<any> {
     const headers = this.fetchData();
-    return this.http.delete(`https://load10-1661520641.us-east-2.elb.amazonaws.com/${id}/${nameObject}`, { headers });
+    return this.http.delete(`https://server.brasilmobis.com/veiculo/delete-images/${id}/${nameObject}`, { headers });
   }
 
   public deleteImageMoto(id: string, nameObject: string): Observable<any> {
     const headers = this.fetchData();
-    return this.http.delete(`https://load10-1661520641.us-east-2.elb.amazonaws.com/${id}/${nameObject}`, { headers });
+    return this.http.delete(`https://server.brasilmobis.com/motocicleta/delete-images/${id}/${nameObject}`, { headers });
   }
   //=========== DELETE IMAGE SERVER ================
 
@@ -134,11 +134,11 @@ export class AdminService {
 
   //================= UPDATE SERVER ============================
   public updateMobi(id: any, value: any): Observable<any> {
-    return this.http.put(`https://load10-1661520641.us-east-2.elb.amazonaws.com/${id}`, value, { headers: this.fetchData() });
+    return this.http.put(`https://server.brasilmobis.com/motocicleta/${id}`, value, { headers: this.fetchData() });
   }
 
   public updateCarro(id: number, value: any): Observable<any> {
-    return this.http.put(`https://load10-1661520641.us-east-2.elb.amazonaws.com/${id}`, value, { headers: this.fetchData() });
+    return this.http.put(`https://server.brasilmobis.com/veiculo/${id}`, value, { headers: this.fetchData() });
   }
   //================= UPDATE SERVER ============================
 
@@ -148,7 +148,7 @@ export class AdminService {
 
   public deleteItem(idItem: number, type: string): Observable<any> {
     const headers = this.fetchData();
-    return this.http.delete(`https://load10-1661520641.us-east-2.elb.amazonaws.com/${type}/${idItem}`, { headers });
+    return this.http.delete(`https://server.brasilmobis.com/${type}/${idItem}`, { headers });
   }
   //================= DELETE ITEM SERVER ============================
 
@@ -157,7 +157,7 @@ export class AdminService {
 
   //================= SAVE NEW IMAGES ============================
   saveNewImages(formData: FormData, type: string, id: string,): Observable<any> {
-    return this.http.post(`https://load10-1661520641.us-east-2.elb.amazonaws.com/${type}/save-images/${id}`, formData, { headers: this.fetchData() });
+    return this.http.post(`https://server.brasilmobis.com/${type}/save-images/${id}`, formData, { headers: this.fetchData() });
   }
   //================= SAVE NEW IMAGES ============================
 

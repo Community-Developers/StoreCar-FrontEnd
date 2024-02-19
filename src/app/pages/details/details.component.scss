@@ -597,11 +597,40 @@
     }
 }
 
+@media (max-width: 768px) {
+    .view-1 {
+        margin-top: 80px !important;
+    }
+
+    .map iframe {
+        margin-top: 20px;
+        height: 350px;
+    }
+}
+
+
 @media (max-width: 650px) {
+
+
+
     .section-1 {
         width: 98% !important;
 
         .view-1 {
+
+            .img gallery {
+                height: 80%;
+            }
+
+            .car-details {
+                margin-top: -80px !important;
+            }
+
+            .recomend .recomend-slide {
+                h2 {
+                    font-size: 28px !important;
+                }
+            }
 
             .links {
                 margin: 0 10px !important;

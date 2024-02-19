@@ -17,11 +17,14 @@ export class DialogLoginComponent {
     username: ['', Validators.required],
     password: ['', Validators.required]
   })
+  isLoading: boolean = false;
 
   constructor(private loginService: LoginService, private formBuilder: FormBuilder, private router: Router, private dialogRef: MatDialogRef<DialogLoginComponent>) { }
 
 
   login() {
+    this.isLoading = true; // Inicia o indicador de carregamento antes da requisição.
+    console.log(this.isLoading)
     if (this.loginForm.valid) {
       const loginData = this.loginForm.value;
 
@@ -43,9 +46,14 @@ export class DialogLoginComponent {
 
           // Aqui, você pode fazer o que mais precisar com tokenData
           console.log('Login successful', tokenData);
+          this.isLoading = false; // Desativa o indicador de carregamento após a conclusão da requisição.
         },
-        error: (error) => console.error('Login failed', error)
+        error: (error) => {
+          console.error('Login failed', error)
+          this.isLoading = false; // Desativa o indicador de carregamento após a conclusão da requisição.
+        }
       });
     }
+    this.isLoading = false; // Desativa o indicador de carregamento após a conclusão da requisição.
   }
 }

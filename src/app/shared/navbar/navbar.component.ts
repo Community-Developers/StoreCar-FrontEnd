@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogLoginComponent } from '../dialog-login/dialog-login.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,10 +9,19 @@ import { DialogLoginComponent } from '../dialog-login/dialog-login.component';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+
+  moto() {
+    this.router.navigateByUrl("/list/motocicleta");
+
+
+  }
+  auto() {
+    this.router.navigateByUrl("/list/veiculo")
+  }
   showFiller = false;
   headerSticky: boolean = false;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private router: Router) { }
 
   @HostListener('window:scroll', ['$event']) onscroll() {
     if (window.scrollY > 80) {

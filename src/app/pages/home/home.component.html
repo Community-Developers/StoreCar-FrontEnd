@@ -9,14 +9,14 @@
 
         <div class="column-1" style="width: 100%;">
 
-            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig2">
+            <ngx-slick-carousel class="carousel carousel-one" #slickModal="slick-carousel" [config]="slideConfig2">
                 <div ngxSlickItem *ngFor="let slide of slides2" class="slide"
                     style="display: flex; justify-content: center;">
 
                     <div class="view-1-1">
                         <section class="banner" [ngClass]="slide?.one ? 'bg-custom' : 'bg-custom-2' "
                             [style.background]="
-                        'linear-gradient(0deg, rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.30)), url(' + slide.img + ')'">
+                        'linear-gradient(0deg, rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.30)), url(' + (isScreenSmall ? slide.smallImgPath : slide.img) + ')'">
                             <div class="text">
                                 <h1>{{slide.text}}</h1>
                                 <span>{{slide.descricao}}</span>
@@ -54,65 +54,14 @@
 
 </main>
 
-
-
-
-<!-- 
-<main class="view-2" fxLayoutAlign="center center" fxLayout="column">
-
-    <header fxLayoutAlign="start center" fxLayout="row">
-        <h2>Veículos em Destaque</h2>
-    </header>
-
-    <div class="view-2-2" fxLayoutAlign="center center" fxLayout="column">
-
-        <div class="main" fxLayoutAlign="space-around center" fxLayout="column">
-            <ul class="lista-destaque" fxLayout="row" fxLayoutAlign="center flex-start" fx>
-
-                <li>
-                    <a href="">
-                        <app-card-star></app-card-star>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <app-card-star></app-card-star>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <app-card-star></app-card-star>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <app-card-star></app-card-star>
-                    </a>
-                </li>
-            </ul>
-
-            <ngx-slick-carousel class="carousel" [config]="slickCarouselConfig">
-                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
-                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
-                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
-                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
-                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
-                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
-            </ngx-slick-carousel> 
-            
-            <button mat-flat-button color="primary">Ver veículos em estoque</button>
-        </div>
-    </div>
-</main>
-
--->
-
-<div fxLayout="column" fxLayoutAlign="center center" class=" carouse" *ngIf="this.carDestaques.length > 0">
+<div fxLayout="column" fxLayoutAlign="center center" class=" carouse"
+    style="background-image: url('/assets/wall-dest-2.webp'); background-position: center bottom; margin: 50px 0 0 0; height: auto;"
+    *ngIf="this.carDestaques.length > 0">
 
     <div class="column-1" style="width: 82%;">
 
         <header fxLayoutAlign="start center" fxLayout="row">
-            <h2>Veículos em Destaque</h2>
+            <h2 style="color: white;">Veículos em Destaque</h2>
         </header>
 
 

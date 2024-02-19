@@ -27,7 +27,7 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
             .banner {
                 width: 100%;
-                height: 700px;
+                height: 80vh;
                 border-radius: 30px;
                 position: relative;
 
@@ -726,7 +726,6 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 .carouse {
     box-sizing: border-box;
     overflow: hidden;
-
     margin-top: 140px;
 
 
@@ -854,19 +853,30 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 }
 
+@media (max-width: 768px) {
+    .view-1-1 {
+        margin-top: 80px !important;
+
+        .banner .text {
+            height: 65%;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+    }
+}
 
 @media (max-width: 680px) {
+    .carouse app-card-star {
+        width: 80% !important;
+    }
+
     .view-5 .content-wrapper {
         padding: 100px 5px !important;
 
         .steps {
             .step {
                 max-width: 190px !important;
-
-
-                // p {
-                //     max-width: 170px !important;
-                // }
             }
 
         }
@@ -1048,12 +1058,20 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 }
 
+// @media(max-width: 650px) {
+//     .view-1-1 .banner{
+
+//     }
+// }
+
 @media (max-width: 500px) {
     main {
         .view-1-1 {
             width: 98% !important;
 
             .banner {
+                height: 70vh;
+
                 .text {
 
                     width: 80%;
@@ -1183,7 +1201,6 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 :host ::ng-deep .slick-dots {
-    bottom: 70px;
 
     li button {
         // background-image: radial-gradient(circle at center, #FFE227 50%, rgba(255, 255, 255, 0) 65%);
@@ -1226,4 +1243,14 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     top: 50%;
     transform: translate(-50%, -50%);
     background-color: rgba(255, 255, 255, .5)
+}
+
+:host ::ng-deep .card-star .img {
+    width: 100%;
+}
+
+
+:host ::ng-deep .carousel-one .slick-dots {
+    bottom: 70px;
+    /* outros estilos conforme necessário */
 }

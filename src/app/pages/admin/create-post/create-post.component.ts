@@ -276,7 +276,7 @@ export class CreatePostComponent implements OnInit {
       this.id = id;
       this.isEdit = true;
       this.preencherFormularioComDados(type, item);
-      this.location.back();
+      // this.location.back();
     })
 
     console.log(this.selectedFiles);

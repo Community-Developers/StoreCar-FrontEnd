@@ -2,6 +2,18 @@
   <div class="left"></div>
   <div class="right">
 
+    <div style="position: fixed;
+        height:100%; width: -webkit-fill-available; -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(10px);
+         z-index: 4; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 25px;"
+      *ngIf="isLoading">
+
+      <mat-spinner></mat-spinner>
+      <span
+        style="display: block; font-family: Montserrat, sans-serif; font-size: 16px; font-weight: 700;">Validando</span>
+
+
+    </div>
+
     <mat-card class="example-card" fxLayout="column" style="height: 100%;" fxLayoutAlign="center center">
 
       <mat-card-header>

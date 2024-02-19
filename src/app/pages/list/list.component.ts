@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
@@ -13,8 +14,11 @@ export class ListComponent implements OnInit {
   items: any[] = [];
 
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private adminService: AdminService) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private adminService: AdminService,
+    private viewportScroller: ViewportScroller
+  ) { }
   ngOnInit(): void {
+    this.viewportScroller.scrollToPosition([0, 0]);
     this.activatedRoute.params.subscribe(params => {
       this.items = [];
       const type = params['type'];
