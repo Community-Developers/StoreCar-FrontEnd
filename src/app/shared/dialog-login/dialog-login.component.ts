@@ -23,7 +23,7 @@ export class DialogLoginComponent {
 
 
   login() {
-    this.isLoading = true; // Inicia o indicador de carregamento antes da requisição.
+    this.isLoading = true;
     console.log(this.isLoading)
     if (this.loginForm.valid) {
       const loginData = this.loginForm.value;
@@ -47,6 +47,7 @@ export class DialogLoginComponent {
           // Aqui, você pode fazer o que mais precisar com tokenData
           console.log('Login successful', tokenData);
           this.isLoading = false; // Desativa o indicador de carregamento após a conclusão da requisição.
+          this.loginService.setAutoLogout((1000 * 60) * 60);
         },
         error: (error) => {
           console.error('Login failed', error)

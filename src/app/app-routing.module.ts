@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { authGuardGuard } from './guards/auth-guard.guard';
 
 const routes: Routes = [
   {
@@ -16,12 +17,15 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () => import('./pages/admin/admin.module').then(p => p.AdminModule)
+    loadChildren: () => import('./pages/admin/admin.module').then(p => p.AdminModule),
+    canActivate: [authGuardGuard], // Utilização da função guard
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    initialNavigation: 'enabledBlocking'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

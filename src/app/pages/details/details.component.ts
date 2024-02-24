@@ -108,9 +108,16 @@ export class DetailsComponent implements OnInit {
 
   carrosDestaques: any[] = [];
 
+  scrollToElement(elementId: string): void {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
   ngOnInit() {
     this.viewportScroller.scrollToPosition([0, 0]);
-    this.carDestaques = this.adminService.getStar();
+    this.loadDestaques();
 
     this.activatedRoute.params.subscribe(params => {
       const type = params['type'];
@@ -137,8 +144,23 @@ export class DetailsComponent implements OnInit {
     });
     this.atualizarValorComBaseNaLarguraDaTela();
   }
+  loadDestaques() {
+    console.log("LOAD DESTAQUES")
+    this.adminService.getDestaquesMobi().subscribe(motos => {
+      this.carrosDestaques = motos.map(moto => ({
+        id: moto.id,
+        type: 'motocicleta',
+        km: moto.km,
+        titulo: moto.titulo,
+        combustivel: moto.combustivel,
+        potenciaMotor: moto.potencia,
+        cilindrada: moto.cilindrada,
+        valor: moto.valor,
+        imagem: moto.imagensMotocicleta[0]?.imageUrl
+      }))
+    })
+  }
 
-  carDestaques: any;
 
   loadItem(type: string, id: string) {
     this.isLoading = true;

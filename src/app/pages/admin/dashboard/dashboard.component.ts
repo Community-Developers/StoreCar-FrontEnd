@@ -152,12 +152,12 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.images = [
-      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
-      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
-      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
-      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
-      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
-      new ImageItem({ src: '/assets/download.jpeg', thumb: '/assets/download.jpeg' }),
+      new ImageItem({ src: '/assets/download.webp', thumb: '/assets/download.webp' }),
+      new ImageItem({ src: '/assets/download.webp', thumb: '/assets/download.webp' }),
+      new ImageItem({ src: '/assets/download.webp', thumb: '/assets/download.webp' }),
+      new ImageItem({ src: '/assets/download.webp', thumb: '/assets/download.webp' }),
+      new ImageItem({ src: '/assets/download.webp', thumb: '/assets/download.webp' }),
+      new ImageItem({ src: '/assets/download.webp', thumb: '/assets/download.webp' })
     ];
   }
 

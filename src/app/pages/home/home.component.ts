@@ -26,16 +26,16 @@ export class HomeComponent implements OnInit {
 
   slides2 = [
     {
-      img: "/assets/bmw.jpg",
-      smallImgPath: "/assets/one-650.jpg",
+      img: "/assets/bmw.webp",
+      smallImgPath: "/assets/one-650-1.webp",
       one: true,
       btnText: 'Ver Motocicletas',
       text: 'Motocicletas',
       descricao: 'Motocicletas, Ciclomotores e Triciclos'
     },
     {
-      img: "assets/mer.jpg",
-      smallImgPath: "assets/one-650.jpg",
+      img: "assets/mer.webp",
+      smallImgPath: "assets/one-650-1.webp",
       one: false,
       btnText: 'Ver Veículos',
       text: 'Carros'
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
     "slidesToScroll": 1,
     "dots": true,
     "infinite": true,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 1400,
     "responsive": [
       {
@@ -110,7 +110,7 @@ export class HomeComponent implements OnInit {
     "slidesToScroll": 1,
     "dots": true,
     "infinite": true,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 1550
     // "responsive": [
     //   {
@@ -204,9 +204,8 @@ export class HomeComponent implements OnInit {
         potenciaMotor: moto.potencia,
         cilindrada: moto.cilindrada,
         valor: moto.valor,
-        imagem: moto.imagensMotocicleta[0].imageUrl
+        imagem: moto.imagensMotocicleta[0]?.imageUrl
       }))
-      this.duplicar();
     })
   }
 
@@ -220,9 +219,9 @@ export class HomeComponent implements OnInit {
         combustivel: carro.combustivel,
         potenciaMotor: carro.potenciaMotor,
         valor: carro.valor,
-        imagem: carro.imagensVeiculos[0].imageUrl
+        imagem: carro.imagensVeiculos[0]?.imageUrl
       }))
-      this.duplicar();
+      // this.duplicar();
     })
   }
 

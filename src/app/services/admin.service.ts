@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Car } from '../shared/navbar/car.interface';
 import { Moto } from '../shared/navbar/moto.interface';
+import { CarResponse } from '../shared/navbar/carResponse.interface';
+import { MotoResponse } from '../shared/navbar/motoResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -31,18 +33,17 @@ export class AdminService {
 
 
   //=========== GET ALL SERVER ================
-  public getAllCars(): Observable<Car[]> {
-
+  public getAllCars(page: number, size: number): Observable<CarResponse> {
     //const headers: HttpHeaders = this.fetchData();
-    return this.http.get<{ content: Car[] }>('https://server.brasilmobis.com/veiculo').pipe(
-      map(res => res.content)
-    );
+    return this.http.get<CarResponse>(`https://server.brasilmobis.com/veiculo?page=${page}&size=${size}`)
   }
-  public getAllMobi(): Observable<Moto[]> {
-    return this.http.get<{ content: Moto[] }>('https://server.brasilmobis.com/motocicleta').pipe(
-      map(res => res.content)
-    );
+
+
+  public getAllMobi(page: number, size: number): Observable<MotoResponse> {
+    return this.http.get<MotoResponse>(`https://server.brasilmobis.com/motocicleta?page=${page}&size=${size}`);
   }
+
+
   //=========== GET ALL SERVER ================
 
 
@@ -72,20 +73,14 @@ export class AdminService {
   // }
 
   public getDestaquesCarros() {
-    return this.http.get<{ content: Car[] }>('https://server.brasilmobis.com/veiculo').pipe(
+    return this.http.get<{ content: Car[] }>('https://server.brasilmobis.com/veiculo/destaques').pipe(
       map(res => res.content)
     );
   }
 
 
-  getStar() {
-    return this.carrosDestaques;
-  }
-
-  public getDestaquesMobi(): Observable<Moto[]> {
-    return this.http.get<{ content: Moto[] }>('https://server.brasilmobis.com/destaques').pipe(
-      map(res => res.content)
-    );
+  public getDestaquesMobi() {
+    return this.http.get<Moto[]>('https://server.brasilmobis.com/motocicleta/destaques');
   }
 
   //=========== GET ALL DESTAQUES SERVER ================

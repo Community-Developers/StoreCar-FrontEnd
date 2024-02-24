@@ -14,7 +14,6 @@
 
         border-bottom: 1px solid #F6F6F6;
 
-
         .top {
             width: 82%;
             box-sizing: border-box;
@@ -239,6 +238,14 @@
                 }
             }
         }
+
+        @media (min-width: 768px) {
+            .top .nav-right .sidenav .nav-right .ww-50 {
+                height: 50% !important;
+                width: 100% !important;
+            }
+        }
+
 
         @media (max-width: 768px) {
 

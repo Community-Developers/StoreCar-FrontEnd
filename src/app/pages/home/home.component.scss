@@ -1065,12 +1065,17 @@ $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 // }
 
 @media (max-width: 500px) {
+    .view-3 {
+        margin-top: 50px !important;
+    }
+
     main {
+
         .view-1-1 {
             width: 98% !important;
 
             .banner {
-                height: 70vh;
+                height: 70vh !important;
 
                 .text {
 

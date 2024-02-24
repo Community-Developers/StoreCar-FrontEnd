@@ -18,31 +18,39 @@
         <div class="links" fxLayoutAlign="center center">
             <ul fxLayout="row" fxLayoutAlign="space-around center">
                 <li class="tes">
-                    <mat-icon style="font-size: 15px; color: green;">send</mat-icon>
-                    Fotos do carro
+                    <a href="javascript:void(0);" (click)="scrollToElement('fot')">
+                        <mat-icon style="font-size: 15px; color: green;">send</mat-icon>
+                        Fotos
+                    </a>
                 </li>
 
-                <li class="tes">
+                <!-- <li class="tes">
                     <mat-icon style="font-size: 15px; color: green;">send</mat-icon>
                     Interior
                 </li>
                 <li class="tes">
                     <mat-icon style="font-size: 15px; color: green;">send</mat-icon>
                     Exterior
+                </li> -->
+                <li *ngIf="isCar" class="tes">
+                    <a href="javascript:void(0);" (click)="scrollToElement('opc')">
+
+                        <mat-icon style="font-size: 15px; color: green;">send</mat-icon>
+                        Opcionais
+                    </a>
+
                 </li>
                 <li class="tes">
-                    <mat-icon style="font-size: 15px; color: green;">send</mat-icon>
-                    Opcionais
-                </li>
-                <li class="tes">
-                    <mat-icon style="font-size: 15px; color: green;">send</mat-icon>
-                    Detalhes
+                    <a href="javascript:void(0);" (click)="scrollToElement('det')">
+                        <mat-icon style="font-size: 15px; color: green;">send</mat-icon>
+                        Detalhes
+                    </a>
                 </li>
             </ul>
         </div>
 
 
-        <div class="img">
+        <div class="img" id="fot" style="scroll-margin-top: 130px;">
             <gallery [items]="images" [thumbPosition]="value"></gallery>
         </div>
 
@@ -91,7 +99,7 @@
                 <div fxLayoutAlign="flex-start center" style="width: 90%; margin-left: 10px; margin-top: 10px;">
                     <h3>Destaques</h3>
                 </div>
-                <app-card-star style="min-height: 380px;" *ngFor="let item of this.carDestaques"
+                <app-card-star style="min-height: 380px;" *ngFor="let item of this.carrosDestaques"
                     [item]="item"></app-card-star>
             </div>
 
@@ -104,7 +112,7 @@
                             <h2>Veículos em Destaque</h2>
                         </header>
                         <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-                            <div ngxSlickItem *ngFor="let item  of this.carDestaques" class="slide"
+                            <div ngxSlickItem *ngFor="let item  of this.carrosDestaques" class="slide"
                                 style="display: flex; justify-content: center center;">
                                 <app-card-star style="width: 100%;height: 400px; max-width: 420px;"
                                     [item]="item"></app-card-star>
@@ -168,7 +176,7 @@
                     </ul>
 
                 </div>
-                <div class="optionals">
+                <div class="optionals" id="opc" style="scroll-margin-top: 110px;">
                     <h3 class="op">Opcionais</h3>
                     <ul fxLayout="row" fxLayoutAlign="flex-start center" style="row-gap: 20px;">
                         <li>
@@ -301,12 +309,13 @@
                         </li>
                     </ul>
                 </div>
-                <div class="description">
+                <div class="description" id="det" style="scroll-margin-top: 110px;">
                     <h3 class="op">Descrição</h3>
                     <p>
                         <strong>{{veiculo.titulo | titlecase}}</strong>
 
-                    <div style="padding: 20px; text-align: justify; border: 1px solid rgba(127, 129, 141, 0.16);">
+                    <div
+                        style="padding: 20px; white-space: pre-wrap; text-align: justify; border: 1px solid rgba(127, 129, 141, 0.16);">
                         {{veiculo.descricao}}
                     </div>
                     <p>
@@ -365,7 +374,7 @@
                     </ul>
 
                 </div>
-                <div class="overview">
+                <div class="overview" id="det" style="scroll-margin-top: 110px;">
                     <h3 class="op">Visão Geral</h3>
 
                     <ul fxLayout="row" fxLayoutAlign="space-between center">
@@ -419,7 +428,8 @@
                     <p>
                         <strong>{{motocicleta.titulo | titlecase}}</strong>
 
-                    <div style="padding: 20px; text-align: justify; border: 1px solid rgba(127, 129, 141, 0.16);">
+                    <div
+                        style="padding: 20px; white-space: pre-wrap; text-align: justify; border: 1px solid rgba(127, 129, 141, 0.16);">
                         {{motocicleta.descricao}}
                     </div>
                     <p>

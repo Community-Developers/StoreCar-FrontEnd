@@ -8,6 +8,7 @@ import { ListComponent } from './pages/list/list.component';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { CreatePostComponent } from './pages/admin/create-post/create-post.component';
 import { TableComponent } from './pages/admin/table/table.component';
+import { authGuardGuard } from './guards/auth-guard.guard';
 
 
 const routes: Routes = [
@@ -17,14 +18,15 @@ const routes: Routes = [
   },
   {
     path: 'details/:type/:id',
-    component: DetailsComponent
+    component: DetailsComponent,
+
   },
   {
     path: 'list/:type',
     component: ListComponent
   },
   {
-    path: 'admin',
+    path: 'admin', canActivate: [authGuardGuard], // Utilização da função guard
     children: [
       {
         path: '',

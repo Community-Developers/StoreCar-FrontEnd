@@ -1,3 +1,4 @@
+import { LoginService } from './../../../services/login.service';
 import { AdminService } from './../../../services/admin.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -8,6 +9,7 @@ import { Observable, map, shareReplay } from 'rxjs';
 import { CarInfo, DialogAdminComponent } from 'src/app/shared/dialog-admin/dialog-admin.component';
 import { Car } from 'src/app/shared/navbar/car.interface';
 import { Moto } from 'src/app/shared/navbar/moto.interface';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 interface sidebarMenu {
   link: string;
@@ -64,48 +66,65 @@ const carInfo: CarInfo = {
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
-
   deleteItem(idItem: number, type: string) {
     this.adminService.deleteItem(idItem, type).subscribe();
     this.loadItems();
   }
 
+  @ViewChild(MatPaginator) paginator !: MatPaginator;
+
   cars: Car[] = [];
   motos: Moto[] = [];
   isLoading = false;
-
+  isCarro: boolean = false;
 
 
   displayedColumns: string[] = ['id', 'marca', 'modelo', 'ano', 'status', 'valor', 'actions'];
   dataSource: AutoElement[] = [];
   routerActive: string = "activelink";
 
+  pageIndex: number = 0;
+  pageSize: number = 10;
+  totalItems: number = 0;
+
+
+
   @ViewChild(MatTable) table?: MatTable<any>;
 
 
 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private adminService: AdminService,
-    private activatedRoute: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private adminService: AdminService, private loginService: LoginService,
+    private activatedRoute: ActivatedRoute, public dialog: MatDialog) {
+    this
+  }
   ngOnInit(): void {
     this.loadItems();
     console.log(this.cars.length);
   }
+
+  ngAfterViewInit() {
+    this.paginator.pageSize = this.pageSize; // Garante que o paginador use 5 como tamanho de página inicial
+  }
+
   loadItems() {
     this.activatedRoute.params.subscribe(params => {
       this.dataSource = [];
       const type = params['type'];
       if (type === 'automovel') {
-        console.log("ENTROU NO CARRO")
         this.loadCars();
+        this.isCarro = true;
       } else if (type === 'motocicleta') {
         this.loadMotos();
+        this.isCarro = false;
       }
     });
   }
 
 
   loadCars() {
-    this.adminService.getAllCars().subscribe(cars => {
+    this.adminService.getAllCars(this.pageIndex, this.pageSize).subscribe(response => {
+      const cars = response.content;
+
       this.dataSource = cars.map(car => ({
         id: car.id,
         marca: car.marca,
@@ -115,12 +134,16 @@ export class TableComponent implements OnInit {
         status: car.destaque ? 'Destacado' : 'Destacar', // Exemplo de como manipular o status
         destacado: car.destaque,
         valor: car.valor
-      }));
+      }))
+      this.totalItems = response.totalElements;
+      console.log(this.totalItems + "TOTAL DE CARROS");
     });
   }
 
   loadMotos() {
-    this.adminService.getAllMobi().subscribe(motos => {
+    this.adminService.getAllMobi(this.pageIndex, this.pageSize).subscribe(response => {
+      const motos = response.content;
+
       this.dataSource = motos.map(moto => ({
         id: moto.id,
         marca: moto.marca,
@@ -130,8 +153,21 @@ export class TableComponent implements OnInit {
         status: moto.destaque ? 'Destacado' : 'Destacar', // Exemplo de como manipular o status
         destacado: moto.destaque,
         valor: moto.valor
-      }));
+      }))
+      this.totalItems = response.totalElements;
+      console.log(this.totalItems + "TOTAL DE MOTOS");
     });
+  }
+
+  mudarPagina(event: PageEvent) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+
+    if (this.isCarro) {
+      this.loadCars();
+    } else if (!this.isCarro) {
+      this.loadMotos();
+    }
   }
 
 
@@ -212,6 +248,7 @@ export class TableComponent implements OnInit {
           error: (error) => {
             console.error('Erro ao deletar o item:', error);
             this.isLoading = false; // Assegura que o indicador de 
+            this.loginService.handleError(error);
           }
         });
       };
