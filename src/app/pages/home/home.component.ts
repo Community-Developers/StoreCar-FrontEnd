@@ -31,14 +31,16 @@ export class HomeComponent implements OnInit {
       one: true,
       btnText: 'Ver Motocicletas',
       text: 'Motocicletas',
-      descricao: 'Motocicletas, Ciclomotores e Triciclos'
+      descricao: 'Motocicletas, Ciclomotores e Triciclos',
+      path: '/list/motocicleta'
     },
     {
       img: "assets/mer.webp",
       smallImgPath: "assets/one-650-1.webp",
       one: false,
       btnText: 'Ver Veículos',
-      text: 'Carros'
+      text: 'Carros',
+      path: '/list/veiculo'
     }
   ];
 
@@ -176,8 +178,8 @@ export class HomeComponent implements OnInit {
     this.loadCarros();
   }
 
-  onClick() {
-    this.router.navigateByUrl("/details")
+  onClick(path: string) {
+    this.router.navigateByUrl("/list" + path);
   }
 
 

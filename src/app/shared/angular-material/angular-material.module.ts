@@ -25,8 +25,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
-
-
 @NgModule({
   declarations: [],
   imports: [
@@ -55,7 +53,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatRippleModule,
     MatRadioModule,
     MatProgressSpinnerModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ]
 })
 export class AngularMaterialModule { }

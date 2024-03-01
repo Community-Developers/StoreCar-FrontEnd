@@ -38,4 +38,20 @@ export class NavbarComponent {
       data: {},
     });
   }
+
+  // navegarParaSecao(secao: string) {
+  //   this.router.navigate(['/'], { fragment: secao });
+  // }
+
+  navegarParaSecao(secao: string) {
+    if (this.router.url !== '/') {
+      this.router.navigate(['/']);
+    }
+    setTimeout(() => {
+      var elemento = document.getElementById(secao);
+      if (elemento) {
+        elemento.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 150);
+  }
 }

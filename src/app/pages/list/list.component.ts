@@ -49,6 +49,8 @@ export class ListComponent implements OnInit {
       this.items = cars.map(car => ({
         id: car.id,
         type: 'veiculo',
+        marca: car.marca,
+        modelo: car.modelo,
         titulo: car.titulo,
         km: car.km,
         combustivel: car.combustivel,
@@ -69,6 +71,8 @@ export class ListComponent implements OnInit {
       this.items = motos.map(moto => ({
         id: moto.id,
         type: 'motocicleta',
+        marca: moto.marca,
+        modelo: moto.modelo,
         km: moto.km,
         titulo: moto.titulo,
         combustivel: moto.combustivel,

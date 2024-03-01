@@ -23,7 +23,8 @@
                                 <div class="w-820" fxLayout="row" fxLayoutAlign="center " style="margin-top: 30px;"
                                     fxLayoutGap="8%">
 
-                                    <button (click)="onClick()" class="btn-1" mat-flat-button extended color="primary">
+                                    <button (click)="onClick(slide.path)" class="btn-1" mat-flat-button extended
+                                        color="primary">
                                         <div fxLayout="row" fxLayoutGap="8px">
                                             <img src="/assets/car.svg" alt="">
                                             <span>{{slide.btnText}}</span>
@@ -56,7 +57,7 @@
 
 <div fxLayout="column" fxLayoutAlign="center center" class=" carouse"
     style="background-image: url('/assets/wall-dest-2.webp'); background-position: center top; margin: 50px 0 0 0; height: auto; padding: 70px 0;"
-    *ngIf="this.carDestaques.length > 0" loading="lazy">
+    *ngIf="this.carDestaques.length > 0">
 
     <div class="column-1" style="width: 82%;">
 
@@ -91,8 +92,8 @@
 
                 </div>
             </div>
-            <div class="left">
-                <div class="top">
+            <div class="left" id="sobre-nos" style="scroll-margin-top: 110px;">
+                <div class=" top">
                     <h3>Porque a Brasil Mobis?</h3>
                     <span>Somos representantes da Amazon Motors em Porto Alegre e Região</span>
                 </div>
@@ -248,7 +249,7 @@
 
 
 
-<section class="view-5-5">
+<section class="view-5-5" style="scroll-margin-top: 110px;" id="fale-conosco">
     <div class="bg" style="position: absolute; background-color: black; 
     width: 100%; height: 300px; left: 0; bottom: 0;"></div>
     <div class="container">
@@ -269,13 +270,14 @@
         </div>
         <div class="content-right">
             <p>Escolher o veículo certo é essencial. Nós ajudamos você a encontrar um que seja perfeito para você.</p>
-            <a href="#show-cars" class="cta-button">Falar Agora</a>
+            <a href=" https://wa.me/5551981589868?text=Ol%C3%A1+eu+gostaria+de+falar+sobre+um+an%C3%BAncio"
+                target="_blank" class="cta-button">Falar Agora</a>
         </div>
 
     </div>
 </section>
 
-<main class="view-6">
+<main class="view-6" style="scroll-margin-top: 110px;" id="localizacao">
 
     <section>
         <iframe

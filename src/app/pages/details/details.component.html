@@ -51,18 +51,28 @@
 
 
         <div class="img" id="fot" style="scroll-margin-top: 130px;">
-            <gallery [items]="images" [thumbPosition]="value"></gallery>
+            <gallery style="background: transparent; height: auto;" [items]="images" [thumbPosition]="value"></gallery>
         </div>
 
 
         <div class="contact">
 
-            <button class="tel" mat-flat-button color="primary"><mat-icon style="color: #FFF;">
-                    phone</mat-icon>Telefone</button>
-            <button class="email" mat-flat-button color="primary"><mat-icon> email</mat-icon>Email</button>
-            <button class="wpp" mat-flat-button color="primary">
-                <div><img src="/assets/wpp.svg" alt=""><span>Whatsapp</span></div>
-            </button>
+            <a href="tel:51 98158-9868" style="width: 100%;">
+                <button class="tel" mat-flat-button color="primary"><mat-icon style="color: #FFF;">
+                        phone</mat-icon>Telefone</button>
+            </a>
+
+            <a href="mailto:contato@brasilmobis.com" style="width: 100%;">
+                <button class="email" mat-flat-button color="primary" style="margin: 10px 0;"><mat-icon>
+                        email</mat-icon>Email</button>
+            </a>
+
+            <a href="https://wa.me/5551981589868?text=Ol%C3%A1+eu+gostaria+de+falar+sobre+um+an%C3%BAncio"
+                target="_blank" style="width: 100%;">
+                <button class="wpp" mat-flat-button color="primary">
+                    <div><img src="/assets/wpp.svg" alt=""><span>Whatsapp</span></div>
+                </button>
+            </a>
 
         </div>
         <div class="email" fxLayout="column" fxLayoutAlign="center center">

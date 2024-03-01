@@ -6,9 +6,9 @@
         </div>
         <div class="list-a">
             <ul fxLayout="row" fxLayoutGap="35px">
-                <li><a href="">Sobre nós</a></li>
-                <li><a href="">Localização</a></li>
-                <li><a href="">Fale conosco</a></li>
+                <li><a (click)="navegarParaSecao('sobre-nos')">Sobre nós</a></li>
+                <li><a (click)="navegarParaSecao('localizacao')">Localização</a></li>
+                <li><a (click)="navegarParaSecao('fale-conosco')">Fale conosco</a></li>
             </ul>
         </div>
         <div class="infos" fxLayout="row" fxLayoutAlign="end center">
@@ -50,9 +50,12 @@
                                         </div>
                                         <ul fxLayout="column" fxLayoutGap="25px" class="list-mobile" id="menu-mobile"
                                             style="width: 100%; margin: auto; padding: 0; text-align: start; padding: 10px 50px;">
-                                            <li><a (click)="sidenav.close()" routerLink="/">Sobre nós</a></li>
-                                            <li><a (click)="sidenav.close()" routerLink="/">Localização</a></li>
-                                            <li><a (click)="sidenav.close()" routerLink="/">Fale conosco</a></li>
+                                            <li><a (click)="sidenav.close()"
+                                                    (click)="navegarParaSecao('sobre-nos')">Sobre nós</a></li>
+                                            <li><a (click)="sidenav.close()"
+                                                    (click)="navegarParaSecao('localizacao')">Localização</a></li>
+                                            <li><a (click)="sidenav.close()"
+                                                    (click)="navegarParaSecao('fale-conosco')">Fale conosco</a></li>
 
                                             <li>
                                                 <!-- <button
@@ -169,16 +172,27 @@
     <div class="bottom" fxLayout="row" fxLayoutAlign="space-between center">
         <div class="categorias">
             <ul fxLayout="row" fxLayoutGap="3%" fxLayoutAlign="start center">
-                <li><a routerLink="/">Home</a></li>
-                <li><a routerLink="/list/veiculo">Automóveis</a></li>
-                <li><a routerLink="/list/motocicleta">Motocicletas</a></li>
-                <li><a routerLink="/list/motocicleta">Mobiletes</a></li>
-                <li><a routerLink="/list/motocicleta">Mobiletes</a></li>
-                <li><a routerLink="/list/motocicleta">Elétricos</a></li>
+                <a routerLink="/">
+                    <li>Home</li>
+                </a>
 
-                <!-- <li>Acessórios</li>
-                <li>Peças</li>
-                <li>Ferramentas</li> -->
+                <a routerLink="/list/veiculo">
+                    <li>Automóveis</li>
+                </a>
+
+                <a routerLink="/list/motocicleta">
+                    <li>Motocicletas</li>
+                </a>
+
+                <a routerLink="/list/motocicleta">
+                    <li>Mobiletes</li>
+                </a>
+                <a routerLink="/list/motocicleta">
+                    <li>Triciclos</li>
+                </a>
+                <a routerLink="/list/motocicleta">
+                    <li>Elétricos</li>
+                </a>
             </ul>
         </div>
 

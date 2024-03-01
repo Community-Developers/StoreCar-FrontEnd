@@ -13,7 +13,7 @@
     <div class="content" fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="">
         <div class="title">
             <h3>
-                {{item?.titulo}}
+                {{ (item?.marca | titlecase) + ' ' + (item?.modelo | titlecase) }}
             </h3>
         </div>
         <div class="details">
