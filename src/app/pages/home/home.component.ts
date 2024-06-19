@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from '../../services/admin.service';
 
@@ -11,6 +11,8 @@ import { AdminService } from '../../services/admin.service';
 export class HomeComponent implements OnInit {
 
   title = 'ng-carousel-demo';
+  isScreenSmall: boolean = false;
+
 
   slides = [
     { img: "https://dummyimage.com/350x150/423b42/fff" },
@@ -24,14 +26,27 @@ export class HomeComponent implements OnInit {
 
   slides2 = [
     {
-      img: "/assets/bmw.jpg",
+      img: "/assets/bmw.webp",
+      smallImgPath: "/assets/one-650-1.webp",
       one: true,
       btnText: 'Ver Motocicletas',
-      text: 'Motocicletas & Ciclomotores',
-      descricao: 'Experimente a liberdade sobre rodas com nossas motocicletas, triciclos, e ciclomotores - escolha entre modelos elétricos para uma viagem sustentável'
+      text: 'Motocicletas',
+      descricao: 'Motocicletas, Ciclomotores e Triciclos',
+      path: '/list/motocicleta'
     },
-    { img: "assets/mer.jpg", one: false, btnText: 'Ver Veículos', text: 'Carros' }
+    {
+      img: "assets/mer.webp",
+      smallImgPath: "assets/one-650-1.webp",
+      one: false,
+      btnText: 'Ver Veículos',
+      text: 'Carros',
+      path: '/list/veiculo'
+    }
   ];
+
+
+
+
   slideConfig = {
     "slidesToShow": 4,
     "slidesToScroll": 1,
@@ -155,20 +170,25 @@ export class HomeComponent implements OnInit {
 
 
   constructor(
-    private router: Router, private adminService: AdminService
-  ) { }
+    private router: Router, private adminService: AdminService) {
+    this.isScreenSmall = window.innerWidth < 650
+  }
   ngOnInit(): void {
-    this.loadMotos();
+    // this.loadMotos();
+    this.loadCarros();
   }
 
-  onClick() {
-    this.router.navigateByUrl("/details")
+  onClick(path: string) {
+    this.router.navigateByUrl("/list" + path);
   }
 
 
   duplicar() {
     const aux: any[] = [];
     for (let item of this.carDestaques) {
+      aux.push(item);
+      aux.push(item);
+      aux.push(item);
       aux.push(item);
       aux.push(item);
     }
@@ -186,9 +206,30 @@ export class HomeComponent implements OnInit {
         potenciaMotor: moto.potencia,
         cilindrada: moto.cilindrada,
         valor: moto.valor,
-        imagem: moto.imagensMotocicleta[0].imageUrl
+        imagem: moto.imagensMotocicleta[0]?.imageUrl
       }))
-      this.duplicar();
     })
+  }
+
+  loadCarros() {
+    this.adminService.getDestaquesCarros().subscribe(carros => {
+      this.carDestaques = carros.map(carro => ({
+        id: carro.id,
+        type: 'veiculo',
+        km: carro.km,
+        titulo: carro.titulo,
+        combustivel: carro.combustivel,
+        potenciaMotor: carro.potenciaMotor,
+        valor: carro.valor,
+        imagem: carro.imagensVeiculos[0]?.imageUrl
+      }))
+      // this.duplicar();
+    })
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    // Atualiza isScreenSmall com base na largura da tela atual
+    this.isScreenSmall = window.innerWidth < 650;
   }
 }

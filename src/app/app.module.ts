@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxCurrencyDirective } from "ngx-currency";
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 registerLocaleData(ptBr);
 
@@ -30,7 +31,9 @@ registerLocaleData(ptBr);
     HttpClientModule,
     NgxCurrencyDirective
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' },
+  { provide: LocationStrategy, useClass: HashLocationStrategy }
+
 
   ],
   bootstrap: [AppComponent]

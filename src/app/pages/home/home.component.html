@@ -9,21 +9,22 @@
 
         <div class="column-1" style="width: 100%;">
 
-            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig2">
+            <ngx-slick-carousel class="carousel carousel-one" #slickModal="slick-carousel" [config]="slideConfig2">
                 <div ngxSlickItem *ngFor="let slide of slides2" class="slide"
                     style="display: flex; justify-content: center;">
 
                     <div class="view-1-1">
                         <section class="banner" [ngClass]="slide?.one ? 'bg-custom' : 'bg-custom-2' "
                             [style.background]="
-                        'linear-gradient(0deg, rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.30)), url(' + slide.img + ')'">
+                        'linear-gradient(0deg, rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.30)), url(' + (isScreenSmall ? slide.smallImgPath : slide.img) + ')'">
                             <div class="text">
                                 <h1>{{slide.text}}</h1>
                                 <span>{{slide.descricao}}</span>
                                 <div class="w-820" fxLayout="row" fxLayoutAlign="center " style="margin-top: 30px;"
                                     fxLayoutGap="8%">
 
-                                    <button (click)="onClick()" class="btn-1" mat-flat-button extended color="primary">
+                                    <button (click)="onClick(slide.path)" class="btn-1" mat-flat-button extended
+                                        color="primary">
                                         <div fxLayout="row" fxLayoutGap="8px">
                                             <img src="/assets/car.svg" alt="">
                                             <span>{{slide.btnText}}</span>
@@ -33,7 +34,7 @@
 
                                     <div class="rating">
 
-                                        <img src="/assets/google.svg" alt="">
+                                        <img src="/assets/google.svg" loading="lazy" alt="">
                                         <span class="span1">Rating 4.7</span>
                                         <span>Baseado em 17 Avalições
                                         </span>
@@ -54,65 +55,14 @@
 
 </main>
 
-
-
-
-<!-- 
-<main class="view-2" fxLayoutAlign="center center" fxLayout="column">
-
-    <header fxLayoutAlign="start center" fxLayout="row">
-        <h2>Veículos em Destaque</h2>
-    </header>
-
-    <div class="view-2-2" fxLayoutAlign="center center" fxLayout="column">
-
-        <div class="main" fxLayoutAlign="space-around center" fxLayout="column">
-            <ul class="lista-destaque" fxLayout="row" fxLayoutAlign="center flex-start" fx>
-
-                <li>
-                    <a href="">
-                        <app-card-star></app-card-star>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <app-card-star></app-card-star>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <app-card-star></app-card-star>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <app-card-star></app-card-star>
-                    </a>
-                </li>
-            </ul>
-
-            <ngx-slick-carousel class="carousel" [config]="slickCarouselConfig">
-                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
-                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
-                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
-                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
-                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
-                <app-card-star style="width: 400px;height: 400px;"></app-card-star>
-            </ngx-slick-carousel> 
-            
-            <button mat-flat-button color="primary">Ver veículos em estoque</button>
-        </div>
-    </div>
-</main>
-
--->
-
-<div fxLayout="column" fxLayoutAlign="center center" class=" carouse" *ngIf="this.carDestaques.length > 0">
+<div fxLayout="column" fxLayoutAlign="center center" class=" carouse"
+    style="background-image: url('/assets/wall-dest-2.webp'); background-position: center top; margin: 50px 0 0 0; height: auto; padding: 70px 0;"
+    *ngIf="this.carDestaques.length > 0">
 
     <div class="column-1" style="width: 82%;">
 
         <header fxLayoutAlign="start center" fxLayout="row">
-            <h2>Veículos em Destaque</h2>
+            <h2 style="color: white;">Veículos em Destaque</h2>
         </header>
 
 
@@ -138,19 +88,19 @@
                 <div class="image">
 
 
-                    <img src="https://www.drivco-wp.egenslab.com/wp-content/uploads/2023/10/why-drivco.png" alt="">
+                    <img src="/assets/why.webp" loading="lazy" alt="">
 
                 </div>
             </div>
-            <div class="left">
-                <div class="top">
+            <div class="left" id="sobre-nos" style="scroll-margin-top: 110px;">
+                <div class=" top">
                     <h3>Porque a Brasil Mobis?</h3>
                     <span>Somos representantes da Amazon Motors em Porto Alegre e Região</span>
                 </div>
                 <ul fxLayout="column" style="gap: 15px;">
                     <li>
                         <div class="image-icon">
-                            <img src="/assets/selo.svg" alt="">
+                            <img src="/assets/pay2.svg" loading="lazy" alt="">
                         </div>
                         <div>
                             <h5>Compra Segura</h5>
@@ -160,7 +110,7 @@
                     </li>
                     <li>
                         <div class="image-icon">
-                            <img src="/assets/selo.svg" alt="">
+                            <img src="/assets/secure.svg" loading="lazy" alt="">
                         </div>
                         <div>
                             <h5>Garantia de Fabrica</h5>
@@ -170,7 +120,7 @@
                     </li>
                     <li>
                         <div class="image-icon">
-                            <img src="/assets/selo.svg" alt="">
+                            <img src="/assets/selo.svg" loading="lazy" alt="">
                         </div>
                         <div>
                             <h5>Suporte Premium</h5>
@@ -187,36 +137,42 @@
 
     <div class="scroll imgBox" style="--time:60s; width: 82%; margin: auto;">
         <div style="display: flex; align-items: center; justify-content: center;">
-            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" alt="">
-            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" alt="">
-            <img src="https://seeklogo.com/images/O/ole-consignado-logo-C4846B9715-seeklogo.com.png"
+            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" loading="lazy" alt="">
+            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" loading="lazy"
+                alt="">
+            <img src="https://seeklogo.com/images/O/ole-consignado-logo-C4846B9715-seeklogo.com.png" loading="lazy"
                 style="max-height: 80px;" alt="">
-            <img src="https://seeklogo.com/images/B/banco-pan-logo-1D441A0860-seeklogo.com.png"
+            <img src="https://seeklogo.com/images/B/banco-pan-logo-1D441A0860-seeklogo.com.png" loading="lazy"
                 style="max-height: 70px;" alt="">
-            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" alt="">
-            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" alt="">
-            <img src="https://seeklogo.com/images/O/ole-consignado-logo-C4846B9715-seeklogo.com.png"
+            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" loading="lazy" alt="">
+            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" loading="lazy"
+                alt="">
+            <img src="https://seeklogo.com/images/O/ole-consignado-logo-C4846B9715-seeklogo.com.png" loading="lazy"
                 style="max-height: 80px;" alt="">
-            <img src="https://seeklogo.com/images/B/banco-pan-logo-1D441A0860-seeklogo.com.png"
+            <img src="https://seeklogo.com/images/B/banco-pan-logo-1D441A0860-seeklogo.com.png" loading="lazy"
                 style="max-height: 70px;" alt="">
-            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" alt="">
-            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" alt="">
+            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" loading="lazy" alt="">
+            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" loading="lazy"
+                alt="">
         </div>
         <div style="display: flex; align-items: center; justify-content: center;">
-            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" alt="">
-            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" alt="">
-            <img src="https://seeklogo.com/images/O/ole-consignado-logo-C4846B9715-seeklogo.com.png"
+            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" loading="lazy" alt="">
+            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" loading="lazy"
+                alt="">
+            <img src="https://seeklogo.com/images/O/ole-consignado-logo-C4846B9715-seeklogo.com.png" loading="lazy"
                 style="max-height: 80px;" alt="">
-            <img src="https://seeklogo.com/images/B/banco-pan-logo-1D441A0860-seeklogo.com.png"
+            <img src="https://seeklogo.com/images/B/banco-pan-logo-1D441A0860-seeklogo.com.png" loading="lazy"
                 style="max-height: 70px;" alt="">
-            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" alt="">
-            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" alt="">
-            <img src="https://seeklogo.com/images/O/ole-consignado-logo-C4846B9715-seeklogo.com.png"
+            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" loading="lazy" alt="">
+            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" loading="lazy"
+                alt="">
+            <img src="https://seeklogo.com/images/O/ole-consignado-logo-C4846B9715-seeklogo.com.png" loading="lazy"
                 style="max-height: 80px;" alt="">
-            <img src="https://seeklogo.com/images/B/banco-pan-logo-1D441A0860-seeklogo.com.png"
+            <img src="https://seeklogo.com/images/B/banco-pan-logo-1D441A0860-seeklogo.com.png" loading="lazy"
                 style="max-height: 70px;" alt="">
-            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" alt="">
-            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" alt="">
+            <img src="https://seeklogo.com/images/C/creditas-logo-B28EEA215C-seeklogo.com.png" loading="lazy" alt="">
+            <img src="https://seeklogo.com/images/B/banco-santander-logo-568C7070A8-seeklogo.com.png" loading="lazy"
+                alt="">
         </div>
     </div>
 
@@ -232,7 +188,7 @@
             <!-- Step 1 -->
             <div class="step" data-step="01">
                 <div>
-                    <img src="assets/maps.svg" alt="Choose Anywhere Icon" />
+                    <img src="assets/maps.svg" loading="lazy" alt="Choose Anywhere Icon" />
                 </div>
 
                 <h3>Escolha Fácil</h3>
@@ -244,7 +200,7 @@
             <!-- Step 2 -->
             <div class="step" data-step="02">
                 <div>
-                    <img src="assets/contact.svg" alt="Contact With Us Icon" />
+                    <img src="assets/contact.svg" loading="lazy" alt="Contact With Us Icon" />
 
                 </div>
                 <h3>Fale Conosco</h3>
@@ -257,7 +213,7 @@
             <!-- Step 3 -->
             <div class="step" data-step="03">
                 <div>
-                    <img src="/assets/pay.svg" alt="Pay For The Car Icon" />
+                    <img src="/assets/pay.svg" alt="Pay For The Car Icon" loading="lazy" />
                 </div>
                 <h3>Opções de Pagamento</h3>
                 <p>Facilitamos seu processo de compra com várias opções de pagamento. Aceitamos cartões de crédito,
@@ -268,7 +224,7 @@
             <!-- Step 4 -->
             <div class="step" data-step="04">
                 <div>
-                    <img src="/assets/motocicle.svg" alt="Receive The Car Icon" />
+                    <img src="/assets/motocicle.svg" alt="Receive The Car Icon" loading="lazy" />
                 </div>
                 <h3>Receba Seu Veículo</h3>
                 <p>Após a conclusão da compra, prepare-se para receber sua nova motocicleta ou veículo. Oferecemos
@@ -285,7 +241,7 @@
                 <p>4.7 Avaliação de 5.0 Basedo Em 17 Reviews</p>
             </div>
             <a href="https://www.trustpilot.com" class="trustpilot">
-                <img src="/assets/google.svg" alt="Google" />
+                <img src="/assets/google.svg" alt="Google" loading="lazy" />
             </a>
         </div>
     </div>
@@ -293,7 +249,7 @@
 
 
 
-<section class="view-5-5">
+<section class="view-5-5" style="scroll-margin-top: 110px;" id="fale-conosco">
     <div class="bg" style="position: absolute; background-color: black; 
     width: 100%; height: 300px; left: 0; bottom: 0;"></div>
     <div class="container">
@@ -307,22 +263,21 @@
             </div>
 
             <div class="image-wrapper">
-                <!-- Substitua 'path-to-your-image.jpg' pelo caminho correto para a sua imagem -->
-                <img src="https://www.drivco-wp.egenslab.com/wp-content/uploads/2023/09/recommended-img.png"
-                    alt="Man thinking">
+                <img src="/assets/think.webp" loading="lazy" alt="Man thinking">
             </div>
 
 
         </div>
         <div class="content-right">
             <p>Escolher o veículo certo é essencial. Nós ajudamos você a encontrar um que seja perfeito para você.</p>
-            <a href="#show-cars" class="cta-button">Falar Agora</a>
+            <a href=" https://wa.me/5551981589868?text=Ol%C3%A1+eu+gostaria+de+falar+sobre+um+an%C3%BAncio"
+                target="_blank" class="cta-button">Falar Agora</a>
         </div>
 
     </div>
 </section>
 
-<main class="view-6">
+<main class="view-6" style="scroll-margin-top: 110px;" id="localizacao">
 
     <section>
         <iframe

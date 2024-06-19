@@ -3,7 +3,6 @@
     display: block;
     width: 100%;
     height: 75vh;
-    background: green;
     box-sizing: border-box;
     overflow: hidden;
     border-radius: 20px;
@@ -33,7 +32,7 @@
 
 
         .left {
-            background: url('/assets/por.jpg');
+            background: url('/assets/por.webp');
             background-position: center;
             background-size: cover;
             height: 100%;
@@ -148,6 +147,15 @@
 }
 
 @media (max-width: 450px) {
+    :host {
+        height: 100vh;
+
+        mat-card {
+            justify-content: start !important;
+            padding-top: 40px !important;
+        }
+    }
+
     .left {
         display: none;
     }
@@ -160,4 +168,12 @@
 ::ng-deep .cdk-overlay-pane {
     max-width: none !important;
     width: 65vw;
+}
+
+::ng-deep .mdc-circular-progress--indeterminate .mdc-circular-progress__circle-right .mdc-circular-progress__indeterminate-circle-graphic {
+    stroke: #FFE227 !important;
+}
+
+::ng-deep .mdc-circular-progress--indeterminate .mdc-circular-progress__circle-left .mdc-circular-progress__indeterminate-circle-graphic {
+    stroke: #FFE227 !important;
 }

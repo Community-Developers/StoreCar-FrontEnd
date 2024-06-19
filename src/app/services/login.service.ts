@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { LoginData } from '../shared/login-data.interface';
 import { TokenBearer } from '../shared/token-bearer.interface';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -10,12 +11,37 @@ import { TokenBearer } from '../shared/token-bearer.interface';
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
-  private url: string = 'https://load10-1661520641.us-east-2.elb.amazonaws.com/login';
+  private url: string = 'https://server.brasilmobis.com/login';
 
   public login(loginData: LoginData): Observable<TokenBearer> {
     return this.http.post<TokenBearer>(this.url, loginData);
+  }
+
+
+  setAutoLogout(expirationDuration: number) {
+    setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
+  }
+
+  logout() {
+    localStorage.removeItem('access_token');
+    this.router.navigate(['/']);
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('access_token');
+  }
+
+  handleError(error: HttpErrorResponse) {
+    if (error.status === 401) {
+      // Se o erro for 401, deslogar o usuário
+      this.logout();
+    }
+    // Retornar um Observable com um erro para ser tratado por quem chamou
+    return throwError(() => new Error('Não autorizado'));
   }
 
 }

@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -8,10 +9,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class CardStarComponent {
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute,) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private viewportScroller: ViewportScroller) { }
 
 
   verDetalhes(type: string, id: string) {
+    this.viewportScroller.scrollToPosition([0, 0]);
+
     this.router.navigate([`/details/${type}/${id}`]);
   }
 

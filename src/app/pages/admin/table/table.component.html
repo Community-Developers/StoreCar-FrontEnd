@@ -8,7 +8,7 @@
             <div class="mb-16">
                 <a fxLayout="row wrap" style="gap: 20px;" fxLayoutAlign="center center" routerLink="/admin"
                     class="d-flex align-items-center">
-                    <img style="max-width: 100%; overflow: hidden;" src="assets/logomobi.png" alt=""> <span
+                    <img style="max-width: 100%; overflow: hidden;" src="assets/logomobi.webp" alt=""> <span
                         class="ms-16 fw-medium fs-26">Admin</span>
                 </a>
 
@@ -61,7 +61,7 @@
                 <button mat-button class="fs-16 pt-4 pb-4 ps-8 pe-8 text-light-muted d-flex align-items-center"
                     [matMenuTriggerFor]="menu">
                     <div class="d-flex align-items-center">
-                        <img src="assets/images/user2.webp" class="rounded-circle" alt="">
+                        <img src="assets/user2.webp" class="rounded-circle" alt="">
                         <span class="fw-light ms-8 text-secondary">Olá,</span>
                         <span class="fw-bold ms-8"> Vera</span>
                         <i-feather name="chevron-down" class="feather-base"></i-feather>
@@ -93,7 +93,8 @@
                 <!-- Daily Activity -->
                 <mat-card class="w-100">
                     <mat-card-content>
-                        <h4 class="mb-56">Product Perfomance</h4>
+                        <h4 *ngIf="!this.isCarro" class="mb-56">Listagem de Motocicletas</h4>
+                        <h4 *ngIf="this.isCarro" class="mb-56">Listagem de Veiculos</h4>
 
                         <div class="table-responsive">
                             <table mat-table [dataSource]="dataSource" class="text-nowrap w-100">
@@ -183,6 +184,15 @@
                             </table>
                         </div>
                     </mat-card-content>
+                    <mat-card-footer>
+
+                        <mat-paginator style="margin-top: 45px;" [length]="totalItems" [pageSizeOptions]="[5, 10, 20]"
+                            [pageIndex]="pageIndex" (page)="mudarPagina($event)" showFirstLastButtons
+                            aria-label="Select page of periodic elements">
+                        </mat-paginator>
+
+                    </mat-card-footer>
+
                 </mat-card>
 
             </div>

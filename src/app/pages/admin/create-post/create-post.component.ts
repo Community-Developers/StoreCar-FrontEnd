@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map, shareReplay } from 'rxjs';
 import { ImagemMotocicleta } from 'src/app/shared/navbar/moto.interface';
 import { Location } from '@angular/common';
+import { LoginService } from 'src/app/services/login.service';
 
 
 interface sidebarMenu {
@@ -44,7 +45,7 @@ export class CreatePostComponent implements OnInit {
     condicao: ['', Validators.required],
     potenciaMotor: ['', Validators.required],
     portas: ['', Validators.required],
-    km: [''],
+    km: ['', Validators.required],
     opcionais: this.fb.group({
       abs: [false],
       airbags: [false],
@@ -115,6 +116,7 @@ export class CreatePostComponent implements OnInit {
         error: (error) => {
           console.log(error)
           this.isLoading = false;
+          this.loginService.handleError(error);
         }
       })
 
@@ -150,6 +152,7 @@ export class CreatePostComponent implements OnInit {
         error: (error) => {
           console.log(error)
           this.isLoading = false;
+          this.loginService.handleError(error);
         }
       })
     }
@@ -171,6 +174,7 @@ export class CreatePostComponent implements OnInit {
         error: (error) => {
           console.log(error)
           this.isLoading = false;
+          this.loginService.handleError(error);
         }
       })
 
@@ -203,6 +207,8 @@ export class CreatePostComponent implements OnInit {
         error: (error) => {
           console.log(error)
           this.isLoading = false;
+          this.loginService.handleError(error);
+
         }
       })
 
@@ -245,7 +251,7 @@ export class CreatePostComponent implements OnInit {
   veiculo: boolean = false;
 
   constructor(private breakpointObserver: BreakpointObserver, private router: Router,
-    private activatedRoute: ActivatedRoute, private fb: FormBuilder, private adminService: AdminService,
+    private activatedRoute: ActivatedRoute, private fb: FormBuilder, private adminService: AdminService, private loginService: LoginService,
     private location: Location) { }
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -276,7 +282,7 @@ export class CreatePostComponent implements OnInit {
       this.id = id;
       this.isEdit = true;
       this.preencherFormularioComDados(type, item);
-      this.location.back();
+      // this.location.back();
     })
 
     console.log(this.selectedFiles);

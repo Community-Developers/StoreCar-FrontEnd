@@ -46,12 +46,56 @@
     margin-left: 265px !important;
 }
 
+@media (max-width: 900px) {
+    .card-body {
+        padding: 0 !important;
+    }
+
+    .image-preview {
+        height: 420px !important;
+    }
+
+    .thumbnail {
+        width: 150px !important;
+        height: 150px !important;
+    }
+}
+
+@media (max-width: 780px) {
+    .image-preview {
+        height: 360px !important;
+    }
+
+    .thumbnail {
+        width: 150px !important;
+        height: 150px !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .thumbnail {
+        width: 110px !important;
+        height: 110px !important;
+    }
+}
+
+
 @media (max-width: 601px) {
     :host ::ng-deep .mat-sidenav-content {
         margin-left: 0 !important;
     }
 }
 
+@media (max-width: 320px) {
+    .image-preview {
+        height: 300px !important;
+    }
+
+    .thumbnail {
+        width: 80px !important;
+        height: 80px !important;
+    }
+}
 
 
 .upload-section {
